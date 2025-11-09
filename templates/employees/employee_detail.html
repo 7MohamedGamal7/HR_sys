@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+
+{% block title %}تفاصيل الموظف{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-user ms-2"></i>تفاصيل الموظف</h2>
+                <div>
+                    <a href="{% url 'employees:employee_update' employee.pk %}" class="btn btn-warning">
+                        <i class="fas fa-edit ms-2"></i>تعديل
+                    </a>
+                    <a href="{% url 'employees:employee_list' %}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-right ms-2"></i>العودة للقائمة
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body text-center">
+                    {% if employee.photo %}
+                        <img src="{{ employee.photo.url }}" class="img-fluid rounded-circle mb-3" style="max-width: 200px;">
+                    {% else %}
+                        <i class="fas fa-user-circle fa-5x text-primary mb-3"></i>
+                    {% endif %}
+                    <h4>{{ employee.full_name_ar }}</h4>
+                    <p class="text-muted">{{ employee.employee_code }}</p>
+                    <p>
+                        {% if employee.is_active %}
+                            <span class="badge bg-success">نشط</span>
+                        {% else %}
+                            <span class="badge bg-danger">غير نشط</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">المعلومات الأساسية</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <strong>الاسم بالعربي:</strong> {{ employee.full_name_ar }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong>الاسم بالإنجليزي:</strong> {{ employee.full_name_en }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong>البريد الإلكتروني:</strong> {{ employee.email }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong>الهاتف:</strong> {{ employee.phone }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong>القسم:</strong> {{ employee.department.name_ar|default:"-" }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong>المنصب:</strong> {{ employee.position.title_ar|default:"-" }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong>الفرع:</strong> {{ employee.branch.name_ar|default:"-" }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong>تاريخ التعيين:</strong> {{ employee.hire_date|date:"Y/m/d" }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong>نوع التوظيف:</strong> {{ employee.get_employment_type_display }}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong>الراتب الأساسي:</strong> {{ employee.basic_salary }} جنيه
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs for Documents, Contracts, etc. -->
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#documents">المستندات</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#contracts">العقود</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#education">المؤهلات</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#experience">الخبرات</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="documents">
+                            <a href="{% url 'employees:employee_document_create' employee.pk %}" class="btn btn-sm btn-primary mb-3">
+                                <i class="fas fa-plus ms-2"></i>إضافة مستند
+                            </a>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>نوع المستند</th>
+                                            <th>رقم المستند</th>
+                                            <th>تاريخ الإصدار</th>
+                                            <th>الإجراءات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for doc in employee.documents.all %}
+                                            <tr>
+                                                <td>{{ doc.get_document_type_display }}</td>
+                                                <td>{{ doc.document_number }}</td>
+                                                <td>{{ doc.issue_date|date:"Y/m/d" }}</td>
+                                                <td>
+                                                    {% if doc.file %}
+                                                        <a href="{{ doc.file.url }}" target="_blank" class="btn btn-sm btn-info">
+                                                            <i class="fas fa-download"></i>
+                                                        </a>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% empty %}
+                                            <tr><td colspan="4" class="text-center">لا توجد مستندات</td></tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="contracts">
+                            <a href="{% url 'employees:employee_contract_create' employee.pk %}" class="btn btn-sm btn-primary mb-3">
+                                <i class="fas fa-plus ms-2"></i>إضافة عقد
+                            </a>
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>نوع العقد</th>
+                                            <th>تاريخ البداية</th>
+                                            <th>تاريخ النهاية</th>
+                                            <th>الحالة</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for contract in employee.contracts.all %}
+                                            <tr>
+                                                <td>{{ contract.get_contract_type_display }}</td>
+                                                <td>{{ contract.start_date|date:"Y/m/d" }}</td>
+                                                <td>{{ contract.end_date|date:"Y/m/d"|default:"-" }}</td>
+                                                <td>
+                                                    {% if contract.is_active %}
+                                                        <span class="badge bg-success">نشط</span>
+                                                    {% else %}
+                                                        <span class="badge bg-secondary">منتهي</span>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% empty %}
+                                            <tr><td colspan="4" class="text-center">لا توجد عقود</td></tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="education">
+                            <a href="{% url 'employees:employee_education_create' employee.pk %}" class="btn btn-sm btn-primary mb-3">
+                                <i class="fas fa-plus ms-2"></i>إضافة مؤهل
+                            </a>
+                            <!-- Education list -->
+                        </div>
+                        <div class="tab-pane fade" id="experience">
+                            <a href="{% url 'employees:employee_experience_create' employee.pk %}" class="btn btn-sm btn-primary mb-3">
+                                <i class="fas fa-plus ms-2"></i>إضافة خبرة
+                            </a>
+                            <!-- Experience list -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

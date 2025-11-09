@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block title %}قائمة الموظفين{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-users ms-2"></i>قائمة الموظفين</h2>
+                <a href="{% url 'employees:employee_create' %}" class="btn btn-primary">
+                    <i class="fas fa-plus ms-2"></i>إضافة موظف جديد
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search and Filters -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <form method="get" class="row g-3">
+                        <div class="col-md-3">
+                            <input type="text" name="search" class="form-control" placeholder="بحث..." value="{{ request.GET.search }}">
+                        </div>
+                        <div class="col-md-2">
+                            <select name="department" class="form-select">
+                                <option value="">كل الأقسام</option>
+                                {% for dept in departments %}
+                                    <option value="{{ dept.id }}" {% if request.GET.department == dept.id|stringformat:"s" %}selected{% endif %}>
+                                        {{ dept.name_ar }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <select name="employment_type" class="form-select">
+                                <option value="">كل الأنواع</option>
+                                <option value="full_time" {% if request.GET.employment_type == 'full_time' %}selected{% endif %}>دوام كامل</option>
+                                <option value="part_time" {% if request.GET.employment_type == 'part_time' %}selected{% endif %}>دوام جزئي</option>
+                                <option value="contract" {% if request.GET.employment_type == 'contract' %}selected{% endif %}>عقد</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-search ms-2"></i>بحث
+                            </button>
+                        </div>
+                        <div class="col-md-2">
+                            <a href="{% url 'employees:employee_list' %}" class="btn btn-secondary w-100">
+                                <i class="fas fa-redo ms-2"></i>إعادة تعيين
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Employee Table -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>كود الموظف</th>
+                                    <th>الاسم</th>
+                                    <th>القسم</th>
+                                    <th>المنصب</th>
+                                    <th>البريد الإلكتروني</th>
+                                    <th>الهاتف</th>
+                                    <th>الحالة</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for employee in page_obj %}
+                                    <tr>
+                                        <td>{{ employee.employee_code }}</td>
+                                        <td>
+                                            <a href="{% url 'employees:employee_detail' employee.pk %}">
+                                                {{ employee.full_name_ar }}
+                                            </a>
+                                        </td>
+                                        <td>{{ employee.department.name_ar|default:"-" }}</td>
+                                        <td>{{ employee.position.title_ar|default:"-" }}</td>
+                                        <td>{{ employee.email }}</td>
+                                        <td>{{ employee.phone }}</td>
+                                        <td>
+                                            {% if employee.is_active %}
+                                                <span class="badge bg-success">نشط</span>
+                                            {% else %}
+                                                <span class="badge bg-danger">غير نشط</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'employees:employee_detail' employee.pk %}" class="btn btn-sm btn-info" title="عرض">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="{% url 'employees:employee_update' employee.pk %}" class="btn btn-sm btn-warning" title="تعديل">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% empty %}
+                                    <tr>
+                                        <td colspan="8" class="text-center">لا توجد بيانات</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    {% if page_obj.has_other_pages %}
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                {% if page_obj.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">السابق</a>
+                                    </li>
+                                {% endif %}
+
+                                {% for num in page_obj.paginator.page_range %}
+                                    {% if page_obj.number == num %}
+                                        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ num }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ num }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if page_obj.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">التالي</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
