@@ -168,20 +168,20 @@ class SystemSettingsForm(forms.ModelForm):
     """
     class Meta:
         model = SystemSettings
-        fields = ['key', 'value', 'description', 'is_active']
+        fields = ['key', 'value', 'description', 'category']
         labels = {
             'key': 'المفتاح',
             'value': 'القيمة',
             'description': 'الوصف',
-            'is_active': 'نشط',
+            'category': 'الفئة',
         }
         widgets = {
             'key': forms.TextInput(attrs={'class': 'form-control'}),
             'value': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 2}),
-            'is_active': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'category': forms.TextInput(attrs={'class': 'form-control'}),
         }
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -190,7 +190,7 @@ class SystemSettingsForm(forms.ModelForm):
             'key',
             'value',
             'description',
-            'is_active',
+            'category',
             FormActions(
                 Submit('submit', 'حفظ', css_class='btn btn-primary'),
                 HTML('<a href="{% url \'core:system_settings\' %}" class="btn btn-secondary">إلغاء</a>')

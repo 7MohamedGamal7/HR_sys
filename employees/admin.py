@@ -108,13 +108,13 @@ class EmployeeAdmin(admin.ModelAdmin):
         }),
     )
     
-    inlines = [
-        EmployeeDocumentInline,
-        EmployeeContractInline,
-        EmergencyContactInline,
-        EmployeeEducationInline,
-        EmployeeExperienceInline,
-    ]
+    # inlines = [
+    #     EmployeeDocumentInline,
+    #     EmployeeContractInline,
+    #     EmergencyContactInline,
+    #     EmployeeEducationInline,
+    #     EmployeeExperienceInline,
+    # ]
 
 
 @admin.register(EmployeeDocument)

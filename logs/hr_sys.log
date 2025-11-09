@@ -1,3 +1,18 @@
 INFO 2025-11-09 18:51:33,451 autoreload Watching for file changes with StatReloader
 INFO 2025-11-09 18:54:10,319 autoreload Watching for file changes with StatReloader
 INFO 2025-11-09 18:58:07,911 autoreload Watching for file changes with StatReloader
+INFO 2025-11-09 19:08:32,347 autoreload Watching for file changes with StatReloader
+INFO 2025-11-09 19:09:14,349 autoreload E:\My_Project\Django_Project\HR_sys\HR_sys\organization\admin.py changed, reloading.
+INFO 2025-11-09 19:09:16,676 autoreload Watching for file changes with StatReloader
+INFO 2025-11-09 19:09:32,924 autoreload Watching for file changes with StatReloader
+INFO 2025-11-09 19:11:25,665 autoreload E:\My_Project\Django_Project\HR_sys\HR_sys\employees\admin.py changed, reloading.
+INFO 2025-11-09 19:11:26,566 autoreload Watching for file changes with StatReloader
+INFO 2025-11-09 19:11:40,449 autoreload Watching for file changes with StatReloader
+INFO 2025-11-09 19:13:56,231 autoreload Watching for file changes with StatReloader
+INFO 2025-11-09 19:14:44,585 autoreload E:\My_Project\Django_Project\HR_sys\HR_sys\core\urls.py changed, reloading.
+INFO 2025-11-09 19:14:45,543 autoreload Watching for file changes with StatReloader
+INFO 2025-11-09 19:14:59,072 autoreload Watching for file changes with StatReloader
+INFO 2025-11-09 19:16:55,579 autoreload Watching for file changes with StatReloader
+INFO 2025-11-09 19:17:46,283 autoreload E:\My_Project\Django_Project\HR_sys\HR_sys\organization\urls.py changed, reloading.
+INFO 2025-11-09 19:17:47,279 autoreload Watching for file changes with StatReloader
+INFO 2025-11-09 19:18:02,386 autoreload Watching for file changes with StatReloader
