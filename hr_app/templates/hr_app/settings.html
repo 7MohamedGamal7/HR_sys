@@ -1,0 +1,211 @@
+{% extends 'hr_app/base.html' %}
+{% load static %}
+
+{% block title %}System Settings - HR Management System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-cog"></i> System Settings</h5>
+            </div>
+            <div class="card-body">
+                <ul class="nav nav-tabs" id="settingsTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab">
+                            <i class="fas fa-cogs"></i> General
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="attendance-tab" data-bs-toggle="tab" data-bs-target="#attendance" type="button" role="tab">
+                            <i class="fas fa-clock"></i> Attendance
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="leave-tab" data-bs-toggle="tab" data-bs-target="#leave" type="button" role="tab">
+                            <i class="fas fa-calendar-alt"></i> Leave
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="payroll-tab" data-bs-toggle="tab" data-bs-target="#payroll" type="button" role="tab">
+                            <i class="fas fa-money-bill-wave"></i> Payroll
+                        </button>
+                    </li>
+                </ul>
+                
+                <div class="tab-content" id="settingsTabContent">
+                    <!-- General Settings -->
+                    <div class="tab-pane fade show active" id="general" role="tabpanel">
+                        <form method="POST" class="mt-4">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="companyName" class="form-label">Company Name</label>
+                                        <input type="text" class="form-control" id="companyName" name="company_name" value="{{ settings.company_name }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="currency" class="form-label">Currency</label>
+                                        <select class="form-select" id="currency" name="currency">
+                                            <option value="USD" {% if settings.salary_currency == 'USD' %}selected{% endif %}>USD ($)</option>
+                                            <option value="EUR" {% if settings.salary_currency == 'EUR' %}selected{% endif %}>EUR (€)</option>
+                                            <option value="GBP" {% if settings.salary_currency == 'GBP' %}selected{% endif %}>GBP (£)</option>
+                                            <option value="EGP" {% if settings.salary_currency == 'EGP' %}selected{% endif %}>EGP (E£)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="workdayStart" class="form-label">Workday Start Time</label>
+                                        <input type="time" class="form-control" id="workdayStart" name="workday_start" value="{{ settings.workday_start|time:"H:i" }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="workdayEnd" class="form-label">Workday End Time</label>
+                                        <input type="time" class="form-control" id="workdayEnd" name="workday_end" value="{{ settings.workday_end|time:"H:i" }}">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Save General Settings
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Attendance Settings -->
+                    <div class="tab-pane fade" id="attendance" role="tabpanel">
+                        <form method="POST" class="mt-4">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="lunchBreak" class="form-label">Lunch Break (minutes)</label>
+                                        <input type="number" class="form-control" id="lunchBreak" name="lunch_break" value="{{ settings.lunch_break_minutes }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="lateThreshold" class="form-label">Late Threshold (minutes)</label>
+                                        <input type="number" class="form-control" id="lateThreshold" name="late_threshold" value="{{ settings.late_threshold_min }}">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Save Attendance Settings
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Leave Settings -->
+                    <div class="tab-pane fade" id="leave" role="tabpanel">
+                        <form method="POST" class="mt-4">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="annualLeaves" class="form-label">Annual Leaves (days)</label>
+                                        <input type="number" class="form-control" id="annualLeaves" name="annual_leaves" value="21">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="sickLeaves" class="form-label">Sick Leaves (days)</label>
+                                        <input type="number" class="form-control" id="sickLeaves" name="sick_leaves" value="14">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="casualLeaves" class="form-label">Casual Leaves (days)</label>
+                                        <input type="number" class="form-control" id="casualLeaves" name="casual_leaves" value="7">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Save Leave Settings
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Payroll Settings -->
+                    <div class="tab-pane fade" id="payroll" role="tabpanel">
+                        <form method="POST" class="mt-4">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="overtimeRate" class="form-label">Overtime Rate (per hour)</label>
+                                        <input type="number" class="form-control" id="overtimeRate" name="overtime_rate" step="0.01" value="{{ settings.overtime_rate }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="workingHours" class="form-label">Monthly Working Hours</label>
+                                        <input type="number" class="form-control" id="workingHours" name="working_hours" step="0.01" value="{{ settings.monthly_working_hours }}">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Save Payroll Settings
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-database"></i> Database Management</h5>
+            </div>
+            <div class="card-body">
+                <p>Backup and restore your HR system data.</p>
+                <button class="btn btn-success">
+                    <i class="fas fa-download"></i> Backup Database
+                </button>
+                <button class="btn btn-warning">
+                    <i class="fas fa-upload"></i> Restore Database
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-sync-alt"></i> System Maintenance</h5>
+            </div>
+            <div class="card-body">
+                <p>Perform system maintenance tasks.</p>
+                <button class="btn btn-info">
+                    <i class="fas fa-sync"></i> Clear Cache
+                </button>
+                <button class="btn btn-secondary">
+                    <i class="fas fa-history"></i> View Logs
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

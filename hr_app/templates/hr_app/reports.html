@@ -1,0 +1,305 @@
+{% extends 'hr_app/base.html' %}
+{% load static %}
+
+{% block title %}Reports - HR Management System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-chart-bar"></i> Reports Dashboard</h5>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6><i class="fas fa-filter"></i> Report Filters</h6>
+                            </div>
+                            <div class="card-body">
+                                <form method="GET">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label for="reportType" class="form-label">Report Type</label>
+                                            <select class="form-select" id="reportType" name="type">
+                                                <option value="attendance" {% if report_type == 'attendance' %}selected{% endif %}>Attendance Report</option>
+                                                <option value="leave" {% if report_type == 'leave' %}selected{% endif %}>Leave Report</option>
+                                                <option value="payroll" {% if report_type == 'payroll' %}selected{% endif %}>Payroll Report</option>
+                                                <option value="employee" {% if report_type == 'employee' %}selected{% endif %}>Employee Report</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="startDate" class="form-label">Start Date</label>
+                                            <input type="date" class="form-control" id="startDate" name="start_date" value="{{ start_date }}">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="endDate" class="form-label">End Date</label>
+                                            <input type="date" class="form-control" id="endDate" name="end_date" value="{{ end_date }}">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="department" class="form-label">Department</label>
+                                            <select class="form-select" id="department" name="department">
+                                                <option value="">All Departments</option>
+                                                <option value="HR" {% if department == 'HR' %}selected{% endif %}>HR</option>
+                                                <option value="IT" {% if department == 'IT' %}selected{% endif %}>IT</option>
+                                                <option value="Finance" {% if department == 'Finance' %}selected{% endif %}>Finance</option>
+                                                <option value="Operations" {% if department == 'Operations' %}selected{% endif %}>Operations</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-12 text-end">
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fas fa-chart-bar"></i> Generate Report
+                                            </button>
+                                            <button type="button" class="btn btn-success" onclick="exportReport()">
+                                                <i class="fas fa-file-export"></i> Export to PDF
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h6>
+                                    {% if report_type == 'attendance' %}
+                                        Attendance Report
+                                    {% elif report_type == 'leave' %}
+                                        Leave Report
+                                    {% elif report_type == 'payroll' %}
+                                        Payroll Report
+                                    {% else %}
+                                        Employee Report
+                                    {% endif %}
+                                </h6>
+                                <span class="text-muted">{{ start_date }} to {{ end_date }}</span>
+                            </div>
+                            <div class="card-body">
+                                {% if report_type == 'attendance' %}
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Employee</th>
+                                                    <th>Department</th>
+                                                    <th>Total Days</th>
+                                                    <th>Present</th>
+                                                    <th>Absent</th>
+                                                    <th>Late</th>
+                                                    <th>Avg. Hours</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for record in report_data %}
+                                                <tr>
+                                                    <td>{{ record.employee }}</td>
+                                                    <td>{{ record.department }}</td>
+                                                    <td>{{ record.total_days }}</td>
+                                                    <td>{{ record.present }}</td>
+                                                    <td>{{ record.absent }}</td>
+                                                    <td>{{ record.late }}</td>
+                                                    <td>{{ record.avg_hours }}</td>
+                                                </tr>
+                                                {% empty %}
+                                                <tr>
+                                                    <td colspan="7" class="text-center">No data available</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                {% elif report_type == 'leave' %}
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Employee</th>
+                                                    <th>Department</th>
+                                                    <th>Total Leaves</th>
+                                                    <th>Approved</th>
+                                                    <th>Pending</th>
+                                                    <th>Rejected</th>
+                                                    <th>Total Days</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for record in report_data %}
+                                                <tr>
+                                                    <td>{{ record.employee }}</td>
+                                                    <td>{{ record.department }}</td>
+                                                    <td>{{ record.total_leaves }}</td>
+                                                    <td>{{ record.approved }}</td>
+                                                    <td>{{ record.pending }}</td>
+                                                    <td>{{ record.rejected }}</td>
+                                                    <td>{{ record.total_days }}</td>
+                                                </tr>
+                                                {% empty %}
+                                                <tr>
+                                                    <td colspan="7" class="text-center">No data available</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                {% elif report_type == 'payroll' %}
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Employee</th>
+                                                    <th>Department</th>
+                                                    <th>Gross Pay</th>
+                                                    <th>Deductions</th>
+                                                    <th>Net Pay</th>
+                                                    <th>Total Loans</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for record in report_data %}
+                                                <tr>
+                                                    <td>{{ record.employee }}</td>
+                                                    <td>{{ record.department }}</td>
+                                                    <td>{{ record.gross_pay }}</td>
+                                                    <td>{{ record.deductions }}</td>
+                                                    <td>{{ record.net_pay }}</td>
+                                                    <td>{{ record.total_loans }}</td>
+                                                </tr>
+                                                {% empty %}
+                                                <tr>
+                                                    <td colspan="6" class="text-center">No data available</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                {% else %}
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Employee</th>
+                                                    <th>Job Title</th>
+                                                    <th>Department</th>
+                                                    <th>Hire Date</th>
+                                                    <th>Status</th>
+                                                    <th>Salary</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for record in report_data %}
+                                                <tr>
+                                                    <td>{{ record.employee }}</td>
+                                                    <td>{{ record.job_title }}</td>
+                                                    <td>{{ record.department }}</td>
+                                                    <td>{{ record.hire_date }}</td>
+                                                    <td>
+                                                        {% if record.status %}
+                                                            <span class="badge bg-success">Active</span>
+                                                        {% else %}
+                                                            <span class="badge bg-secondary">Inactive</span>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>{{ record.salary }}</td>
+                                                </tr>
+                                                {% empty %}
+                                                <tr>
+                                                    <td colspan="6" class="text-center">No data available</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                {% endif %}
+                                
+                                <div class="row mt-4">
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h6>Summary Statistics</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <p><strong>Total Records:</strong> {{ report_data|length }}</p>
+                                                        <p><strong>Generated On:</strong> {% now "M d, Y H:i" %}</p>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <p><strong>Report Type:</strong> 
+                                                            {% if report_type == 'attendance' %}
+                                                                Attendance
+                                                            {% elif report_type == 'leave' %}
+                                                                Leave
+                                                            {% elif report_type == 'payroll' %}
+                                                                Payroll
+                                                            {% else %}
+                                                                Employee
+                                                            {% endif %}
+                                                        </p>
+                                                        <p><strong>Department:</strong> {{ department|default:"All" }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h6>Visualization</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <canvas id="reportChart"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Sample chart for reports
+    const ctx = document.getElementById('reportChart').getContext('2d');
+    const reportChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+                label: 'Employee Count',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: 'rgba(13, 110, 253, 0.5)',
+                borderColor: 'rgba(13, 110, 253, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+});
+
+function exportReport() {
+    alert('Report exported successfully!');
+}
+</script>
+{% endblock %}

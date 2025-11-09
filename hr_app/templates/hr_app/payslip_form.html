@@ -1,0 +1,77 @@
+{% extends 'hr_app/base.html' %}
+{% load static %}
+
+{% block title %}Edit Payslip - HR Management System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5><i class="fas fa-money-bill-wave"></i> Edit Payslip</h5>
+                <a href="{% url 'payroll' %}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Payroll
+                </a>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h5>Employee Information</h5>
+                        <p><strong>Name:</strong> {{ payslip.emp.emp_fullname }}</p>
+                        <p><strong>Employee ID:</strong> {{ payslip.emp.emp_code }}</p>
+                        <p><strong>Department:</strong> {{ payslip.emp.department }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Payslip Period</h5>
+                        <p><strong>Start Date:</strong> {{ payslip.period_start }}</p>
+                        <p><strong>End Date:</strong> {{ payslip.period_end }}</p>
+                        <p><strong>Generated:</strong> {{ payslip.generated_at|date:"M d, Y H:i" }}</p>
+                    </div>
+                </div>
+                
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="grossPay" class="form-label">Gross Pay</label>
+                                <input type="number" class="form-control" id="grossPay" name="gross_pay" value="{{ payslip.gross_pay }}" step="0.01">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="deductions" class="form-label">Total Deductions</label>
+                                <input type="number" class="form-control" id="deductions" name="deductions" value="{{ payslip.total_deductions }}" step="0.01">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="netPay" class="form-label">Net Pay</label>
+                                <input type="number" class="form-control" id="netPay" name="net_pay" value="{{ payslip.net_pay }}" step="0.01">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="payslipFile" class="form-label">Payslip File Path</label>
+                                <input type="text" class="form-control" id="payslipFile" name="payslip_file" value="{{ payslip.payslip_file }}">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Update Payslip
+                        </button>
+                        <a href="{% url 'payroll' %}" class="btn btn-secondary">
+                            <i class="fas fa-times"></i> Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

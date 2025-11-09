@@ -1,0 +1,162 @@
+{% extends 'hr_app/base.html' %}
+{% load static %}
+
+{% block title %}{{ employee.emp_fullname }} - HR Management System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5><i class="fas fa-user"></i> Employee Details</h5>
+                <div>
+                    <a href="{% url 'edit_employee' employee.emp_id %}" class="btn btn-warning">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                    <a href="{% url 'employees' %}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="text-center mb-4">
+                            <div class="bg-light rounded-circle d-flex align-items-center justify-content-center mx-auto" style="width: 150px; height: 150px;">
+                                <i class="fas fa-user fa-5x text-secondary"></i>
+                            </div>
+                            <h3 class="mt-3">{{ employee.emp_fullname }}</h3>
+                            <p class="text-muted">{{ employee.job_title }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <h5>Personal Information</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Employee ID:</strong> {{ employee.emp_code }}</p>
+                                <p><strong>National ID:</strong> {{ employee.national_id }}</p>
+                                <p><strong>Department:</strong> {{ employee.department }}</p>
+                                <p><strong>Hire Date:</strong> {{ employee.hire_date }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Status:</strong> 
+                                    {% if employee.is_active %}
+                                        <span class="badge bg-success">Active</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Inactive</span>
+                                    {% endif %}
+                                </p>
+                                <p><strong>Telegram UserID:</strong> {{ employee.telegram_userid }}</p>
+                                <p><strong>Work Start:</strong> {{ employee.work_start }}</p>
+                                <p><strong>Work End:</strong> {{ employee.work_end }}</p>
+                            </div>
+                        </div>
+                        
+                        <h5 class="mt-4">Salary Information</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Basic Salary:</strong> {{ employee.salary_basic }}</p>
+                                <p><strong>Housing Allowance:</strong> {{ employee.salary_housing }}</p>
+                                <p><strong>Transport Allowance:</strong> {{ employee.salary_transport }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Other Allowance:</strong> {{ employee.salary_other }}</p>
+                                <p><strong>Total Salary:</strong> <strong>{{ employee.salary_total }}</strong></p>
+                            </div>
+                        </div>
+                        
+                        <h5 class="mt-4">Leave Information</h5>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p><strong>Annual Leaves:</strong> {{ employee.allowed_annual_leaves }}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><strong>Sick Leaves:</strong> {{ employee.allowed_sick_leaves }}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><strong>Casual Leaves:</strong> {{ employee.allowed_casual_leaves }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-calendar-alt"></i> Recent Leaves</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for leave in employee_leaves %}
+                            <tr>
+                                <td>{{ leave.start_date }}</td>
+                                <td>{{ leave.end_date }}</td>
+                                <td>{{ leave.leave_type }}</td>
+                                <td>{{ leave.status }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4">No leave records found</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-money-bill-wave"></i> Recent Payslips</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Gross Pay</th>
+                                <th>Deductions</th>
+                                <th>Net Pay</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for payslip in employee_payslips %}
+                            <tr>
+                                <td>{{ payslip.period_start }} to {{ payslip.period_end }}</td>
+                                <td>{{ payslip.gross_pay }}</td>
+                                <td>{{ payslip.total_deductions }}</td>
+                                <td>{{ payslip.net_pay }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4">No payslip records found</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

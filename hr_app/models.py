@@ -26,6 +26,16 @@ class TblEmployees(models.Model):
         managed = False
         db_table = 'Tbl_Employees'
 
+    def save(self, *args, **kwargs):
+        # Calculate salary_total before saving
+        if self.salary_basic is not None or self.salary_housing is not None or self.salary_transport is not None or self.salary_other is not None:
+            basic = self.salary_basic or 0
+            housing = self.salary_housing or 0
+            transport = self.salary_transport or 0
+            other = self.salary_other or 0
+            self.salary_total = basic + housing + transport + other
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.emp_fullname
 
