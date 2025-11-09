@@ -1,0 +1,291 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}لوحة التحكم - نظام إدارة الموارد البشرية{% endblock %}
+{% block page_title %}لوحة التحكم{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Statistics Cards -->
+    <div class="col-md-3 mb-4">
+        <div class="card text-white" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-subtitle mb-2">إجمالي الموظفين</h6>
+                        <h2 class="card-title mb-0">{{ total_employees|default:0 }}</h2>
+                    </div>
+                    <div>
+                        <i class="fas fa-users fa-3x" style="opacity: 0.3;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 mb-4">
+        <div class="card text-white" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-subtitle mb-2">الحضور اليوم</h6>
+                        <h2 class="card-title mb-0">{{ present_today|default:0 }}</h2>
+                    </div>
+                    <div>
+                        <i class="fas fa-user-check fa-3x" style="opacity: 0.3;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 mb-4">
+        <div class="card text-white" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-subtitle mb-2">طلبات الإجازات</h6>
+                        <h2 class="card-title mb-0">{{ pending_leaves|default:0 }}</h2>
+                    </div>
+                    <div>
+                        <i class="fas fa-calendar-alt fa-3x" style="opacity: 0.3;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 mb-4">
+        <div class="card text-white" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-subtitle mb-2">الأقسام</h6>
+                        <h2 class="card-title mb-0">{{ total_departments|default:0 }}</h2>
+                    </div>
+                    <div>
+                        <i class="fas fa-sitemap fa-3x" style="opacity: 0.3;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Recent Attendance -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="fas fa-clock text-primary"></i> آخر الحضور</h5>
+                <a href="{% url 'attendance:attendance_list' %}" class="btn btn-sm btn-outline-primary">عرض الكل</a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>الموظف</th>
+                                <th>الوقت</th>
+                                <th>الحالة</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if recent_attendance %}
+                                {% for attendance in recent_attendance %}
+                                <tr>
+                                    <td>{{ attendance.employee.full_name_ar }}</td>
+                                    <td>{{ attendance.check_in|time:"H:i" }}</td>
+                                    <td>
+                                        {% if attendance.status == 'present' %}
+                                            <span class="badge bg-success">حاضر</span>
+                                        {% elif attendance.status == 'late' %}
+                                            <span class="badge bg-warning">متأخر</span>
+                                        {% elif attendance.status == 'absent' %}
+                                            <span class="badge bg-danger">غائب</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="3" class="text-center text-muted">لا توجد بيانات</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Pending Leave Requests -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="fas fa-calendar-check text-info"></i> طلبات الإجازات المعلقة</h5>
+                <a href="{% url 'attendance:leave_request_list' %}" class="btn btn-sm btn-outline-info">عرض الكل</a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>الموظف</th>
+                                <th>النوع</th>
+                                <th>المدة</th>
+                                <th>الإجراء</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if pending_leave_requests %}
+                                {% for leave in pending_leave_requests %}
+                                <tr>
+                                    <td>{{ leave.employee.full_name_ar }}</td>
+                                    <td>{{ leave.get_leave_type_display }}</td>
+                                    <td>{{ leave.days }} يوم</td>
+                                    <td>
+                                        <a href="{% url 'attendance:leave_request_detail' leave.id %}" class="btn btn-sm btn-primary">عرض</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td colspan="4" class="text-center text-muted">لا توجد طلبات معلقة</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Upcoming Birthdays -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-birthday-cake text-warning"></i> أعياد الميلاد القادمة</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group list-group-flush">
+                    {% if upcoming_birthdays %}
+                        {% for employee in upcoming_birthdays %}
+                        <div class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-0">{{ employee.full_name_ar }}</h6>
+                                <small class="text-muted">{{ employee.department }}</small>
+                            </div>
+                            <span class="badge bg-warning">{{ employee.date_of_birth|date:"d/m" }}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-center text-muted mb-0">لا توجد أعياد ميلاد قادمة</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quick Actions -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-bolt text-success"></i> إجراءات سريعة</h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <a href="{% url 'employees:employee_create' %}" class="btn btn-outline-primary w-100">
+                            <i class="fas fa-user-plus"></i><br>
+                            إضافة موظف
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="{% url 'attendance:leave_request_create' %}" class="btn btn-outline-info w-100">
+                            <i class="fas fa-calendar-plus"></i><br>
+                            طلب إجازة
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="{% url 'attendance:zk_sync' %}" class="btn btn-outline-success w-100">
+                            <i class="fas fa-sync"></i><br>
+                            مزامنة البصمة
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="{% url 'reports:reports_dashboard' %}" class="btn btn-outline-warning w-100">
+                            <i class="fas fa-chart-bar"></i><br>
+                            التقارير
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Attendance Chart -->
+    <div class="col-md-12 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-chart-line text-primary"></i> إحصائيات الحضور الشهرية</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="attendanceChart" height="80"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Attendance Chart
+    const ctx = document.getElementById('attendanceChart').getContext('2d');
+    const attendanceChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['الأسبوع 1', 'الأسبوع 2', 'الأسبوع 3', 'الأسبوع 4'],
+            datasets: [{
+                label: 'حاضر',
+                data: [85, 90, 88, 92],
+                borderColor: 'rgb(75, 192, 192)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                tension: 0.4
+            }, {
+                label: 'متأخر',
+                data: [10, 8, 9, 6],
+                borderColor: 'rgb(255, 205, 86)',
+                backgroundColor: 'rgba(255, 205, 86, 0.2)',
+                tension: 0.4
+            }, {
+                label: 'غائب',
+                data: [5, 2, 3, 2],
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}
+

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}نظام إدارة الموارد البشرية{% endblock %}</title>
+    
+    <!-- Bootstrap 5 RTL CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts - Cairo (Arabic) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --sidebar-width: 260px;
+            --header-height: 60px;
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --info-color: #16a085;
+            --light-bg: #ecf0f1;
+            --dark-text: #2c3e50;
+        }
+        
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: var(--sidebar-width);
+            background: linear-gradient(180deg, var(--primary-color) 0%, #34495e 100%);
+            color: white;
+            overflow-y: auto;
+            transition: all 0.3s;
+            z-index: 1000;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .sidebar-header h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0;
+            color: white;
+        }
+        
+        .sidebar-header p {
+            font-size: 0.85rem;
+            margin: 5px 0 0 0;
+            opacity: 0.8;
+        }
+        
+        .sidebar-menu {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        
+        .sidebar-menu li {
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active {
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            padding-right: 25px;
+        }
+        
+        .sidebar-menu a i {
+            margin-left: 15px;
+            font-size: 1.1rem;
+            width: 25px;
+            text-align: center;
+        }
+        
+        .sidebar-menu .submenu {
+            display: none;
+            background-color: rgba(0,0,0,0.2);
+            padding-right: 20px;
+        }
+        
+        .sidebar-menu .submenu a {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+        
+        .sidebar-menu li.has-submenu > a::after {
+            content: '\f078';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-right: auto;
+            transition: transform 0.3s;
+        }
+        
+        .sidebar-menu li.has-submenu.open > a::after {
+            transform: rotate(180deg);
+        }
+        
+        .sidebar-menu li.has-submenu.open .submenu {
+            display: block;
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-right: var(--sidebar-width);
+            min-height: 100vh;
+            transition: all 0.3s;
+        }
+        
+        /* Top Header */
+        .top-header {
+            background: white;
+            height: var(--header-height);
+            padding: 0 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+        
+        .top-header h4 {
+            margin: 0;
+            color: var(--dark-text);
+            font-weight: 600;
+        }
+        
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .notifications {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .notifications .badge {
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            background-color: var(--danger-color);
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.7rem;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        /* Content Area */
+        .content-area {
+            padding: 30px;
+        }
+        
+        .page-header {
+            margin-bottom: 30px;
+        }
+        
+        .page-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-text);
+            margin-bottom: 5px;
+        }
+        
+        .breadcrumb {
+            background: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        /* Cards */
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        
+        .card-header {
+            background-color: white;
+            border-bottom: 2px solid var(--light-bg);
+            padding: 15px 20px;
+            font-weight: 600;
+        }
+        
+        /* Buttons */
+        .btn {
+            border-radius: 5px;
+            padding: 8px 20px;
+            font-weight: 500;
+        }
+        
+        /* Tables */
+        .table {
+            background: white;
+        }
+        
+        .table thead th {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            font-weight: 600;
+            border: none;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(100%);
+            }
+            
+            .sidebar.show {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-right: 0;
+            }
+            
+            .mobile-toggle {
+                display: block !important;
+            }
+        }
+        
+        .mobile-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        
+        /* Alerts */
+        .alert {
+            border-radius: 8px;
+            border: none;
+        }
+        
+        /* Footer */
+        .footer {
+            background: white;
+            padding: 20px 30px;
+            text-align: center;
+            color: #7f8c8d;
+            border-top: 1px solid var(--light-bg);
+        }
+    </style>
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-users-cog"></i> نظام الموارد البشرية</h3>
+            <p>HR Management System</p>
+        </div>
+        
+        <ul class="sidebar-menu">
+            <li>
+                <a href="{% url 'core:dashboard' %}" class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+                    <i class="fas fa-home"></i>
+                    <span>الرئيسية</span>
+                </a>
+            </li>
+            
+            <li class="has-submenu">
+                <a href="#employees-menu">
+                    <i class="fas fa-users"></i>
+                    <span>الموظفين</span>
+                </a>
+                <ul class="submenu" id="employees-menu">
+                    <li><a href="{% url 'employees:employee_list' %}">قائمة الموظفين</a></li>
+                    <li><a href="{% url 'employees:employee_create' %}">إضافة موظف</a></li>
+                </ul>
+            </li>
+            
+            <li class="has-submenu">
+                <a href="#attendance-menu">
+                    <i class="fas fa-clock"></i>
+                    <span>الحضور والانصراف</span>
+                </a>
+                <ul class="submenu" id="attendance-menu">
+                    <li><a href="{% url 'attendance:attendance_today' %}">الحضور اليوم</a></li>
+                    <li><a href="{% url 'attendance:attendance_list' %}">سجل الحضور</a></li>
+                    <li><a href="{% url 'attendance:zk_sync' %}">مزامنة البصمة</a></li>
+                </ul>
+            </li>
+            
+            <li class="has-submenu">
+                <a href="#leaves-menu">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>الإجازات</span>
+                </a>
+                <ul class="submenu" id="leaves-menu">
+                    <li><a href="{% url 'attendance:leave_request_create' %}">طلب إجازة</a></li>
+                    <li><a href="{% url 'attendance:my_leave_requests' %}">إجازاتي</a></li>
+                    <li><a href="{% url 'attendance:leave_request_list' %}">جميع الإجازات</a></li>
+                    <li><a href="{% url 'leaves:leave_policy_list' %}">سياسات الإجازات</a></li>
+                </ul>
+            </li>
+            
+            <li class="has-submenu">
+                <a href="#payroll-menu">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>الرواتب</span>
+                </a>
+                <ul class="submenu" id="payroll-menu">
+                    <li><a href="{% url 'payroll:payroll_list' %}">كشوف الرواتب</a></li>
+                    <li><a href="{% url 'payroll:my_payslips' %}">قسائم رواتبي</a></li>
+                    <li><a href="{% url 'payroll:loan_list' %}">القروض</a></li>
+                    <li><a href="{% url 'payroll:bonus_list' %}">المكافآت</a></li>
+                </ul>
+            </li>
+            
+            <li class="has-submenu">
+                <a href="#organization-menu">
+                    <i class="fas fa-sitemap"></i>
+                    <span>الهيكل التنظيمي</span>
+                </a>
+                <ul class="submenu" id="organization-menu">
+                    <li><a href="{% url 'organization:department_list' %}">الأقسام</a></li>
+                    <li><a href="{% url 'organization:position_list' %}">المناصب</a></li>
+                    <li><a href="{% url 'organization:branch_list' %}">الفروع</a></li>
+                    <li><a href="{% url 'organization:shift_list' %}">الورديات</a></li>
+                    <li><a href="{% url 'organization:holiday_list' %}">العطلات</a></li>
+                </ul>
+            </li>
+            
+            <li class="has-submenu">
+                <a href="#performance-menu">
+                    <i class="fas fa-chart-line"></i>
+                    <span>تقييم الأداء</span>
+                </a>
+                <ul class="submenu" id="performance-menu">
+                    <li><a href="{% url 'performance:my_reviews' %}">تقييماتي</a></li>
+                    <li><a href="{% url 'performance:review_list' %}">جميع التقييمات</a></li>
+                    <li><a href="{% url 'performance:my_goals' %}">أهدافي</a></li>
+                    <li><a href="{% url 'performance:kpi_list' %}">مؤشرات الأداء</a></li>
+                </ul>
+            </li>
+            
+            <li class="has-submenu">
+                <a href="#recruitment-menu">
+                    <i class="fas fa-user-plus"></i>
+                    <span>التوظيف</span>
+                </a>
+                <ul class="submenu" id="recruitment-menu">
+                    <li><a href="{% url 'recruitment:job_list' %}">الوظائف المتاحة</a></li>
+                    <li><a href="{% url 'recruitment:application_list' %}">الطلبات</a></li>
+                    <li><a href="{% url 'recruitment:interview_list' %}">المقابلات</a></li>
+                    <li><a href="{% url 'recruitment:offer_list' %}">عروض العمل</a></li>
+                </ul>
+            </li>
+            
+            <li class="has-submenu">
+                <a href="#training-menu">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>التدريب</span>
+                </a>
+                <ul class="submenu" id="training-menu">
+                    <li><a href="{% url 'training:program_list' %}">البرامج التدريبية</a></li>
+                    <li><a href="{% url 'training:session_list' %}">الجلسات</a></li>
+                    <li><a href="{% url 'training:my_enrollments' %}">تدريباتي</a></li>
+                </ul>
+            </li>
+            
+            <li class="has-submenu">
+                <a href="#reports-menu">
+                    <i class="fas fa-file-alt"></i>
+                    <span>التقارير</span>
+                </a>
+                <ul class="submenu" id="reports-menu">
+                    <li><a href="{% url 'reports:reports_dashboard' %}">لوحة التقارير</a></li>
+                    <li><a href="{% url 'reports:employee_summary_report' %}">تقرير الموظفين</a></li>
+                    <li><a href="{% url 'reports:attendance_monthly_report' %}">تقرير الحضور</a></li>
+                    <li><a href="{% url 'reports:payroll_summary_report' %}">تقرير الرواتب</a></li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="{% url 'core:system_settings' %}">
+                    <i class="fas fa-cog"></i>
+                    <span>الإعدادات</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="{% url 'core:logout' %}">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>تسجيل الخروج</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Header -->
+        <div class="top-header">
+            <div class="d-flex align-items-center">
+                <span class="mobile-toggle" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </span>
+                <h4>{% block page_title %}لوحة التحكم{% endblock %}</h4>
+            </div>
+            
+            <div class="user-menu">
+                <div class="notifications" onclick="showNotifications()">
+                    <i class="fas fa-bell fa-lg"></i>
+                    <span class="badge">3</span>
+                </div>
+                
+                <div class="user-info" onclick="toggleUserMenu()">
+                    <div class="user-avatar">
+                        {% if user.first_name %}{{ user.first_name|first }}{% else %}{{ user.username|first }}{% endif %}
+                    </div>
+                    <div>
+                        <div style="font-weight: 600;">{{ user.get_full_name|default:user.username }}</div>
+                        <small style="color: #7f8c8d;">{{ user.get_role_display }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Content Area -->
+        <div class="content-area">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            
+            {% block content %}{% endblock %}
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>&copy; 2025 نظام إدارة الموارد البشرية. جميع الحقوق محفوظة.</p>
+        </div>
+    </div>
+    
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        // Toggle sidebar on mobile
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('show');
+        }
+        
+        // Toggle submenu
+        document.querySelectorAll('.has-submenu > a').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                this.parentElement.classList.toggle('open');
+            });
+        });
+        
+        // Show notifications
+        function showNotifications() {
+            alert('عرض الإشعارات');
+        }
+        
+        // Toggle user menu
+        function toggleUserMenu() {
+            alert('قائمة المستخدم');
+        }
+    </script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
+
