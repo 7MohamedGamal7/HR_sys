@@ -104,7 +104,7 @@ WSGI_APPLICATION = 'HR_sys.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': 'Acrylica',
+        'NAME': 'HR_System',
         'USER': 'admin',
         'PASSWORD': 'hgslduhgfwdv',
         'HOST': '192.168.1.48',
