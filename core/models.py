@@ -95,7 +95,7 @@ class BaseModel(models.Model):
         verbose_name='تاريخ التحديث'
     )
     created_by = models.ForeignKey(
-        'User',
+        'core.User',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
@@ -103,7 +103,7 @@ class BaseModel(models.Model):
         verbose_name='أنشئ بواسطة'
     )
     updated_by = models.ForeignKey(
-        'User',
+        'core.User',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,

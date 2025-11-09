@@ -46,8 +46,8 @@ class WorkShiftAdmin(admin.ModelAdmin):
 @admin.register(Holiday)
 class HolidayAdmin(admin.ModelAdmin):
     """Holiday Admin"""
-    list_display = ['name', 'start_date', 'end_date', 'is_recurring']
-    list_filter = ['is_recurring', 'start_date']
+    list_display = ['name', 'date', 'holiday_type', 'is_recurring']
+    list_filter = ['is_recurring', 'holiday_type', 'date']
     search_fields = ['name', 'description']
-    ordering = ['-start_date']
+    ordering = ['-date']
 

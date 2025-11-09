@@ -21,23 +21,23 @@ urlpatterns = [
     path('employees/', include('employees.urls')),
 
     # Attendance & Leaves
-    path('attendance/', include('attendance.urls')),
-    path('leaves/', include('leaves.urls')),
+    # path('attendance/', include('attendance.urls')),  # Temporarily disabled
+    # path('leaves/', include('leaves.urls')),  # Temporarily disabled
 
     # Payroll
-    path('payroll/', include('payroll.urls')),
+    # path('payroll/', include('payroll.urls')),  # Temporarily disabled
 
     # Performance Management
-    path('performance/', include('performance.urls')),
+    # path('performance/', include('performance.urls')),  # Temporarily disabled
 
     # Recruitment
-    path('recruitment/', include('recruitment.urls')),
+    # path('recruitment/', include('recruitment.urls')),  # Temporarily disabled
 
     # Training & Development
-    path('training/', include('training.urls')),
+    # path('training/', include('training.urls')),  # Temporarily disabled
 
     # Reports & Analytics
-    path('reports/', include('reports.urls')),
+    # path('reports/', include('reports.urls')),  # Temporarily disabled
 ]
 
 # Serve media files in development

@@ -18,7 +18,7 @@ class AttendanceForm(forms.ModelForm):
         model = Attendance
         fields = [
             'employee', 'date', 'check_in', 'check_out', 'status',
-            'late_minutes', 'early_leave_minutes', 'overtime_hours', 'notes'
+            'late_minutes', 'early_leave_minutes', 'overtime_hours', 'remarks'
         ]
         labels = {
             'employee': 'الموظف',
@@ -29,15 +29,15 @@ class AttendanceForm(forms.ModelForm):
             'late_minutes': 'دقائق التأخير',
             'early_leave_minutes': 'دقائق المغادرة المبكرة',
             'overtime_hours': 'ساعات العمل الإضافي',
-            'notes': 'ملاحظات',
+            'remarks': 'ملاحظات',
         }
         widgets = {
             'date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'check_in': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}),
             'check_out': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}),
-            'notes': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
+            'remarks': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
         }
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -57,7 +57,7 @@ class AttendanceForm(forms.ModelForm):
                 Column('early_leave_minutes', css_class='col-md-4'),
             ),
             'overtime_hours',
-            'notes',
+            'remarks',
             FormActions(
                 Submit('submit', 'حفظ', css_class='btn btn-primary'),
                 HTML('<a href="{% url \'attendance:attendance_list\' %}" class="btn btn-secondary">إلغاء</a>')
@@ -136,14 +136,14 @@ class LeaveApprovalForm(forms.ModelForm):
     """
     class Meta:
         model = LeaveRequest
-        fields = ['status', 'approved_by_notes']
+        fields = ['status', 'rejection_reason']
         labels = {
             'status': 'الحالة',
-            'approved_by_notes': 'ملاحظات المدير',
+            'rejection_reason': 'سبب الرفض',
         }
         widgets = {
             'status': forms.Select(attrs={'class': 'form-control'}),
-            'approved_by_notes': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
+            'rejection_reason': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
         }
     
     def __init__(self, *args, **kwargs):
@@ -153,12 +153,12 @@ class LeaveApprovalForm(forms.ModelForm):
             ('approved', 'موافق عليها'),
             ('rejected', 'مرفوضة'),
         ]
-        
+
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.layout = Layout(
             'status',
-            'approved_by_notes',
+            'rejection_reason',
             FormActions(
                 Submit('submit', 'حفظ', css_class='btn btn-primary'),
                 HTML('<a href="javascript:history.back()" class="btn btn-secondary">إلغاء</a>')

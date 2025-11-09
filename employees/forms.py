@@ -25,7 +25,7 @@ class EmployeeForm(forms.ModelForm):
             'nationality', 'religion', 'email', 'phone', 'mobile', 'address',
             'department', 'position', 'branch', 'manager', 'hire_date', 'employment_type',
             'work_shift', 'probation_end_date', 'basic_salary', 'housing_allowance',
-            'transportation_allowance', 'other_allowances', 'bank_name', 'bank_account_number',
+            'transport_allowance', 'other_allowances', 'bank_name', 'bank_account_number',
             'iban', 'photo', 'zk_user_id', 'is_active'
         ]
         widgets = {
@@ -107,7 +107,7 @@ class EmployeeForm(forms.ModelForm):
                         Column('housing_allowance', css_class='col-md-6'),
                     ),
                     Row(
-                        Column('transportation_allowance', css_class='col-md-6'),
+                        Column('transport_allowance', css_class='col-md-6'),
                         Column('other_allowances', css_class='col-md-6'),
                     ),
                 ),
@@ -135,22 +135,22 @@ class EmployeeDocumentForm(forms.ModelForm):
     """
     class Meta:
         model = EmployeeDocument
-        fields = ['document_type', 'document_number', 'issue_date', 'expiry_date', 'file', 'notes']
+        fields = ['document_type', 'document_name', 'document_file', 'issue_date', 'expiry_date', 'description']
         labels = {
             'document_type': 'نوع المستند',
-            'document_number': 'رقم المستند',
+            'document_name': 'اسم المستند',
+            'document_file': 'ملف المستند',
             'issue_date': 'تاريخ الإصدار',
             'expiry_date': 'تاريخ الانتهاء',
-            'file': 'الملف',
-            'notes': 'ملاحظات',
+            'description': 'الوصف',
         }
         widgets = {
             'issue_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'expiry_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'notes': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
-            'file': forms.FileInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
+            'document_file': forms.FileInput(attrs={'class': 'form-control'}),
         }
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -158,13 +158,13 @@ class EmployeeDocumentForm(forms.ModelForm):
         self.helper.form_enctype = 'multipart/form-data'
         self.helper.layout = Layout(
             'document_type',
-            'document_number',
+            'document_name',
             Row(
                 Column('issue_date', css_class='col-md-6'),
                 Column('expiry_date', css_class='col-md-6'),
             ),
-            'file',
-            'notes',
+            'document_file',
+            'description',
             FormActions(
                 Submit('submit', 'حفظ', css_class='btn btn-primary'),
                 HTML('<a href="javascript:history.back()" class="btn btn-secondary">إلغاء</a>')
@@ -180,25 +180,26 @@ class EmployeeContractForm(forms.ModelForm):
     class Meta:
         model = EmployeeContract
         fields = [
-            'contract_type', 'start_date', 'end_date', 'salary', 
-            'allowances', 'contract_file', 'notes'
+            'contract_type', 'contract_number', 'start_date', 'end_date', 'salary',
+            'contract_file', 'terms_and_conditions', 'is_current'
         ]
         labels = {
             'contract_type': 'نوع العقد',
+            'contract_number': 'رقم العقد',
             'start_date': 'تاريخ البداية',
             'end_date': 'تاريخ النهاية',
             'salary': 'الراتب',
-            'allowances': 'البدلات',
             'contract_file': 'ملف العقد',
-            'notes': 'ملاحظات',
+            'terms_and_conditions': 'الشروط والأحكام',
+            'is_current': 'العقد الحالي',
         }
         widgets = {
             'start_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'end_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'notes': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
+            'terms_and_conditions': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
             'contract_file': forms.FileInput(attrs={'class': 'form-control'}),
         }
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -206,16 +207,15 @@ class EmployeeContractForm(forms.ModelForm):
         self.helper.form_enctype = 'multipart/form-data'
         self.helper.layout = Layout(
             'contract_type',
+            'contract_number',
             Row(
                 Column('start_date', css_class='col-md-6'),
                 Column('end_date', css_class='col-md-6'),
             ),
-            Row(
-                Column('salary', css_class='col-md-6'),
-                Column('allowances', css_class='col-md-6'),
-            ),
+            'salary',
             'contract_file',
-            'notes',
+            'terms_and_conditions',
+            'is_current',
             FormActions(
                 Submit('submit', 'حفظ', css_class='btn btn-primary'),
                 HTML('<a href="javascript:history.back()" class="btn btn-secondary">إلغاء</a>')
@@ -268,22 +268,20 @@ class EmployeeEducationForm(forms.ModelForm):
     """
     class Meta:
         model = EmployeeEducation
-        fields = ['degree', 'institution', 'field_of_study', 'start_date', 'end_date', 'grade', 'certificate']
+        fields = ['degree', 'field_of_study', 'institution', 'country', 'graduation_year', 'grade', 'certificate_file']
         labels = {
             'degree': 'الدرجة العلمية',
+            'field_of_study': 'مجال الدراسة',
             'institution': 'المؤسسة التعليمية',
-            'field_of_study': 'التخصص',
-            'start_date': 'تاريخ البداية',
-            'end_date': 'تاريخ النهاية',
+            'country': 'الدولة',
+            'graduation_year': 'سنة التخرج',
             'grade': 'التقدير',
-            'certificate': 'الشهادة',
+            'certificate_file': 'ملف الشهادة',
         }
         widgets = {
-            'start_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'end_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'certificate': forms.FileInput(attrs={'class': 'form-control'}),
+            'certificate_file': forms.FileInput(attrs={'class': 'form-control'}),
         }
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -298,12 +296,13 @@ class EmployeeExperienceForm(forms.ModelForm):
     """
     class Meta:
         model = EmployeeExperience
-        fields = ['company', 'position', 'start_date', 'end_date', 'responsibilities', 'reason_for_leaving']
+        fields = ['company_name', 'position', 'start_date', 'end_date', 'is_current', 'responsibilities', 'reason_for_leaving']
         labels = {
-            'company': 'الشركة',
+            'company_name': 'اسم الشركة',
             'position': 'المنصب',
             'start_date': 'تاريخ البداية',
             'end_date': 'تاريخ النهاية',
+            'is_current': 'الوظيفة الحالية',
             'responsibilities': 'المسؤوليات',
             'reason_for_leaving': 'سبب ترك العمل',
         }
@@ -311,5 +310,6 @@ class EmployeeExperienceForm(forms.ModelForm):
             'start_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'end_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'responsibilities': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
+            'reason_for_leaving': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
         }
 
