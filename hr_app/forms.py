@@ -62,8 +62,13 @@ class EmployeeForm(forms.ModelForm):
         
         if commit:
             # Save without including Salary_Total in the SQL statement
-            self.save_m2m = super().save_m2m
-            instance.save()
+            instance.save(update_fields=[
+                'emp_code', 'emp_fullname', 'national_id', 'job_title', 'department',
+                'hire_date', 'salary_basic', 'salary_housing', 'salary_transport',
+                'salary_other', 'allowed_annual_leaves', 'allowed_sick_leaves',
+                'allowed_casual_leaves', 'work_start', 'work_end', 'telegram_userid',
+                'is_active'
+            ])
         return instance
 
 

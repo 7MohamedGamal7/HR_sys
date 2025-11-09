@@ -151,8 +151,14 @@ def add_employee_view(request):
             transport = employee.salary_transport or 0
             other = employee.salary_other or 0
             employee.salary_total = basic + housing + transport + other
-            # Now save to database
-            employee.save()
+            # Now save to database, explicitly excluding salary_total
+            employee.save(update_fields=[
+                'emp_code', 'emp_fullname', 'national_id', 'job_title', 'department',
+                'hire_date', 'salary_basic', 'salary_housing', 'salary_transport',
+                'salary_other', 'allowed_annual_leaves', 'allowed_sick_leaves',
+                'allowed_casual_leaves', 'work_start', 'work_end', 'telegram_userid',
+                'is_active'
+            ])
             messages.success(request, f'Employee {employee.emp_fullname} added successfully!')
             return redirect('employees')
     else:
@@ -181,8 +187,14 @@ def edit_employee_view(request, emp_id):
             transport = employee.salary_transport or 0
             other = employee.salary_other or 0
             employee.salary_total = basic + housing + transport + other
-            # Now save to database
-            employee.save()
+            # Now save to database, explicitly excluding salary_total
+            employee.save(update_fields=[
+                'emp_code', 'emp_fullname', 'national_id', 'job_title', 'department',
+                'hire_date', 'salary_basic', 'salary_housing', 'salary_transport',
+                'salary_other', 'allowed_annual_leaves', 'allowed_sick_leaves',
+                'allowed_casual_leaves', 'work_start', 'work_end', 'telegram_userid',
+                'is_active'
+            ])
             messages.success(request, f'Employee {employee.emp_fullname} updated successfully!')
             return redirect('view_employee', emp_id=employee.emp_id)
     else:

@@ -34,6 +34,14 @@ class TblEmployees(models.Model):
             transport = self.salary_transport or 0
             other = self.salary_other or 0
             self.salary_total = basic + housing + transport + other
+        
+        # Explicitly exclude salary_total from the fields to update
+        if 'update_fields' in kwargs and kwargs['update_fields'] is not None:
+            # Remove salary_total from update_fields if present
+            update_fields = set(kwargs['update_fields'])
+            update_fields.discard('salary_total')
+            kwargs['update_fields'] = update_fields
+        
         super().save(*args, **kwargs)
 
     def __str__(self):
