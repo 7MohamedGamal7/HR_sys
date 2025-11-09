@@ -1,42 +1,34 @@
 {% extends 'hr_app/base.html' %}
 {% load static %}
 
-{% block title %}Delete Payslip - HR Management System{% endblock %}
+{% block title %}تأكيد الحذف - نظام إدارة الموارد البشرية{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-6">
-        <div class="card border-danger">
-            <div class="card-header bg-danger text-white">
-                <h5><i class="fas fa-exclamation-triangle"></i> Confirm Delete</h5>
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-exclamation-triangle"></i> تأكيد الحذف</h5>
             </div>
             <div class="card-body">
-                <p class="lead">Are you sure you want to delete the following payslip?</p>
-                
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Payslip for {{ payslip.emp.emp_fullname }}</h5>
-                        <p class="card-text">
-                            <strong>Period:</strong> {{ payslip.period_start }} to {{ payslip.period_end }}<br>
-                            <strong>Gross Pay:</strong> {{ payslip.gross_pay }}<br>
-                            <strong>Net Pay:</strong> {{ payslip.net_pay }}<br>
-                            <strong>Generated:</strong> {{ payslip.generated_at|date:"M d, Y H:i" }}<br>
-                        </p>
-                    </div>
+                <p>هل أنت متأكد أنك تريد حذف كشف الراتب التالي؟</p>
+                <div class="alert alert-warning">
+                    <strong>الموظف:</strong> {{ payslip.emp.emp_fullname }}<br>
+                    <strong>الفترة:</strong> {{ payslip.period_start|date:"d/m/Y" }} إلى {{ payslip.period_end|date:"d/m/Y" }}<br>
+                    <strong>الراتب الصافي:</strong> {{ payslip.net_pay }}
                 </div>
-                
                 <p class="text-danger">
-                    <i class="fas fa-exclamation-circle"></i> This action cannot be undone. The payslip will be permanently removed.
+                    <i class="fas fa-exclamation-circle"></i> هذا الإجراء لا يمكن التراجع عنه.
                 </p>
                 
                 <form method="POST">
                     {% csrf_token %}
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a href="{% url 'payroll' %}" class="btn btn-secondary me-md-2">
-                            <i class="fas fa-times"></i> Cancel
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'payroll' %}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> إلغاء
                         </a>
                         <button type="submit" class="btn btn-danger">
-                            <i class="fas fa-trash"></i> Delete Payslip
+                            <i class="fas fa-trash"></i> تأكيد الحذف
                         </button>
                     </div>
                 </form>

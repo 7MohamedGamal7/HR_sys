@@ -86,13 +86,27 @@ class TblLeaves(models.Model):
     start_date = models.DateField(db_column='Start_Date', blank=True, null=True)
     end_date = models.DateField(db_column='End_Date', blank=True, null=True)
     leave_type = models.CharField(db_column='Leave_Type', max_length=50, blank=True, null=True)
-    leave_days = models.IntegerField(db_column='Leave_Days', blank=True, null=True)
+    leave_days = models.IntegerField(db_column='Leave_Days', blank=True, null=True, editable=False)
     approved_by = models.CharField(db_column='Approved_By', max_length=100, blank=True, null=True)
     status = models.CharField(db_column='Status', max_length=20, blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'Tbl_Leaves'
+    
+    def save(self, *args, **kwargs):
+        # Calculate leave_days before saving if start_date and end_date are provided
+        if self.start_date and self.end_date:
+            self.leave_days = (self.end_date - self.start_date).days + 1
+        
+        # Explicitly exclude leave_days from the fields to update
+        if 'update_fields' in kwargs and kwargs['update_fields'] is not None:
+            # Remove leave_days from update_fields if present
+            update_fields = set(kwargs['update_fields'])
+            update_fields.discard('leave_days')
+            kwargs['update_fields'] = update_fields
+        
+        super().save(*args, **kwargs)
 
 
 class TblLoans(models.Model):

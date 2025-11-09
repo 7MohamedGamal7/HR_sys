@@ -1,139 +1,103 @@
 {% extends 'hr_app/base.html' %}
 {% load static %}
 
-{% block title %}Dashboard - HR Management System{% endblock %}
+{% block title %}لوحة التحكم - نظام إدارة الموارد البشرية{% endblock %}
 
 {% block content %}
-<div class="row mb-4">
+<div class="row">
     <div class="col-md-3">
-        <div class="card stat-card bg-primary text-white">
-            <div class="card-body text-center">
-                <i class="fas fa-users"></i>
-                <h3>{{ total_employees }}</h3>
-                <p>Total Employees</p>
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-users"></i> الموظفين</h5>
+                <p class="card-text display-4">{{ total_employees }}</p>
             </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card stat-card bg-success text-white">
-            <div class="card-body text-center">
-                <i class="fas fa-calendar-check"></i>
-                <h3>{{ present_today }}</h3>
-                <p>Present Today</p>
+        <div class="card text-white bg-success mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-calendar-check"></i> الحضور اليوم</h5>
+                <p class="card-text display-4">{{ present_today }}</p>
             </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card stat-card bg-warning text-white">
-            <div class="card-body text-center">
-                <i class="fas fa-door-open"></i>
-                <h3>{{ leaves_today }}</h3>
-                <p>On Leave Today</p>
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-umbrella-beach"></i> الإجازات اليوم</h5>
+                <p class="card-text display-4">{{ leaves_today }}</p>
             </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card stat-card bg-info text-white">
-            <div class="card-body text-center">
-                <i class="fas fa-money-bill-wave"></i>
-                <h3>{{ pending_loans }}</h3>
-                <p>Pending Loans</p>
+        <div class="card text-white bg-info mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-file-invoice-dollar"></i> القروض المعلقة</h5>
+                <p class="card-text display-4">{{ pending_loans }}</p>
             </div>
         </div>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-header">
-                <h5><i class="fas fa-chart-bar"></i> Attendance Overview</h5>
-            </div>
-            <div class="card-body">
-                <canvas id="attendanceChart"></canvas>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-header">
-                <h5><i class="fas fa-bell"></i> Recent Activities</h5>
-            </div>
-            <div class="card-body">
-                <ul class="list-group list-group-flush">
-                    {% for log in recent_logs %}
-                    <li class="list-group-item">
-                        <small class="text-muted">{{ log.performed_at|date:"M d, Y H:i" }}</small>
-                        <p class="mb-0">{{ log.action }} - {{ log.performed_by }}</p>
-                    </li>
-                    {% empty %}
-                    <li class="list-group-item">No recent activities</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row mt-4">
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <h5><i class="fas fa-calendar-alt"></i> Upcoming Leaves</h5>
+                <h5><i class="fas fa-history"></i> الأنشطة الأخيرة</h5>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Employee</th>
-                                <th>Start Date</th>
-                                <th>Type</th>
+                                <th>الموظف</th>
+                                <th>الإجراء</th>
+                                <th>التاريخ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for log in recent_logs %}
+                            <tr>
+                                <td>{{ log.emp_id }}</td>
+                                <td>{{ log.action }}</td>
+                                <td>{{ log.performed_at|date:"d/m/Y H:i" }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="3">لا توجد أنشطة حديثة</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-calendar-alt"></i> الإجازات القادمة</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>الموظف</th>
+                                <th>نوع الإجازة</th>
+                                <th>تاريخ البدء</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for leave in upcoming_leaves %}
                             <tr>
                                 <td>{{ leave.emp.emp_fullname }}</td>
-                                <td>{{ leave.start_date }}</td>
                                 <td>{{ leave.leave_type }}</td>
+                                <td>{{ leave.start_date|date:"d/m/Y" }}</td>
                             </tr>
                             {% empty %}
                             <tr>
-                                <td colspan="3">No upcoming leaves</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card">
-            <div class="card-header">
-                <h5><i class="fas fa-exclamation-triangle"></i> Recent Lates</h5>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Employee</th>
-                                <th>Date</th>
-                                <th>Minutes</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for late in recent_lates %}
-                            <tr>
-                                <td>{{ late.emp.emp_fullname }}</td>
-                                <td>{{ late.late_date }}</td>
-                                <td>{{ late.late_minutes }}</td>
-                            </tr>
-                            {% empty %}
-                            <tr>
-                                <td colspan="3">No recent lates</td>
+                                <td colspan="3">لا توجد إجازات قادمة</td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -143,41 +107,42 @@
         </div>
     </div>
 </div>
-{% endblock %}
 
-{% block extra_js %}
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Sample data for the chart
-    const ctx = document.getElementById('attendanceChart').getContext('2d');
-    const attendanceChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-            datasets: [{
-                label: 'Present',
-                data: [45, 48, 42, 46, 44, 30],
-                backgroundColor: 'rgba(13, 202, 240, 0.5)',
-                borderColor: 'rgba(13, 202, 240, 1)',
-                borderWidth: 1
-            }, {
-                label: 'Absent',
-                data: [5, 2, 8, 4, 6, 20],
-                backgroundColor: 'rgba(220, 53, 69, 0.5)',
-                borderColor: 'rgba(220, 53, 69, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-});
-</script>
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-clock"></i> التأخيرات الحديثة</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>الموظف</th>
+                                <th>تاريخ التأخير</th>
+                                <th>دقائق التأخير</th>
+                                <th>السبب</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for late in recent_lates %}
+                            <tr>
+                                <td>{{ late.emp.emp_fullname }}</td>
+                                <td>{{ late.late_date|date:"d/m/Y" }}</td>
+                <td>{{ late.late_minutes }}</td>
+                                <td>{{ late.reason }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4">لا توجد تأخيرات حديثة</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -1,20 +1,20 @@
 {% extends 'hr_app/base.html' %}
 {% load static %}
 
-{% block title %}{{ employee.emp_fullname }} - HR Management System{% endblock %}
+{% block title %}{{ employee.emp_fullname }} - نظام إدارة الموارد البشرية{% endblock %}
 
 {% block content %}
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h5><i class="fas fa-user"></i> Employee Details</h5>
+                <h5><i class="fas fa-user"></i> تفاصيل الموظف</h5>
                 <div>
                     <a href="{% url 'edit_employee' employee.emp_id %}" class="btn btn-warning">
-                        <i class="fas fa-edit"></i> Edit
+                        <i class="fas fa-edit"></i> تعديل
                     </a>
                     <a href="{% url 'employees' %}" class="btn btn-secondary">
-                        <i class="fas fa-arrow-left"></i> Back
+                        <i class="fas fa-arrow-left"></i> العودة
                     </a>
                 </div>
             </div>
@@ -30,54 +30,54 @@
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <h5>Personal Information</h5>
+                        <h5>المعلومات الشخصية</h5>
                         <hr>
                         <div class="row">
                             <div class="col-md-6">
-                                <p><strong>Employee ID:</strong> {{ employee.emp_code }}</p>
-                                <p><strong>National ID:</strong> {{ employee.national_id }}</p>
-                                <p><strong>Department:</strong> {{ employee.department }}</p>
-                                <p><strong>Hire Date:</strong> {{ employee.hire_date }}</p>
+                                <p><strong>رمز الموظف:</strong> {{ employee.emp_code }}</p>
+                                <p><strong>الرقم القومي:</strong> {{ employee.national_id }}</p>
+                                <p><strong>القسم:</strong> {{ employee.department }}</p>
+                                <p><strong>تاريخ التوظيف:</strong> {{ employee.hire_date }}</p>
                             </div>
                             <div class="col-md-6">
-                                <p><strong>Status:</strong> 
+                                <p><strong>الحالة:</strong> 
                                     {% if employee.is_active %}
-                                        <span class="badge bg-success">Active</span>
+                                        <span class="badge bg-success">نشط</span>
                                     {% else %}
-                                        <span class="badge bg-secondary">Inactive</span>
+                                        <span class="badge bg-secondary">غير نشط</span>
                                     {% endif %}
                                 </p>
-                                <p><strong>Telegram UserID:</strong> {{ employee.telegram_userid }}</p>
-                                <p><strong>Work Start:</strong> {{ employee.work_start }}</p>
-                                <p><strong>Work End:</strong> {{ employee.work_end }}</p>
+                                <p><strong>معرف تيليجرام:</strong> {{ employee.telegram_userid }}</p>
+                                <p><strong>وقت بدء العمل:</strong> {{ employee.work_start }}</p>
+                                <p><strong>وقت انتهاء العمل:</strong> {{ employee.work_end }}</p>
                             </div>
                         </div>
                         
-                        <h5 class="mt-4">Salary Information</h5>
+                        <h5 class="mt-4">معلومات الراتب</h5>
                         <hr>
                         <div class="row">
                             <div class="col-md-6">
-                                <p><strong>Basic Salary:</strong> {{ employee.salary_basic }}</p>
-                                <p><strong>Housing Allowance:</strong> {{ employee.salary_housing }}</p>
-                                <p><strong>Transport Allowance:</strong> {{ employee.salary_transport }}</p>
+                                <p><strong>الراتب الأساسي:</strong> {{ employee.salary_basic }}</p>
+                                <p><strong>بدل السكن:</strong> {{ employee.salary_housing }}</p>
+                                <p><strong>بدل المواصلات:</strong> {{ employee.salary_transport }}</p>
                             </div>
                             <div class="col-md-6">
-                                <p><strong>Other Allowance:</strong> {{ employee.salary_other }}</p>
-                                <p><strong>Total Salary:</strong> <strong>{{ employee.salary_total }}</strong></p>
+                                <p><strong>بدلات أخرى:</strong> {{ employee.salary_other }}</p>
+                                <p><strong>إجمالي الراتب:</strong> <strong>{{ employee.salary_total }}</strong></p>
                             </div>
                         </div>
                         
-                        <h5 class="mt-4">Leave Information</h5>
+                        <h5 class="mt-4">معلومات الإجازات</h5>
                         <hr>
                         <div class="row">
                             <div class="col-md-4">
-                                <p><strong>Annual Leaves:</strong> {{ employee.allowed_annual_leaves }}</p>
+                                <p><strong>الإجازات السنوية:</strong> {{ employee.allowed_annual_leaves }}</p>
                             </div>
                             <div class="col-md-4">
-                                <p><strong>Sick Leaves:</strong> {{ employee.allowed_sick_leaves }}</p>
+                                <p><strong>الإجازات المرضية:</strong> {{ employee.allowed_sick_leaves }}</p>
                             </div>
                             <div class="col-md-4">
-                                <p><strong>Casual Leaves:</strong> {{ employee.allowed_casual_leaves }}</p>
+                                <p><strong>الإجازات العارضة:</strong> {{ employee.allowed_casual_leaves }}</p>
                             </div>
                         </div>
                     </div>
@@ -91,17 +91,17 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <h5><i class="fas fa-calendar-alt"></i> Recent Leaves</h5>
+                <h5><i class="fas fa-calendar-alt"></i> الإجازات الحديثة</h5>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Type</th>
-                                <th>Status</th>
+                                <th>تاريخ البدء</th>
+                                <th>تاريخ الانتهاء</th>
+                                <th>النوع</th>
+                                <th>الحالة</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -114,7 +114,7 @@
                             </tr>
                             {% empty %}
                             <tr>
-                                <td colspan="4">No leave records found</td>
+                                <td colspan="4">لا توجد سجلات إجازات</td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -126,30 +126,30 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <h5><i class="fas fa-money-bill-wave"></i> Recent Payslips</h5>
+                <h5><i class="fas fa-money-bill-wave"></i> كشوف الرواتب الحديثة</h5>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Period</th>
-                                <th>Gross Pay</th>
-                                <th>Deductions</th>
-                                <th>Net Pay</th>
+                                <th>الفترة</th>
+                                <th>الراتب الإجمالي</th>
+                                <th>الخصومات</th>
+                                <th>الراتب الصافي</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for payslip in employee_payslips %}
                             <tr>
-                                <td>{{ payslip.period_start }} to {{ payslip.period_end }}</td>
+                                <td>{{ payslip.period_start }} إلى {{ payslip.period_end }}</td>
                                 <td>{{ payslip.gross_pay }}</td>
                                 <td>{{ payslip.total_deductions }}</td>
                                 <td>{{ payslip.net_pay }}</td>
                             </tr>
                             {% empty %}
                             <tr>
-                                <td colspan="4">No payslip records found</td>
+                                <td colspan="4">لا توجد سجلات رواتب</td>
                             </tr>
                             {% endfor %}
                         </tbody>

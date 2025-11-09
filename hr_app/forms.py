@@ -81,12 +81,12 @@ class LeaveForm(forms.ModelForm):
             'start_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'end_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'leave_type': forms.Select(attrs={'class': 'form-control'}, choices=[
-                ('Annual', 'Annual Leave'),
-                ('Sick', 'Sick Leave'),
-                ('Casual', 'Casual Leave'),
-                ('Maternity', 'Maternity Leave'),
-                ('Paternity', 'Paternity Leave'),
-                ('Unpaid', 'Unpaid Leave'),
+                ('Annual', 'إجازة سنوية'),
+                ('Sick', 'إجازة مرضية'),
+                ('Casual', 'إجازة عارضة'),
+                ('Maternity', 'إجازة أمومة'),
+                ('Paternity', 'إجازة أبوة'),
+                ('Unpaid', 'إجازة غير مدفوعة'),
             ]),
         }
     

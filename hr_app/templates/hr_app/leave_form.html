@@ -1,7 +1,7 @@
 {% extends 'hr_app/base.html' %}
 {% load static %}
 
-{% block title %}{{ title }} - HR Management System{% endblock %}
+{% block title %}{{ title }} - نظام إدارة الموارد البشرية{% endblock %}
 
 {% block content %}
 <div class="row">
@@ -10,7 +10,7 @@
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5><i class="fas fa-calendar-alt"></i> {{ title }}</h5>
                 <a href="{% url 'leaves' %}" class="btn btn-secondary">
-                    <i class="fas fa-arrow-left"></i> Back to Leaves
+                    <i class="fas fa-arrow-left"></i> العودة إلى الإجازات
                 </a>
             </div>
             <div class="card-body">
@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="{{ form.emp.id_for_label }}" class="form-label">Employee *</label>
+                                <label for="{{ form.emp.id_for_label }}" class="form-label">الموظف *</label>
                                 {{ form.emp }}
                                 {% if form.emp.errors %}
                                     <div class="text-danger">{{ form.emp.errors }}</div>
@@ -28,7 +28,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="{{ form.leave_type.id_for_label }}" class="form-label">Leave Type *</label>
+                                <label for="{{ form.leave_type.id_for_label }}" class="form-label">نوع الإجازة *</label>
                                 {{ form.leave_type }}
                                 {% if form.leave_type.errors %}
                                     <div class="text-danger">{{ form.leave_type.errors }}</div>
@@ -40,7 +40,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="{{ form.start_date.id_for_label }}" class="form-label">Start Date *</label>
+                                <label for="{{ form.start_date.id_for_label }}" class="form-label">تاريخ البدء *</label>
                                 {{ form.start_date }}
                                 {% if form.start_date.errors %}
                                     <div class="text-danger">{{ form.start_date.errors }}</div>
@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="{{ form.end_date.id_for_label }}" class="form-label">End Date *</label>
+                                <label for="{{ form.end_date.id_for_label }}" class="form-label">تاريخ الانتهاء *</label>
                                 {{ form.end_date }}
                                 {% if form.end_date.errors %}
                                     <div class="text-danger">{{ form.end_date.errors }}</div>
@@ -60,10 +60,10 @@
                     
                     <div class="mb-3">
                         <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-paper-plane"></i> Submit Leave Application
+                            <i class="fas fa-paper-plane"></i> تقديم الطلب
                         </button>
                         <a href="{% url 'leaves' %}" class="btn btn-secondary">
-                            <i class="fas fa-times"></i> Cancel
+                            <i class="fas fa-times"></i> إلغاء
                         </a>
                     </div>
                 </form>
