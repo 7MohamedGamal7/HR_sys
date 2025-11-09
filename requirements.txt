@@ -1,3 +1,44 @@
+# Core Django
 Django==5.2.8
 pyodbc==4.0.35
 django-mssql==1.8.1
+
+# ZK Fingerprint Device Integration
+pyzk==0.9
+
+# PDF Generation
+reportlab==4.0.7
+weasyprint==60.1
+
+# Excel Export/Import
+openpyxl==3.1.2
+xlsxwriter==3.1.9
+
+# Image Processing
+Pillow==10.1.0
+
+# Date/Time utilities
+python-dateutil==2.8.2
+
+# Environment variables
+python-decouple==3.8
+
+# Arabic text processing
+arabic-reshaper==3.0.0
+python-bidi==0.4.2
+
+# Charts and visualization
+django-chartjs==2.3.0
+
+# REST API (for future mobile app)
+djangorestframework==3.14.0
+
+# Celery for background tasks
+celery==5.3.4
+redis==5.0.1
+
+# Django extensions
+django-crispy-forms==2.1
+crispy-bootstrap5==2024.2
+django-filter==23.5
+django-import-export==3.3.5
