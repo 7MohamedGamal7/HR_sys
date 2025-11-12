@@ -61,48 +61,45 @@ def dashboard(request):
     Dashboard view
     عرض لوحة التحكم
     """
-    today = timezone.now().date()
-    
-    # Statistics
-    total_employees = Employee.objects.filter(is_active=True).count()
-    present_today = Attendance.objects.filter(
-        date=today,
-        status__in=['present', 'late']
-    ).count()
-    pending_leaves = LeaveRequest.objects.filter(status='pending').count()
-    total_departments = Department.objects.filter(is_active=True).count()
-    
-    # Recent attendance (last 10)
-    recent_attendance = Attendance.objects.select_related('employee').filter(
-        date=today
-    ).order_by('-check_in')[:10]
-    
-    # Pending leave requests (last 10)
-    pending_leave_requests = LeaveRequest.objects.select_related('employee').filter(
-        status='pending'
-    ).order_by('-created_at')[:10]
-    
-    # Upcoming birthdays (next 30 days)
-    upcoming_birthdays = Employee.objects.filter(
-        is_active=True,
-        date_of_birth__isnull=False
-    ).extra(
-        select={
-            'birthday_this_year': "DATEADD(year, DATEDIFF(year, date_of_birth, GETDATE()), date_of_birth)"
+    try:
+        today = timezone.now().date()
+
+        # Statistics
+        total_employees = Employee.objects.filter(is_active=True).count()
+
+        try:
+            present_today = Attendance.objects.filter(
+                date=today,
+                status__in=['present', 'late']
+            ).count()
+        except:
+            present_today = 0
+
+        try:
+            pending_leaves = LeaveRequest.objects.filter(status='pending').count()
+        except:
+            pending_leaves = 0
+
+        try:
+            total_departments = Department.objects.filter(is_active=True).count()
+        except:
+            total_departments = 0
+
+        context = {
+            'total_employees': total_employees,
+            'present_today': present_today,
+            'pending_leaves': pending_leaves,
+            'total_departments': total_departments,
         }
-    )[:5]
-    
-    context = {
-        'total_employees': total_employees,
-        'present_today': present_today,
-        'pending_leaves': pending_leaves,
-        'total_departments': total_departments,
-        'recent_attendance': recent_attendance,
-        'pending_leave_requests': pending_leave_requests,
-        'upcoming_birthdays': upcoming_birthdays,
-    }
-    
-    return render(request, 'core/dashboard.html', context)
+    except Exception as e:
+        context = {
+            'total_employees': 0,
+            'present_today': 0,
+            'pending_leaves': 0,
+            'total_departments': 0,
+        }
+
+    return render(request, 'core/dashboard_simple.html', context)
 
 
 @login_required

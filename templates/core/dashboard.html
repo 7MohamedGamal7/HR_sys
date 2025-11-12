@@ -5,8 +5,19 @@
 {% block page_title %}لوحة التحكم{% endblock %}
 
 {% block content %}
+<!-- Welcome Message -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading"><i class="fas fa-check-circle"></i> مرحباً بك في نظام إدارة الموارد البشرية!</h4>
+            <p>تم تسجيل الدخول بنجاح. النظام جاهز للاستخدام.</p>
+            <hr>
+            <p class="mb-0">المستخدم: <strong>{{ user.get_full_name|default:user.username }}</strong></p>
+        </div>
+    </div>
+</div>
+<!-- Statistics Cards -->
 <div class="row">
-    <!-- Statistics Cards -->
     <div class="col-md-3 mb-4">
         <div class="card text-white" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
             <div class="card-body">
@@ -22,7 +33,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="col-md-3 mb-4">
         <div class="card text-white" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
             <div class="card-body">
@@ -38,7 +49,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="col-md-3 mb-4">
         <div class="card text-white" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
             <div class="card-body">
