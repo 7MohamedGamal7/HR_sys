@@ -105,7 +105,7 @@ WSGI_APPLICATION = 'HR_sys.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': 'HR_System',
+        'NAME': 'HR_System_New',
         'USER': 'admin',
         'PASSWORD': 'hgslduhgfwdv',
         'HOST': '192.168.1.48',
