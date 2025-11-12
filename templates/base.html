@@ -335,9 +335,8 @@
                     <span>الحضور والانصراف</span>
                 </a>
                 <ul class="submenu" id="attendance-menu">
-                    <li><a href="{% url 'attendance:attendance_today' %}">الحضور اليوم</a></li>
                     <li><a href="{% url 'attendance:attendance_list' %}">سجل الحضور</a></li>
-                    <li><a href="{% url 'attendance:zk_sync' %}">مزامنة البصمة</a></li>
+                    <li><a href="{% url 'attendance:attendance_create' %}">إضافة حضور</a></li>
                 </ul>
             </li>
             
@@ -347,10 +346,7 @@
                     <span>الإجازات</span>
                 </a>
                 <ul class="submenu" id="leaves-menu">
-                    <li><a href="{% url 'attendance:leave_request_create' %}">طلب إجازة</a></li>
-                    <li><a href="{% url 'attendance:my_leave_requests' %}">إجازاتي</a></li>
-                    <li><a href="{% url 'attendance:leave_request_list' %}">جميع الإجازات</a></li>
-                    <li><a href="{% url 'leaves:leave_policy_list' %}">سياسات الإجازات</a></li>
+                    <li><a href="{% url 'leaves:leaves_list' %}">الإجازات</a></li>
                 </ul>
             </li>
             
@@ -426,9 +422,6 @@
                 </a>
                 <ul class="submenu" id="reports-menu">
                     <li><a href="{% url 'reports:reports_dashboard' %}">لوحة التقارير</a></li>
-                    <li><a href="{% url 'reports:employee_summary_report' %}">تقرير الموظفين</a></li>
-                    <li><a href="{% url 'reports:attendance_monthly_report' %}">تقرير الحضور</a></li>
-                    <li><a href="{% url 'reports:payroll_summary_report' %}">تقرير الرواتب</a></li>
                 </ul>
             </li>
             

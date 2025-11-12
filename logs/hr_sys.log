@@ -552,3 +552,12 @@ Traceback (most recent call last):
     )
 django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: ' 'attendance:attendance_create'' from 'url 'attendance:attendance_create''
 ERROR 2025-11-12 15:51:10,385 basehttp "GET /attendance/ HTTP/1.1" 500 198896
+INFO 2025-11-12 16:02:56,526 basehttp "GET /attendance/ HTTP/1.1" 302 0
+INFO 2025-11-12 16:02:56,530 basehttp "GET /login/?next=/attendance/ HTTP/1.1" 200 7575
+INFO 2025-11-12 16:03:19,913 basehttp - Broken pipe from ('127.0.0.1', 65015)
+INFO 2025-11-12 16:04:09,606 autoreload Watching for file changes with StatReloader
+INFO 2025-11-12 16:04:30,678 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-11-12 16:04:30,690 basehttp "GET /login/?next=/ HTTP/1.1" 200 7575
+INFO 2025-11-12 16:04:34,870 basehttp - Broken pipe from ('127.0.0.1', 49906)
+INFO 2025-11-12 16:04:38,384 basehttp "GET /attendance/ HTTP/1.1" 302 0
+INFO 2025-11-12 16:04:38,392 basehttp "GET /login/?next=/attendance/ HTTP/1.1" 200 7575

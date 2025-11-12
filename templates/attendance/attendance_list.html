@@ -1,14 +1,14 @@
-{%extends 'base.html' %}
+{% extends 'base.html' %}
 
-{%block title %}سجلات الحضور{%endblock %}
+{% block title %}سجلات الحضور{% endblock %}
 
-{%block content %}
+{% block content %}
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2><i class="fas fa-list ms-2"></i>سجلات الحضور</h2>
-                <a href="{{url 'attendance:attendance_create' }}" class="btn btn-primary">
+                <a href="{% url 'attendance:attendance_create' %}" class="btn btn-primary">
                     <i class="fas fa-plus ms-2"></i>إضافة جديد
                 </a>
             </div>
@@ -28,21 +28,35 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{for item in page_obj %}}
+                                {% for item in page_obj %}
                                     <tr>
-                                        <!-- Add table cells here -->
+                                        <td>{{ item.date }}</td>
+                                        <td>{{ item.employee }}</td>
+                                        <td>{{ item.check_in|time:"H:i" }}</td>
+                                        <td>{{ item.check_out|time:"H:i"|default:"--" }}</td>
                                         <td>
-                                            <a href="{{url 'attendance:attendance_detail' item.pk }}" class="btn btn-sm btn-info">
+                                            {% if item.status == 'present' %}
+                                                <span class="badge bg-success">حاضر</span>
+                                            {% elif item.status == 'late' %}
+                                                <span class="badge bg-warning">متأخر</span>
+                                            {% elif item.status == 'absent' %}
+                                                <span class="badge bg-danger">غائب</span>
+                                            {% else %}
+                                                <span class="badge bg-secondary">{{ item.status }}</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <a href="#" class="btn btn-sm btn-info" title="عرض التفاصيل">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="{{url 'attendance:attendance_update' item.pk }}" class="btn btn-sm btn-warning">
+                                            <a href="#" class="btn btn-sm btn-warning" title="تعديل">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                         </td>
                                     </tr>
-                                {{empty %}}
+                                {% empty %}
                                     <tr><td colspan="6" class="text-center">لا توجد بيانات</td></tr>
-                                {{endfor %}}
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -51,4 +65,4 @@
         </div>
     </div>
 </div>
-{%endblock %}
+{% endblock %}
