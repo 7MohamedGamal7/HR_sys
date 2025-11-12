@@ -23,3 +23,190 @@ INFO 2025-11-09 19:31:33,102 autoreload Watching for file changes with StatReloa
 INFO 2025-11-09 19:32:01,436 autoreload E:\My_Project\Django_Project\HR_sys\HR_sys\organization\admin.py changed, reloading.
 INFO 2025-11-09 19:32:03,730 autoreload Watching for file changes with StatReloader
 INFO 2025-11-09 19:32:21,195 autoreload Watching for file changes with StatReloader
+INFO 2025-11-12 14:58:38,577 autoreload Watching for file changes with StatReloader
+ERROR 2025-11-12 14:58:43,465 log Internal Server Error: /
+Traceback (most recent call last):
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\contrib\auth\decorators.py", line 60, in _view_wrapper
+    return _redirect_to_login(request)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\contrib\auth\decorators.py", line 24, in _redirect_to_login
+    resolved_login_url = resolve_url(login_url or settings.LOGIN_URL)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'login' not found. 'login' is not a valid view function or pattern name.
+ERROR 2025-11-12 14:58:43,478 basehttp "GET / HTTP/1.1" 500 91520
+WARNING 2025-11-12 14:58:43,720 log Not Found: /favicon.ico
+WARNING 2025-11-12 14:58:43,721 basehttp "GET /favicon.ico HTTP/1.1" 404 5570
+INFO 2025-11-12 15:00:13,259 autoreload E:\My_Project\Django_Project\HR_sys\HR_sys\HR_sys\settings.py changed, reloading.
+INFO 2025-11-12 15:00:15,764 autoreload Watching for file changes with StatReloader
+INFO 2025-11-12 15:02:23,347 autoreload Watching for file changes with StatReloader
+INFO 2025-11-12 15:02:38,690 basehttp "GET / HTTP/1.1" 302 0
+ERROR 2025-11-12 15:02:38,761 log Internal Server Error: /login/
+Traceback (most recent call last):
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\core\views.py", line 44, in login_view
+    return render(request, 'core/login.html', {'form': form})
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: core/login.html
+ERROR 2025-11-12 15:02:38,766 basehttp "GET /login/?next=/ HTTP/1.1" 500 88770
+ERROR 2025-11-12 15:02:52,679 log Internal Server Error: /login/
+Traceback (most recent call last):
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\core\views.py", line 44, in login_view
+    return render(request, 'core/login.html', {'form': form})
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: core/login.html
+ERROR 2025-11-12 15:02:52,684 basehttp "GET /login/?next=/ HTTP/1.1" 500 88895
+INFO 2025-11-12 15:03:01,914 basehttp "GET / HTTP/1.1" 302 0
+ERROR 2025-11-12 15:03:01,964 log Internal Server Error: /login/
+Traceback (most recent call last):
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\core\views.py", line 44, in login_view
+    return render(request, 'core/login.html', {'form': form})
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: core/login.html
+ERROR 2025-11-12 15:03:01,968 basehttp "GET /login/?next=/ HTTP/1.1" 500 88758
+INFO 2025-11-12 15:03:30,274 autoreload Watching for file changes with StatReloader
+INFO 2025-11-12 15:03:48,683 basehttp "GET / HTTP/1.1" 302 0
+ERROR 2025-11-12 15:03:48,733 log Internal Server Error: /login/
+Traceback (most recent call last):
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\core\views.py", line 44, in login_view
+    return render(request, 'core/login.html', {'form': form})
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: core/login.html
+ERROR 2025-11-12 15:03:48,736 basehttp "GET /login/?next=/ HTTP/1.1" 500 88758
+INFO 2025-11-12 15:09:10,746 autoreload E:\My_Project\Django_Project\HR_sys\HR_sys\HR_sys\settings.py changed, reloading.
+INFO 2025-11-12 15:09:12,206 autoreload Watching for file changes with StatReloader
+INFO 2025-11-12 15:09:34,355 basehttp "GET /login/ HTTP/1.1" 200 7575
+ERROR 2025-11-12 15:09:43,980 log Internal Server Error: /login/
+Traceback (most recent call last):
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\mssql\base.py", line 679, in execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+pyodbc.ProgrammingError: ('42S02', "[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid object name 'Tbl_Users'. (208) (SQLExecDirectW); [42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Statement(s) could not be prepared. (8180)")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\core\views.py", line 29, in login_view
+    if form.is_valid():
+       ~~~~~~~~~~~~~^^
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\forms\forms.py", line 206, in is_valid
+    return self.is_bound and not self.errors
+                                 ^^^^^^^^^^^
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\forms\forms.py", line 201, in errors
+    self.full_clean()
+    ~~~~~~~~~~~~~~~^^
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\forms\forms.py", line 338, in full_clean
+    self._clean_form()
+    ~~~~~~~~~~~~~~~~^^
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\forms\forms.py", line 354, in _clean_form
+    cleaned_data = self.clean()
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\views\decorators\debug.py", line 75, in sensitive_variables_wrapper
+    return func(*func_args, **func_kwargs)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\contrib\auth\forms.py", line 366, in clean
+    self.user_cache = authenticate(
+                      ~~~~~~~~~~~~^
+        self.request, username=username, password=password
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\views\decorators\debug.py", line 75, in sensitive_variables_wrapper
+    return func(*func_args, **func_kwargs)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\contrib\auth\__init__.py", line 114, in authenticate
+    user = backend.authenticate(request, **credentials)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\contrib\auth\backends.py", line 65, in authenticate
+    user = UserModel._default_manager.get_by_natural_key(username)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\contrib\auth\base_user.py", line 37, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\db\models\query.py", line 631, in get
+    num = len(clone)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\db\models\query.py", line 368, in __len__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\db\models\query.py", line 1954, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\db\models\query.py", line 93, in __iter__
+    results = compiler.execute_sql(
+        chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size
+    )
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "E:\My_Project\Django_Project\HR_sys\HR_sys\venv\Lib\site-packages\mssql\base.py", line 679, in execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+django.db.utils.ProgrammingError: ('42S02', "[42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid object name 'Tbl_Users'. (208) (SQLExecDirectW); [42S02] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Statement(s) could not be prepared. (8180)")
+ERROR 2025-11-12 15:09:44,004 basehttp "POST /login/ HTTP/1.1" 500 189299
