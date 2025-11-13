@@ -561,3 +561,11 @@ INFO 2025-11-12 16:04:30,690 basehttp "GET /login/?next=/ HTTP/1.1" 200 7575
 INFO 2025-11-12 16:04:34,870 basehttp - Broken pipe from ('127.0.0.1', 49906)
 INFO 2025-11-12 16:04:38,384 basehttp "GET /attendance/ HTTP/1.1" 302 0
 INFO 2025-11-12 16:04:38,392 basehttp "GET /login/?next=/attendance/ HTTP/1.1" 200 7575
+INFO 2025-11-13 11:36:11,259 autoreload Watching for file changes with StatReloader
+INFO 2025-11-13 11:40:04,336 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-11-13 11:40:04,343 basehttp "GET /login/?next=/ HTTP/1.1" 200 7575
+WARNING 2025-11-13 11:40:04,865 log Not Found: /favicon.ico
+WARNING 2025-11-13 11:40:04,865 basehttp "GET /favicon.ico HTTP/1.1" 404 6638
+INFO 2025-11-13 11:40:09,883 basehttp "POST /login/ HTTP/1.1" 200 8196
+INFO 2025-11-13 11:40:25,654 basehttp "POST /login/ HTTP/1.1" 200 8196
+INFO 2025-11-13 11:40:34,830 basehttp "POST /login/ HTTP/1.1" 200 8196
