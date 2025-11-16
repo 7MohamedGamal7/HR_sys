@@ -7,10 +7,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
 from django.core.paginator import Paginator
-from .models import Employee, EmployeeDocument, EmployeeContract, EmergencyContact, EmployeeEducation, EmployeeExperience
+from .models import (
+    Employee, EmployeeDocument, EmployeeContract, EmergencyContact,
+    EmployeeEducation, EmployeeExperience, EmployeeInsurance, EmployeeCustody
+)
 from .forms import (
     EmployeeForm, EmployeeDocumentForm, EmployeeContractForm,
-    EmergencyContactForm, EmployeeEducationForm, EmployeeExperienceForm
+    EmergencyContactForm, EmployeeEducationForm, EmployeeExperienceForm,
+    EmployeeInsuranceForm, EmployeeCustodyForm
 )
 
 
@@ -63,24 +67,21 @@ def employee_detail(request, pk):
     عرض تفاصيل الموظف
     """
     employee = get_object_or_404(Employee, pk=pk)
-    
-    # Get related data
-    documents = EmployeeDocument.objects.filter(employee=employee)
-    contracts = EmployeeContract.objects.filter(employee=employee).order_by('-start_date')
-    emergency_contacts = EmergencyContact.objects.filter(employee=employee)
-    education = EmployeeEducation.objects.filter(employee=employee).order_by('-graduation_year')
-    experience = EmployeeExperience.objects.filter(employee=employee).order_by('-start_date')
-    
+
+    # Get related data - using related_name from models
+    # documents = employee.documents.all()
+    # contracts = employee.contracts.all().order_by('-start_date')
+    # emergency_contacts = employee.emergency_contacts.all()
+    # education = employee.education.all().order_by('-graduation_year')
+    # experience = employee.experience.all().order_by('-start_date')
+    # insurances = employee.insurances.all()
+    # custodies = employee.custodies.all()
+
     context = {
         'employee': employee,
-        'documents': documents,
-        'contracts': contracts,
-        'emergency_contacts': emergency_contacts,
-        'education': education,
-        'experience': experience,
     }
-    
-    return render(request, 'employees/employee_detail.html', context)
+
+    return render(request, 'employees/employee_detail_comprehensive.html', context)
 
 
 @login_required
@@ -93,12 +94,12 @@ def employee_create(request):
         form = EmployeeForm(request.POST, request.FILES)
         if form.is_valid():
             employee = form.save()
-            messages.success(request, f'تم إضافة الموظف {employee.full_name_ar} بنجاح.')
+            messages.success(request, f'تم إضافة الموظف {employee.get_full_name_ar()} بنجاح.')
             return redirect('employees:employee_detail', pk=employee.pk)
     else:
         form = EmployeeForm()
-    
-    return render(request, 'employees/employee_form.html', {'form': form, 'action': 'إضافة'})
+
+    return render(request, 'employees/employee_form_comprehensive.html', {'form': form, 'action': 'إضافة'})
 
 
 @login_required
@@ -108,17 +109,17 @@ def employee_update(request, pk):
     عرض تعديل الموظف
     """
     employee = get_object_or_404(Employee, pk=pk)
-    
+
     if request.method == 'POST':
         form = EmployeeForm(request.POST, request.FILES, instance=employee)
         if form.is_valid():
             employee = form.save()
-            messages.success(request, f'تم تحديث بيانات الموظف {employee.full_name_ar} بنجاح.')
+            messages.success(request, f'تم تحديث بيانات الموظف {employee.get_full_name_ar()} بنجاح.')
             return redirect('employees:employee_detail', pk=employee.pk)
     else:
         form = EmployeeForm(instance=employee)
-    
-    return render(request, 'employees/employee_form.html', {'form': form, 'action': 'تعديل', 'employee': employee})
+
+    return render(request, 'employees/employee_form_comprehensive.html', {'form': form, 'action': 'تعديل', 'employee': employee})
 
 
 @login_required

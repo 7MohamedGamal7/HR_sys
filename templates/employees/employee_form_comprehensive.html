@@ -1,0 +1,298 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}{% if form.instance.pk %}تعديل موظف{% else %}إضافة موظف جديد{% endif %}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .nav-tabs .nav-link {
+        color: #495057;
+        font-weight: 500;
+    }
+    .nav-tabs .nav-link.active {
+        color: #0d6efd;
+        font-weight: 600;
+    }
+    .tab-content {
+        border: 1px solid #dee2e6;
+        border-top: none;
+        padding: 20px;
+        background-color: #fff;
+    }
+    .form-section-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #0d6efd;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #0d6efd;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>
+                    <i class="fas fa-user-plus"></i>
+                    {% if form.instance.pk %}تعديل بيانات الموظف{% else %}إضافة موظف جديد{% endif %}
+                </h2>
+                <a href="{% url 'employees:employee_list' %}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-right"></i> العودة للقائمة
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <form method="post" enctype="multipart/form-data" id="employeeForm">
+        {% csrf_token %}
+        
+        <!-- Nav Tabs -->
+        <ul class="nav nav-tabs" id="employeeTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="personal-tab" data-bs-toggle="tab" data-bs-target="#personal" type="button" role="tab">
+                    <i class="fas fa-user"></i> البيانات الشخصية
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="work-tab" data-bs-toggle="tab" data-bs-target="#work" type="button" role="tab">
+                    <i class="fas fa-briefcase"></i> بيانات العمل
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="salary-tab" data-bs-toggle="tab" data-bs-target="#salary" type="button" role="tab">
+                    <i class="fas fa-money-bill-wave"></i> بيانات الراتب
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="attendance-tab" data-bs-toggle="tab" data-bs-target="#attendance" type="button" role="tab">
+                    <i class="fas fa-clock"></i> بيانات الحضور
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="bank-tab" data-bs-toggle="tab" data-bs-target="#bank" type="button" role="tab">
+                    <i class="fas fa-university"></i> البيانات البنكية
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="documents-tab" data-bs-toggle="tab" data-bs-target="#documents" type="button" role="tab">
+                    <i class="fas fa-file-alt"></i> المستندات
+                </button>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="employeeTabContent">
+            <!-- Personal Information Tab -->
+            <div class="tab-pane fade show active" id="personal" role="tabpanel">
+                <div class="form-section-title">المعلومات الشخصية</div>
+                <div class="row">
+                    <div class="col-md-3">
+                        {{ form.emp_code|as_crispy_field }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.first_name_ar|as_crispy_field }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.middle_name_ar|as_crispy_field }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.last_name_ar|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form.first_name_en|as_crispy_field }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.last_name_en|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        {{ form.national_id|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.passport_number|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.date_of_birth|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        {{ form.gender|as_crispy_field }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.marital_status|as_crispy_field }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.nationality|as_crispy_field }}
+                    </div>
+                    <div class="col-md-3">
+                        {{ form.religion|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        {{ form.email|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.phone|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.mobile|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        {{ form.address|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.city|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form.postal_code|as_crispy_field }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.photo|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Work Information Tab -->
+            <div class="tab-pane fade" id="work" role="tabpanel">
+                <div class="form-section-title">بيانات العمل</div>
+                <div class="row">
+                    <div class="col-md-4">
+                        {{ form.department|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.position|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.branch|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form.manager|as_crispy_field }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.employment_type|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        {{ form.hire_date|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.probation_end_date|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.confirmation_date|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form.termination_date|as_crispy_field }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.is_active|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        {{ form.termination_reason|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Salary Information Tab -->
+            <div class="tab-pane fade" id="salary" role="tabpanel">
+                <div class="form-section-title">بيانات الراتب والبدلات</div>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form.basic_salary|as_crispy_field }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.housing_allowance|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form.transport_allowance|as_crispy_field }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.other_allowances|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attendance Information Tab -->
+            <div class="tab-pane fade" id="attendance" role="tabpanel">
+                <div class="form-section-title">بيانات الحضور والإجازات</div>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form.work_shift|as_crispy_field }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.zk_user_id|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form.annual_leave_balance|as_crispy_field }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.sick_leave_balance|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bank Information Tab -->
+            <div class="tab-pane fade" id="bank" role="tabpanel">
+                <div class="form-section-title">البيانات البنكية</div>
+                <div class="row">
+                    <div class="col-md-4">
+                        {{ form.bank_name|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.bank_account_number|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form.iban|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Documents Tab -->
+            <div class="tab-pane fade" id="documents" role="tabpanel">
+                <div class="form-section-title">المستندات والملاحظات</div>
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    يمكنك إضافة المستندات والعقود والتأمينات والعهد بعد حفظ بيانات الموظف الأساسية
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="fas fa-save"></i> حفظ البيانات
+                </button>
+                <a href="{% url 'employees:employee_list' %}" class="btn btn-secondary btn-lg">
+                    <i class="fas fa-times"></i> إلغاء
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
+

@@ -34,6 +34,12 @@ class DepartmentForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        # Filter querysets to show only active records
+        from employees.models import Employee
+        self.fields['parent_department'].queryset = Department.objects.filter(is_active=True)
+        self.fields['manager'].queryset = Employee.objects.filter(is_active=True)
+
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.layout = Layout(
@@ -83,6 +89,10 @@ class PositionForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        # Filter querysets to show only active records
+        self.fields['department'].queryset = Department.objects.filter(is_active=True)
+
         self.helper = FormHelper()
         self.helper.form_method = 'post'
 
@@ -108,6 +118,13 @@ class BranchForm(forms.ModelForm):
         widgets = {
             'address': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Filter querysets to show only active records
+        from employees.models import Employee
+        self.fields['manager'].queryset = Employee.objects.filter(is_active=True)
 
 
 class WorkShiftForm(forms.ModelForm):

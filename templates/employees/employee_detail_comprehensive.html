@@ -1,0 +1,588 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}تفاصيل الموظف - {{ employee.get_full_name_ar }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .nav-tabs .nav-link {
+        color: #495057;
+        font-weight: 500;
+    }
+    .nav-tabs .nav-link.active {
+        color: #0d6efd;
+        font-weight: 600;
+    }
+    .tab-content {
+        border: 1px solid #dee2e6;
+        border-top: none;
+        padding: 20px;
+        background-color: #fff;
+    }
+    .info-label {
+        font-weight: 600;
+        color: #6c757d;
+        margin-bottom: 5px;
+    }
+    .info-value {
+        font-size: 1.05rem;
+        color: #212529;
+        margin-bottom: 15px;
+    }
+    .section-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #0d6efd;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #0d6efd;
+    }
+    .employee-photo {
+        max-width: 200px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .badge-status {
+        font-size: 0.9rem;
+        padding: 5px 15px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-2 text-center">
+                            {% if employee.photo %}
+                                <img src="{{ employee.photo.url }}" alt="{{ employee.get_full_name_ar }}" class="employee-photo">
+                            {% else %}
+                                <i class="fas fa-user-circle fa-8x text-secondary"></i>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-7">
+                            <h2 class="mb-2">{{ employee.get_full_name_ar }}</h2>
+                            <p class="text-muted mb-1"><strong>رمز الموظف:</strong> {{ employee.emp_code }}</p>
+                            <p class="text-muted mb-1"><strong>القسم:</strong> {{ employee.department.dept_name_ar|default:"غير محدد" }}</p>
+                            <p class="text-muted mb-1"><strong>المنصب:</strong> {{ employee.position.position_name_ar|default:"غير محدد" }}</p>
+                            <p class="mb-0">
+                                {% if employee.is_active %}
+                                    <span class="badge bg-success badge-status">نشط</span>
+                                {% else %}
+                                    <span class="badge bg-danger badge-status">غير نشط</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="col-md-3 text-end">
+                            <a href="{% url 'employees:employee_update' employee.pk %}" class="btn btn-warning mb-2">
+                                <i class="fas fa-edit"></i> تعديل
+                            </a>
+                            <a href="{% url 'employees:employee_list' %}" class="btn btn-secondary mb-2">
+                                <i class="fas fa-arrow-right"></i> العودة
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs" id="employeeDetailTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="personal-tab" data-bs-toggle="tab" data-bs-target="#personal" type="button" role="tab">
+                <i class="fas fa-user"></i> البيانات الشخصية
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="work-tab" data-bs-toggle="tab" data-bs-target="#work" type="button" role="tab">
+                <i class="fas fa-briefcase"></i> بيانات العمل
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="salary-tab" data-bs-toggle="tab" data-bs-target="#salary" type="button" role="tab">
+                <i class="fas fa-money-bill-wave"></i> الراتب
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="attendance-tab" data-bs-toggle="tab" data-bs-target="#attendance" type="button" role="tab">
+                <i class="fas fa-clock"></i> الحضور
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="insurance-tab" data-bs-toggle="tab" data-bs-target="#insurance" type="button" role="tab">
+                <i class="fas fa-shield-alt"></i> التأمينات
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="contracts-tab" data-bs-toggle="tab" data-bs-target="#contracts" type="button" role="tab">
+                <i class="fas fa-file-contract"></i> العقود
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="custody-tab" data-bs-toggle="tab" data-bs-target="#custody" type="button" role="tab">
+                <i class="fas fa-box"></i> العهد
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="documents-tab" data-bs-toggle="tab" data-bs-target="#documents" type="button" role="tab">
+                <i class="fas fa-file-alt"></i> المستندات
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="education-tab" data-bs-toggle="tab" data-bs-target="#education" type="button" role="tab">
+                <i class="fas fa-graduation-cap"></i> المؤهلات
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="experience-tab" data-bs-toggle="tab" data-bs-target="#experience" type="button" role="tab">
+                <i class="fas fa-briefcase"></i> الخبرات
+            </button>
+        </li>
+    </ul>
+
+
+
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="employeeDetailTabContent">
+        <!-- Personal Information Tab -->
+        <div class="tab-pane fade show active" id="personal" role="tabpanel">
+            <div class="section-title">المعلومات الشخصية</div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="info-label">الاسم الكامل بالعربية</div>
+                    <div class="info-value">{{ employee.get_full_name_ar }}</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="info-label">الاسم بالإنجليزية</div>
+                    <div class="info-value">{{ employee.get_full_name_en|default:"غير محدد" }}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="info-label">رقم الهوية الوطنية</div>
+                    <div class="info-value">{{ employee.national_id }}</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-label">رقم جواز السفر</div>
+                    <div class="info-value">{{ employee.passport_number|default:"غير محدد" }}</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-label">تاريخ الميلاد</div>
+                    <div class="info-value">{{ employee.date_of_birth|date:"Y-m-d" }} ({{ employee.get_age }} سنة)</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="info-label">الجنس</div>
+                    <div class="info-value">{{ employee.get_gender_display }}</div>
+                </div>
+                <div class="col-md-3">
+                    <div class="info-label">الحالة الاجتماعية</div>
+                    <div class="info-value">{{ employee.get_marital_status_display }}</div>
+                </div>
+                <div class="col-md-3">
+                    <div class="info-label">الجنسية</div>
+                    <div class="info-value">{{ employee.nationality }}</div>
+                </div>
+                <div class="col-md-3">
+                    <div class="info-label">الديانة</div>
+                    <div class="info-value">{{ employee.religion|default:"غير محدد" }}</div>
+                </div>
+            </div>
+            <div class="section-title mt-4">معلومات الاتصال</div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="info-label">البريد الإلكتروني</div>
+                    <div class="info-value">{{ employee.email }}</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-label">الهاتف</div>
+                    <div class="info-value">{{ employee.phone }}</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-label">الجوال</div>
+                    <div class="info-value">{{ employee.mobile|default:"غير محدد" }}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="info-label">العنوان</div>
+                    <div class="info-value">{{ employee.address }}</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-label">المدينة</div>
+                    <div class="info-value">{{ employee.city }}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Work Information Tab -->
+        <div class="tab-pane fade" id="work" role="tabpanel">
+            <div class="section-title">بيانات العمل</div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="info-label">القسم</div>
+                    <div class="info-value">{{ employee.department.dept_name_ar|default:"غير محدد" }}</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-label">المنصب</div>
+                    <div class="info-value">{{ employee.position.position_name_ar|default:"غير محدد" }}</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-label">الفرع</div>
+                    <div class="info-value">{{ employee.branch.branch_name_ar|default:"غير محدد" }}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="info-label">المدير المباشر</div>
+                    <div class="info-value">{{ employee.manager.get_full_name_ar|default:"غير محدد" }}</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="info-label">نوع التوظيف</div>
+                    <div class="info-value">{{ employee.get_employment_type_display }}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="info-label">تاريخ التعيين</div>
+                    <div class="info-value">{{ employee.hire_date|date:"Y-m-d" }}</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-label">سنوات الخدمة</div>
+                    <div class="info-value">{{ employee.get_years_of_service }} سنة</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-label">تاريخ التثبيت</div>
+                    <div class="info-value">{{ employee.confirmation_date|date:"Y-m-d"|default:"غير محدد" }}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Salary Information Tab -->
+        <div class="tab-pane fade" id="salary" role="tabpanel">
+            <div class="section-title">بيانات الراتب والبدلات</div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="info-label">الراتب الأساسي</div>
+                    <div class="info-value">{{ employee.basic_salary|floatformat:2 }} ريال</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="info-label">بدل السكن</div>
+                    <div class="info-value">{{ employee.housing_allowance|floatformat:2 }} ريال</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="info-label">بدل النقل</div>
+                    <div class="info-value">{{ employee.transport_allowance|floatformat:2 }} ريال</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="info-label">بدلات أخرى</div>
+                    <div class="info-value">{{ employee.other_allowances|floatformat:2 }} ريال</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-success">
+                        <h5><i class="fas fa-calculator"></i> إجمالي الراتب: {{ employee.get_total_salary|floatformat:2 }} ريال</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Attendance Tab -->
+        <div class="tab-pane fade" id="attendance" role="tabpanel">
+            <div class="section-title">بيانات الحضور والإجازات</div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="info-label">الوردية</div>
+                    <div class="info-value">{{ employee.work_shift.shift_name|default:"غير محدد" }}</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="info-label">معرف جهاز البصمة</div>
+                    <div class="info-value">{{ employee.zk_user_id|default:"غير محدد" }}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="info-label">رصيد الإجازة السنوية</div>
+                    <div class="info-value">{{ employee.annual_leave_balance }} يوم</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="info-label">رصيد الإجازة المرضية</div>
+                    <div class="info-value">{{ employee.sick_leave_balance }} يوم</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Insurance Tab -->
+        <div class="tab-pane fade" id="insurance" role="tabpanel">
+            <div class="section-title">التأمينات الاجتماعية والصحية</div>
+            {% if employee.insurances.all %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>نوع التأمين</th>
+                                <th>رقم التأمين</th>
+                                <th>شركة التأمين</th>
+                                <th>تاريخ البداية</th>
+                                <th>تاريخ النهاية</th>
+                                <th>قيمة التغطية</th>
+                                <th>القسط الشهري</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for insurance in employee.insurances.all %}
+                            <tr>
+                                <td>{{ insurance.get_insurance_type_display }}</td>
+                                <td>{{ insurance.insurance_number }}</td>
+                                <td>{{ insurance.insurance_company|default:"غير محدد" }}</td>
+                                <td>{{ insurance.start_date|date:"Y-m-d" }}</td>
+                                <td>{{ insurance.end_date|date:"Y-m-d"|default:"مستمر" }}</td>
+                                <td>{{ insurance.coverage_amount|floatformat:2|default:"غير محدد" }}</td>
+                                <td>{{ insurance.monthly_premium|floatformat:2|default:"غير محدد" }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> لا توجد بيانات تأمينات مسجلة لهذا الموظف
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Contracts Tab -->
+        <div class="tab-pane fade" id="contracts" role="tabpanel">
+            <div class="section-title">عقود العمل</div>
+            {% if employee.contracts.all %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>رقم العقد</th>
+                                <th>نوع العقد</th>
+                                <th>تاريخ البداية</th>
+                                <th>تاريخ النهاية</th>
+                                <th>الراتب</th>
+                                <th>الحالة</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for contract in employee.contracts.all %}
+                            <tr>
+                                <td>{{ contract.contract_number }}</td>
+                                <td>{{ contract.get_contract_type_display }}</td>
+                                <td>{{ contract.start_date|date:"Y-m-d" }}</td>
+                                <td>{{ contract.end_date|date:"Y-m-d"|default:"غير محدد" }}</td>
+                                <td>{{ contract.salary|floatformat:2 }} ريال</td>
+                                <td>
+                                    {% if contract.is_active %}
+                                        <span class="badge bg-success">نشط</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">منتهي</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> لا توجد عقود مسجلة لهذا الموظف
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Custody Tab -->
+        <div class="tab-pane fade" id="custody" role="tabpanel">
+            <div class="section-title">عهد الموظف</div>
+            {% if employee.custodies.all %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>نوع العهدة</th>
+                                <th>اسم الصنف</th>
+                                <th>الرقم التسلسلي</th>
+                                <th>قيمة الصنف</th>
+                                <th>تاريخ الاستلام</th>
+                                <th>تاريخ الإرجاع</th>
+                                <th>الحالة</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for custody in employee.custodies.all %}
+                            <tr>
+                                <td>{{ custody.get_custody_type_display }}</td>
+                                <td>{{ custody.item_name }}</td>
+                                <td>{{ custody.serial_number|default:"غير محدد" }}</td>
+                                <td>{{ custody.item_value|floatformat:2|default:"غير محدد" }}</td>
+                                <td>{{ custody.issue_date|date:"Y-m-d" }}</td>
+                                <td>{{ custody.return_date|date:"Y-m-d"|default:"لم يُرجع" }}</td>
+                                <td>
+                                    {% if custody.status == 'active' %}
+                                        <span class="badge bg-success">نشطة</span>
+                                    {% elif custody.status == 'returned' %}
+                                        <span class="badge bg-info">مُرتجعة</span>
+                                    {% elif custody.status == 'lost' %}
+                                        <span class="badge bg-danger">مفقودة</span>
+                                    {% else %}
+                                        <span class="badge bg-warning">تالفة</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> لا توجد عهد مسجلة لهذا الموظف
+                </div>
+            {% endif %}
+        </div>
+
+
+        <!-- Documents Tab -->
+        <div class="tab-pane fade" id="documents" role="tabpanel">
+            <div class="section-title">المستندات</div>
+            {% if employee.documents.all %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>نوع المستند</th>
+                                <th>اسم المستند</th>
+                                <th>رقم المستند</th>
+                                <th>تاريخ الإصدار</th>
+                                <th>تاريخ الانتهاء</th>
+                                <th>الملف</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for document in employee.documents.all %}
+                            <tr>
+                                <td>{{ document.get_document_type_display }}</td>
+                                <td>{{ document.document_name }}</td>
+                                <td>{{ document.document_number|default:"غير محدد" }}</td>
+                                <td>{{ document.issue_date|date:"Y-m-d"|default:"غير محدد" }}</td>
+                                <td>{{ document.expiry_date|date:"Y-m-d"|default:"غير محدد" }}</td>
+                                <td>
+                                    {% if document.document_file %}
+                                        <a href="{{ document.document_file.url }}" target="_blank" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-download"></i> تحميل
+                                        </a>
+                                    {% else %}
+                                        <span class="text-muted">لا يوجد ملف</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> لا توجد مستندات مسجلة لهذا الموظف
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Education Tab -->
+        <div class="tab-pane fade" id="education" role="tabpanel">
+            <div class="section-title">المؤهلات العلمية</div>
+            {% if employee.education.all %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>الدرجة العلمية</th>
+                                <th>مجال الدراسة</th>
+                                <th>المؤسسة التعليمية</th>
+                                <th>سنة التخرج</th>
+                                <th>التقدير</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for edu in employee.education.all %}
+                            <tr>
+                                <td>{{ edu.get_degree_display }}</td>
+                                <td>{{ edu.field_of_study }}</td>
+                                <td>{{ edu.institution }}</td>
+                                <td>{{ edu.graduation_year|default:"غير محدد" }}</td>
+                                <td>{{ edu.grade|default:"غير محدد" }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> لا توجد مؤهلات علمية مسجلة لهذا الموظف
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Experience Tab -->
+        <div class="tab-pane fade" id="experience" role="tabpanel">
+            <div class="section-title">الخبرات العملية</div>
+            {% if employee.experience.all %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>الشركة</th>
+                                <th>المنصب</th>
+                                <th>تاريخ البداية</th>
+                                <th>تاريخ النهاية</th>
+                                <th>المدة</th>
+                                <th>المسؤوليات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for exp in employee.experience.all %}
+                            <tr>
+                                <td>{{ exp.company_name }}</td>
+                                <td>{{ exp.position }}</td>
+                                <td>{{ exp.start_date|date:"Y-m-d" }}</td>
+                                <td>
+                                    {% if exp.is_current %}
+                                        <span class="badge bg-success">حالياً</span>
+                                    {% else %}
+                                        {{ exp.end_date|date:"Y-m-d" }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if exp.is_current %}
+                                        مستمر
+                                    {% else %}
+                                        {% widthratio exp.end_date.year|add:"-1"|add:exp.start_date.year 1 1 %} سنة
+                                    {% endif %}
+                                </td>
+                                <td>{{ exp.responsibilities|truncatewords:10|default:"غير محدد" }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> لا توجد خبرات عملية مسجلة لهذا الموظف
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

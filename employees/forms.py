@@ -7,8 +7,9 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column, Fieldset, HTML
 from crispy_forms.bootstrap import FormActions, TabHolder, Tab
 from .models import (
-    Employee, EmployeeDocument, EmployeeContract, 
-    EmergencyContact, EmployeeEducation, EmployeeExperience
+    Employee, EmployeeDocument, EmployeeContract,
+    EmergencyContact, EmployeeEducation, EmployeeExperience,
+    EmployeeInsurance, EmployeeCustody
 )
 
 
@@ -20,24 +21,39 @@ class EmployeeForm(forms.ModelForm):
     class Meta:
         model = Employee
         fields = [
-            'emp_code', 'first_name_ar', 'last_name_ar', 'first_name_en', 'last_name_en',
-            'national_id', 'passport_number', 'date_of_birth', 'gender', 'marital_status',
-            'nationality', 'religion', 'email', 'phone', 'mobile', 'address',
+            'emp_code', 'first_name_ar', 'middle_name_ar', 'last_name_ar',
+            'first_name_en', 'last_name_en', 'national_id', 'passport_number',
+            'date_of_birth', 'gender', 'marital_status', 'nationality', 'religion',
+            'email', 'phone', 'mobile', 'address', 'city', 'postal_code',
             'department', 'position', 'branch', 'manager', 'hire_date', 'employment_type',
-            'work_shift', 'probation_end_date', 'basic_salary', 'housing_allowance',
-            'transport_allowance', 'other_allowances', 'bank_name', 'bank_account_number',
-            'iban', 'photo', 'zk_user_id', 'is_active'
+            'work_shift', 'probation_end_date', 'confirmation_date',
+            'basic_salary', 'housing_allowance', 'transport_allowance', 'other_allowances',
+            'annual_leave_balance', 'sick_leave_balance',
+            'bank_name', 'bank_account_number', 'iban',
+            'photo', 'zk_user_id', 'is_active', 'termination_date', 'termination_reason'
         ]
         widgets = {
             'date_of_birth': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'hire_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'probation_end_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'confirmation_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'termination_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'address': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
+            'termination_reason': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
             'photo': forms.FileInput(attrs={'class': 'form-control'}),
         }
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        # Filter querysets to show only active records
+        from organization.models import Department, Position, Branch, WorkShift
+        self.fields['department'].queryset = Department.objects.filter(is_active=True)
+        self.fields['position'].queryset = Position.objects.filter(is_active=True)
+        self.fields['branch'].queryset = Branch.objects.filter(is_active=True)
+        self.fields['work_shift'].queryset = WorkShift.objects.filter(is_active=True)
+        self.fields['manager'].queryset = Employee.objects.filter(is_active=True)
+
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.form_enctype = 'multipart/form-data'
@@ -241,7 +257,7 @@ class EmergencyContactForm(forms.ModelForm):
         widgets = {
             'address': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
         }
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -313,3 +329,62 @@ class EmployeeExperienceForm(forms.ModelForm):
             'reason_for_leaving': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
         }
 
+
+
+
+class EmployeeInsuranceForm(forms.ModelForm):
+    """
+    Employee insurance form
+    نموذج تأمينات الموظف
+    """
+    class Meta:
+        model = EmployeeInsurance
+        fields = [
+            'insurance_type', 'insurance_number', 'insurance_company',
+            'start_date', 'end_date', 'coverage_amount', 'monthly_premium', 'notes'
+        ]
+        labels = {
+            'insurance_type': 'نوع التأمين',
+            'insurance_number': 'رقم التأمين',
+            'insurance_company': 'شركة التأمين',
+            'start_date': 'تاريخ البداية',
+            'end_date': 'تاريخ النهاية',
+            'coverage_amount': 'قيمة التغطية',
+            'monthly_premium': 'القسط الشهري',
+            'notes': 'ملاحظات',
+        }
+        widgets = {
+            'start_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'end_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'notes': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
+        }
+
+
+class EmployeeCustodyForm(forms.ModelForm):
+    """
+    Employee custody form
+    نموذج عهد الموظف
+    """
+    class Meta:
+        model = EmployeeCustody
+        fields = [
+            'custody_type', 'item_name', 'item_description', 'serial_number',
+            'item_value', 'issue_date', 'return_date', 'status', 'notes'
+        ]
+        labels = {
+            'custody_type': 'نوع العهدة',
+            'item_name': 'اسم الصنف',
+            'item_description': 'وصف الصنف',
+            'serial_number': 'الرقم التسلسلي',
+            'item_value': 'قيمة الصنف',
+            'issue_date': 'تاريخ الاستلام',
+            'return_date': 'تاريخ الإرجاع',
+            'status': 'الحالة',
+            'notes': 'ملاحظات',
+        }
+        widgets = {
+            'issue_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'return_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'item_description': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
+            'notes': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
+        }

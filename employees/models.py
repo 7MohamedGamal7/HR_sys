@@ -15,14 +15,14 @@ class Employee(BaseModel):
         ('male', 'ذكر'),
         ('female', 'أنثى'),
     ]
-    
+
     MARITAL_STATUS_CHOICES = [
         ('single', 'أعزب'),
         ('married', 'متزوج'),
         ('divorced', 'مطلق'),
         ('widowed', 'أرمل'),
     ]
-    
+
     EMPLOYMENT_TYPE_CHOICES = [
         ('full_time', 'دوام كامل'),
         ('part_time', 'دوام جزئي'),
@@ -30,7 +30,7 @@ class Employee(BaseModel):
         ('temporary', 'مؤقت'),
         ('intern', 'متدرب'),
     ]
-    
+
     # Basic Information
     emp_code = models.CharField(
         max_length=20,
@@ -63,7 +63,7 @@ class Employee(BaseModel):
         null=True,
         verbose_name='اسم العائلة بالإنجليزية'
     )
-    
+
     # Personal Information
     national_id = models.CharField(
         max_length=20,
@@ -101,7 +101,7 @@ class Employee(BaseModel):
         null=True,
         verbose_name='الديانة'
     )
-    
+
     # Contact Information
     email = models.EmailField(
         unique=True,
@@ -130,7 +130,7 @@ class Employee(BaseModel):
         null=True,
         verbose_name='الرمز البريدي'
     )
-    
+
     # Employment Information
     department = models.ForeignKey(
         'organization.Department',
@@ -181,7 +181,7 @@ class Employee(BaseModel):
         blank=True,
         verbose_name='تاريخ التثبيت'
     )
-    
+
     # Salary Information
     basic_salary = models.DecimalField(
         max_digits=10,
@@ -206,7 +206,7 @@ class Employee(BaseModel):
         default=0,
         verbose_name='بدلات أخرى'
     )
-    
+
     # Work Schedule
     work_shift = models.ForeignKey(
         'organization.WorkShift',
@@ -215,7 +215,7 @@ class Employee(BaseModel):
         blank=True,
         verbose_name='الوردية'
     )
-    
+
     # Leave Balances
     annual_leave_balance = models.IntegerField(
         default=21,
@@ -225,7 +225,7 @@ class Employee(BaseModel):
         default=30,
         verbose_name='رصيد الإجازة المرضية'
     )
-    
+
     # Bank Information
     bank_name = models.CharField(
         max_length=100,
@@ -245,7 +245,7 @@ class Employee(BaseModel):
         null=True,
         verbose_name='رقم الآيبان'
     )
-    
+
     # Photo
     photo = models.ImageField(
         upload_to='employees/photos/',
@@ -253,7 +253,7 @@ class Employee(BaseModel):
         null=True,
         verbose_name='الصورة الشخصية'
     )
-    
+
     # Status
     is_active = models.BooleanField(
         default=True,
@@ -269,7 +269,7 @@ class Employee(BaseModel):
         null=True,
         verbose_name='سبب إنهاء الخدمة'
     )
-    
+
     # ZK Device Integration
     zk_user_id = models.CharField(
         max_length=50,
@@ -278,16 +278,16 @@ class Employee(BaseModel):
         unique=True,
         verbose_name='معرف جهاز البصمة'
     )
-    
+
     class Meta:
         db_table = 'Tbl_Employees_New'
         verbose_name = 'موظف'
         verbose_name_plural = 'الموظفون'
         ordering = ['emp_code']
-    
+
     def __str__(self):
         return f"{self.emp_code} - {self.get_full_name_ar()}"
-    
+
     def get_full_name_ar(self):
         """Get full Arabic name"""
         parts = [self.first_name_ar]
@@ -295,18 +295,18 @@ class Employee(BaseModel):
             parts.append(self.middle_name_ar)
         parts.append(self.last_name_ar)
         return ' '.join(parts)
-    
+
     def get_full_name_en(self):
         """Get full English name"""
         if self.first_name_en and self.last_name_en:
             return f"{self.first_name_en} {self.last_name_en}"
         return self.get_full_name_ar()
-    
+
     def get_total_salary(self):
         """Calculate total salary"""
-        return (self.basic_salary + self.housing_allowance + 
+        return (self.basic_salary + self.housing_allowance +
                 self.transport_allowance + self.other_allowances)
-    
+
     def get_age(self):
         """Calculate employee age"""
         from datetime import date
@@ -314,7 +314,7 @@ class Employee(BaseModel):
         return today.year - self.date_of_birth.year - (
             (today.month, today.day) < (self.date_of_birth.month, self.date_of_birth.day)
         )
-    
+
     def get_years_of_service(self):
         """Calculate years of service"""
         from datetime import date
@@ -624,3 +624,158 @@ class EmployeeExperience(BaseModel):
     def __str__(self):
         return f"{self.employee.emp_code} - {self.company_name}"
 
+
+
+class EmployeeInsurance(BaseModel):
+    """
+    Employee insurance information (Social & Health)
+    بيانات التأمينات الاجتماعية والصحية للموظف
+    """
+    INSURANCE_TYPE_CHOICES = [
+        ('social', 'تأمينات اجتماعية'),
+        ('health', 'تأمين صحي'),
+    ]
+
+    employee = models.ForeignKey(
+        Employee,
+        on_delete=models.CASCADE,
+        related_name='insurances',
+        verbose_name='الموظف'
+    )
+    insurance_type = models.CharField(
+        max_length=20,
+        choices=INSURANCE_TYPE_CHOICES,
+        verbose_name='نوع التأمين'
+    )
+    insurance_number = models.CharField(
+        max_length=50,
+        verbose_name='رقم التأمين'
+    )
+    insurance_company = models.CharField(
+        max_length=200,
+        blank=True,
+        null=True,
+        verbose_name='شركة التأمين'
+    )
+    start_date = models.DateField(
+        verbose_name='تاريخ البداية'
+    )
+    end_date = models.DateField(
+        null=True,
+        blank=True,
+        verbose_name='تاريخ النهاية'
+    )
+    coverage_amount = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        verbose_name='قيمة التغطية'
+    )
+    monthly_premium = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        verbose_name='القسط الشهري'
+    )
+    notes = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='ملاحظات'
+    )
+
+    class Meta:
+        db_table = 'Tbl_Employee_Insurance'
+        verbose_name = 'تأمين موظف'
+        verbose_name_plural = 'تأمينات الموظفين'
+        ordering = ['-start_date']
+
+    def __str__(self):
+        return f"{self.employee.emp_code} - {self.get_insurance_type_display()}"
+
+
+class EmployeeCustody(BaseModel):
+    """
+    Employee custody items (equipment, tools, etc.)
+    عهد الموظف
+    """
+    CUSTODY_TYPE_CHOICES = [
+        ('laptop', 'جهاز كمبيوتر محمول'),
+        ('desktop', 'جهاز كمبيوتر مكتبي'),
+        ('mobile', 'هاتف محمول'),
+        ('vehicle', 'مركبة'),
+        ('tools', 'أدوات'),
+        ('keys', 'مفاتيح'),
+        ('card', 'بطاقة'),
+        ('other', 'أخرى'),
+    ]
+
+    CUSTODY_STATUS_CHOICES = [
+        ('active', 'نشطة'),
+        ('returned', 'مُرتجعة'),
+        ('lost', 'مفقودة'),
+        ('damaged', 'تالفة'),
+    ]
+
+    employee = models.ForeignKey(
+        Employee,
+        on_delete=models.CASCADE,
+        related_name='custodies',
+        verbose_name='الموظف'
+    )
+    custody_type = models.CharField(
+        max_length=20,
+        choices=CUSTODY_TYPE_CHOICES,
+        verbose_name='نوع العهدة'
+    )
+    item_name = models.CharField(
+        max_length=200,
+        verbose_name='اسم الصنف'
+    )
+    item_description = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='وصف الصنف'
+    )
+    serial_number = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        verbose_name='الرقم التسلسلي'
+    )
+    item_value = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        verbose_name='قيمة الصنف'
+    )
+    issue_date = models.DateField(
+        verbose_name='تاريخ الاستلام'
+    )
+    return_date = models.DateField(
+        null=True,
+        blank=True,
+        verbose_name='تاريخ الإرجاع'
+    )
+    status = models.CharField(
+        max_length=20,
+        choices=CUSTODY_STATUS_CHOICES,
+        default='active',
+        verbose_name='الحالة'
+    )
+    notes = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='ملاحظات'
+    )
+
+    class Meta:
+        db_table = 'Tbl_Employee_Custody'
+        verbose_name = 'عهدة موظف'
+        verbose_name_plural = 'عهد الموظفين'
+        ordering = ['-issue_date']
+
+    def __str__(self):
+        return f"{self.employee.emp_code} - {self.item_name}"
