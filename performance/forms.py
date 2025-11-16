@@ -17,30 +17,27 @@ class PerformanceReviewForm(forms.ModelForm):
     class Meta:
         model = PerformanceReview
         fields = [
-            'employee', 'reviewer', 'review_period_start', 'review_period_end',
-            'overall_rating', 'strengths', 'weaknesses', 'goals', 'comments', 'status'
+            'employee', 'review_cycle', 'reviewer', 'review_date',
+            'overall_rating', 'strengths', 'weaknesses', 'recommendations', 'status'
         ]
         labels = {
             'employee': 'الموظف',
+            'review_cycle': 'دورة التقييم',
             'reviewer': 'المقيّم',
-            'review_period_start': 'بداية فترة التقييم',
-            'review_period_end': 'نهاية فترة التقييم',
+            'review_date': 'تاريخ التقييم',
             'overall_rating': 'التقييم الإجمالي',
             'strengths': 'نقاط القوة',
             'weaknesses': 'نقاط الضعف',
-            'goals': 'الأهداف',
-            'comments': 'التعليقات',
+            'recommendations': 'التوصيات',
             'status': 'الحالة',
         }
         widgets = {
-            'review_period_start': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'review_period_end': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'review_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'strengths': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
             'weaknesses': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
-            'goals': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
-            'comments': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
+            'recommendations': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
         }
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()

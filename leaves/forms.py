@@ -17,23 +17,23 @@ class LeavePolicyForm(forms.ModelForm):
     class Meta:
         model = LeavePolicy
         fields = [
-            'name', 'leave_type', 'days_per_year', 'max_carry_forward',
-            'requires_approval', 'is_paid', 'description', 'is_active'
+            'name', 'leave_type', 'days_per_year', 'max_consecutive_days',
+            'requires_approval', 'is_paid', 'carry_forward', 'description'
         ]
         labels = {
             'name': 'الاسم',
             'leave_type': 'نوع الإجازة',
             'days_per_year': 'الأيام في السنة',
-            'max_carry_forward': 'الحد الأقصى للترحيل',
+            'max_consecutive_days': 'الحد الأقصى للأيام المتتالية',
             'requires_approval': 'تتطلب موافقة',
             'is_paid': 'مدفوعة',
+            'carry_forward': 'يمكن ترحيلها',
             'description': 'الوصف',
-            'is_active': 'نشطة',
         }
         widgets = {
             'description': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
         }
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -45,12 +45,12 @@ class LeavePolicyForm(forms.ModelForm):
             ),
             Row(
                 Column('days_per_year', css_class='col-md-6'),
-                Column('max_carry_forward', css_class='col-md-6'),
+                Column('max_consecutive_days', css_class='col-md-6'),
             ),
             Row(
                 Column('requires_approval', css_class='col-md-4'),
                 Column('is_paid', css_class='col-md-4'),
-                Column('is_active', css_class='col-md-4'),
+                Column('carry_forward', css_class='col-md-4'),
             ),
             'description',
             FormActions(
@@ -67,16 +67,15 @@ class LeaveBalanceForm(forms.ModelForm):
     """
     class Meta:
         model = LeaveBalance
-        fields = ['employee', 'leave_policy', 'year', 'total_days', 'used_days', 'remaining_days']
+        fields = ['employee', 'leave_type', 'year', 'total_days', 'used_days']
         labels = {
             'employee': 'الموظف',
-            'leave_policy': 'سياسة الإجازة',
+            'leave_type': 'نوع الإجازة',
             'year': 'السنة',
             'total_days': 'إجمالي الأيام',
             'used_days': 'الأيام المستخدمة',
-            'remaining_days': 'الأيام المتبقية',
         }
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -90,11 +89,15 @@ class LeaveApprovalWorkflowForm(forms.ModelForm):
     """
     class Meta:
         model = LeaveApprovalWorkflow
-        fields = ['leave_policy', 'approval_level', 'approver_role', 'is_required']
+        fields = ['leave_request', 'approver', 'level', 'status', 'comments']
         labels = {
-            'leave_policy': 'سياسة الإجازة',
-            'approval_level': 'مستوى الموافقة',
-            'approver_role': 'دور الموافق',
-            'is_required': 'مطلوب',
+            'leave_request': 'طلب الإجازة',
+            'approver': 'المعتمد',
+            'level': 'المستوى',
+            'status': 'الحالة',
+            'comments': 'التعليقات',
+        }
+        widgets = {
+            'comments': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
         }
 
