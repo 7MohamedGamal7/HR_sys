@@ -52,34 +52,20 @@ class PayslipForm(forms.ModelForm):
     """
     class Meta:
         model = Payslip
-        fields = [
-            'employee', 'payroll', 'basic_salary', 'housing_allowance',
-            'transportation_allowance', 'other_allowances', 'overtime_amount',
-            'bonus_amount', 'deductions', 'loan_deduction', 'tax', 'insurance',
-            'net_salary', 'payment_date', 'payment_method', 'notes'
-        ]
+        fields = ['payslip_number', 'pdf_file']
         labels = {
-            'employee': 'الموظف',
-            'payroll': 'كشف الرواتب',
-            'basic_salary': 'الراتب الأساسي',
-            'housing_allowance': 'بدل السكن',
-            'transportation_allowance': 'بدل المواصلات',
-            'other_allowances': 'بدلات أخرى',
-            'overtime_amount': 'مبلغ العمل الإضافي',
-            'bonus_amount': 'مبلغ المكافأة',
-            'deductions': 'الخصومات',
-            'loan_deduction': 'خصم القرض',
-            'tax': 'الضريبة',
-            'insurance': 'التأمين',
-            'net_salary': 'صافي الراتب',
-            'payment_date': 'تاريخ الدفع',
-            'payment_method': 'طريقة الدفع',
-            'notes': 'ملاحظات',
+            'payslip_number': 'رقم القسيمة',
+            'pdf_file': 'ملف PDF',
         }
         widgets = {
-            'payment_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'notes': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
+            'payslip_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'سيتم إنشاؤه تلقائياً'}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Make payslip_number optional as it can be auto-generated
+        self.fields['payslip_number'].required = False
+        self.fields['pdf_file'].required = False
 
 
 class LoanForm(forms.ModelForm):
