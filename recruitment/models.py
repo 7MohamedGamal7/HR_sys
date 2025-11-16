@@ -212,6 +212,75 @@ class Interview(BaseModel):
         return f"{self.application.applicant_name} - {self.interview_date}"
 
 
+class JobOffer(BaseModel):
+    """
+    Job offers
+    عروض العمل
+    """
+    STATUS_CHOICES = [
+        ('pending', 'قيد الانتظار'),
+        ('accepted', 'مقبول'),
+        ('rejected', 'مرفوض'),
+        ('withdrawn', 'ملغى'),
+    ]
+
+    application = models.ForeignKey(
+        JobApplication,
+        on_delete=models.CASCADE,
+        related_name='offers',
+        verbose_name='طلب التوظيف'
+    )
+    position = models.ForeignKey(
+        'organization.Position',
+        on_delete=models.SET_NULL,
+        null=True,
+        verbose_name='المنصب'
+    )
+    salary = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        verbose_name='الراتب'
+    )
+    start_date = models.DateField(
+        verbose_name='تاريخ البداية'
+    )
+    offer_date = models.DateField(
+        auto_now_add=True,
+        verbose_name='تاريخ العرض'
+    )
+    offer_letter = models.FileField(
+        upload_to='recruitment/offers/',
+        blank=True,
+        null=True,
+        verbose_name='خطاب العرض'
+    )
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='pending',
+        verbose_name='الحالة'
+    )
+    response_date = models.DateField(
+        null=True,
+        blank=True,
+        verbose_name='تاريخ الرد'
+    )
+    notes = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='ملاحظات'
+    )
+
+    class Meta:
+        db_table = 'Tbl_Job_Offers'
+        verbose_name = 'عرض عمل'
+        verbose_name_plural = 'عروض العمل'
+        ordering = ['-offer_date']
+
+    def __str__(self):
+        return f"{self.application.applicant_name} - {self.position}"
+
+
 class OnboardingTask(BaseModel):
     """
     Onboarding tasks for new employees

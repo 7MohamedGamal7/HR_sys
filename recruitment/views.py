@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator
-from .models import JobPosting, Application, Interview, JobOffer
+from .models import JobPosting, JobApplication, Interview, JobOffer
 from .forms import JobPostingForm, ApplicationForm, InterviewForm, JobOfferForm
 
 
@@ -43,7 +43,7 @@ def job_detail(request, pk):
     عرض تفاصيل الوظيفة
     """
     job = get_object_or_404(JobPosting, pk=pk)
-    applications = Application.objects.filter(job_posting=job).order_by('-application_date')
+    applications = JobApplication.objects.filter(job_posting=job).order_by('-application_date')
     
     context = {
         'job': job,
@@ -98,7 +98,7 @@ def application_list(request):
     Application list view
     عرض قائمة الطلبات
     """
-    applications = Application.objects.select_related('job_posting').all().order_by('-application_date')
+    applications = JobApplication.objects.select_related('job_posting').all().order_by('-application_date')
     
     # Filter by status
     status = request.GET.get('status')
@@ -123,7 +123,7 @@ def application_detail(request, pk):
     Application detail view
     عرض تفاصيل الطلب
     """
-    application = get_object_or_404(Application, pk=pk)
+    application = get_object_or_404(JobApplication, pk=pk)
     interviews = Interview.objects.filter(application=application).order_by('-interview_date')
     
     context = {
@@ -198,7 +198,7 @@ def interview_create(request, application_pk):
     Interview create view
     عرض جدولة مقابلة
     """
-    application = get_object_or_404(Application, pk=application_pk)
+    application = get_object_or_404(JobApplication, pk=application_pk)
     
     if request.method == 'POST':
         form = InterviewForm(request.POST)
@@ -256,7 +256,7 @@ def offer_create(request, application_pk):
     Job offer create view
     عرض إنشاء عرض عمل
     """
-    application = get_object_or_404(Application, pk=application_pk)
+    application = get_object_or_404(JobApplication, pk=application_pk)
     
     if request.method == 'POST':
         form = JobOfferForm(request.POST, request.FILES)

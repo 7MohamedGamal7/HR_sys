@@ -76,19 +76,22 @@ class LoanForm(forms.ModelForm):
     class Meta:
         model = Loan
         fields = [
-            'employee', 'amount', 'installments', 'start_date',
-            'reason', 'status'
+            'employee', 'loan_amount', 'installment_amount', 'number_of_installments',
+            'start_date', 'end_date', 'reason', 'status'
         ]
         labels = {
             'employee': 'الموظف',
-            'amount': 'المبلغ',
-            'installments': 'عدد الأقساط',
+            'loan_amount': 'مبلغ القرض',
+            'installment_amount': 'مبلغ القسط',
+            'number_of_installments': 'عدد الأقساط',
             'start_date': 'تاريخ البداية',
+            'end_date': 'تاريخ النهاية',
             'reason': 'السبب',
             'status': 'الحالة',
         }
         widgets = {
             'start_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'end_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'reason': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
         }
     

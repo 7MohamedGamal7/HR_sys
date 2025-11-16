@@ -6,7 +6,7 @@ from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column, HTML
 from crispy_forms.bootstrap import FormActions
-from .models import JobPosting, Application, Interview, JobOffer
+from .models import JobPosting, JobApplication, Interview, JobOffer
 
 
 class JobPostingForm(forms.ModelForm):
@@ -56,15 +56,14 @@ class ApplicationForm(forms.ModelForm):
     نموذج التقديم
     """
     class Meta:
-        model = Application
+        model = JobApplication
         fields = [
-            'job_posting', 'first_name', 'last_name', 'email', 'phone',
+            'job_posting', 'applicant_name', 'email', 'phone',
             'resume', 'cover_letter', 'status'
         ]
         labels = {
             'job_posting': 'الوظيفة',
-            'first_name': 'الاسم الأول',
-            'last_name': 'اسم العائلة',
+            'applicant_name': 'اسم المتقدم',
             'email': 'البريد الإلكتروني',
             'phone': 'الهاتف',
             'resume': 'السيرة الذاتية',
@@ -72,6 +71,7 @@ class ApplicationForm(forms.ModelForm):
             'status': 'الحالة',
         }
         widgets = {
+            'applicant_name': forms.TextInput(attrs={'class': 'form-control'}),
             'resume': forms.FileInput(attrs={'class': 'form-control'}),
             'cover_letter': forms.Textarea(attrs={'rows': 5, 'class': 'form-control'}),
         }
