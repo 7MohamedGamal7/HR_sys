@@ -224,7 +224,7 @@ def shift_list(request):
     Work shift list view
     عرض قائمة الورديات
     """
-    shifts = WorkShift.objects.filter(is_active=True).order_by('name')
+    shifts = WorkShift.objects.filter(is_active=True).order_by('shift_name')
     
     context = {
         'shifts': shifts,

@@ -1450,3 +1450,545 @@ INFO 2025-11-16 16:16:08,478 autoreload F:\HR_sys\HR_sys_v2\HR_sys\organization\
 INFO 2025-11-16 16:16:09,053 autoreload Watching for file changes with StatReloader
 INFO 2025-11-16 16:16:33,175 autoreload F:\HR_sys\HR_sys_v2\HR_sys\employees\forms.py changed, reloading.
 INFO 2025-11-16 16:16:33,768 autoreload Watching for file changes with StatReloader
+INFO 2025-11-16 17:29:36,880 basehttp "GET / HTTP/1.1" 200 21965
+INFO 2025-11-16 17:29:42,553 basehttp "GET /settings/ HTTP/1.1" 200 36482
+INFO 2025-11-16 17:29:49,839 basehttp "POST /settings/ HTTP/1.1" 302 0
+INFO 2025-11-16 17:29:49,855 basehttp "GET /settings/ HTTP/1.1" 200 36829
+INFO 2025-11-16 17:30:01,481 basehttp "POST /settings/ HTTP/1.1" 302 0
+INFO 2025-11-16 17:30:01,495 basehttp "GET /settings/ HTTP/1.1" 200 36857
+INFO 2025-11-16 17:30:09,380 basehttp "GET /employees/ HTTP/1.1" 200 20168
+INFO 2025-11-16 17:30:11,966 basehttp "GET /employees/add/ HTTP/1.1" 200 54242
+ERROR 2025-11-16 17:30:46,041 log Internal Server Error: /leaves/policies/
+Traceback (most recent call last):
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\leaves\views.py", line 26, in leave_policy_list
+    return render(request, 'leaves/leave_policy_list.html', context)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ~~~~~~~~~~~~^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\defaulttags.py", line 860, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 481, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 479, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 597, in compile_filter
+    return FilterExpression(token, self)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 698, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: ' %' from 'empty %'
+ERROR 2025-11-16 17:30:46,054 basehttp "GET /leaves/policies/ HTTP/1.1" 500 203532
+INFO 2025-11-16 17:30:51,769 basehttp "GET /performance/my-goals/ HTTP/1.1" 302 0
+INFO 2025-11-16 17:30:51,778 basehttp "GET / HTTP/1.1" 200 22309
+ERROR 2025-11-16 17:30:59,903 log Internal Server Error: /training/
+Traceback (most recent call last):
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\training\views.py", line 31, in program_list
+    return render(request, 'training/program_list.html', context)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ~~~~~~~~~~~~^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\defaulttags.py", line 860, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 481, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 479, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 597, in compile_filter
+    return FilterExpression(token, self)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 698, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: ' %' from 'empty %'
+ERROR 2025-11-16 17:30:59,908 basehttp "GET /training/ HTTP/1.1" 500 203417
+ERROR 2025-11-16 17:31:02,860 log Internal Server Error: /training/sessions/
+Traceback (most recent call last):
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\training\views.py", line 96, in session_list
+    sessions = TrainingSession.objects.select_related('program', 'trainer').all().order_by('-start_date')
+               ^^^^^^^^^^^^^^^
+NameError: name 'TrainingSession' is not defined
+ERROR 2025-11-16 17:31:02,863 basehttp "GET /training/sessions/ HTTP/1.1" 500 74295
+ERROR 2025-11-16 17:31:07,028 log Internal Server Error: /organization/departments/
+Traceback (most recent call last):
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\organization\views.py", line 26, in department_list
+    return render(request, 'organization/department_list.html', context)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ~~~~~~~~~~~~^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\defaulttags.py", line 860, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 481, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 479, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 597, in compile_filter
+    return FilterExpression(token, self)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 698, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: ' %' from 'empty %'
+ERROR 2025-11-16 17:31:07,033 basehttp "GET /organization/departments/ HTTP/1.1" 500 203636
+INFO 2025-11-16 17:32:14,195 autoreload Watching for file changes with StatReloader
+INFO 2025-11-16 17:32:32,121 basehttp "GET / HTTP/1.1" 200 21965
+ERROR 2025-11-16 17:32:40,575 log Internal Server Error: /organization/departments/
+Traceback (most recent call last):
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\organization\views.py", line 26, in department_list
+    return render(request, 'organization/department_list.html', context)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ~~~~~~~~~~~~^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\defaulttags.py", line 860, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 481, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 479, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 597, in compile_filter
+    return FilterExpression(token, self)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 698, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: ' %' from 'empty %'
+ERROR 2025-11-16 17:32:40,582 basehttp "GET /organization/departments/ HTTP/1.1" 500 203787
+ERROR 2025-11-16 17:32:43,201 log Internal Server Error: /organization/departments/
+Traceback (most recent call last):
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\organization\views.py", line 26, in department_list
+    return render(request, 'organization/department_list.html', context)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ~~~~~~~~~~~~^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\defaulttags.py", line 860, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 481, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 479, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 597, in compile_filter
+    return FilterExpression(token, self)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 698, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: ' %' from 'empty %'
+ERROR 2025-11-16 17:32:43,206 basehttp "GET /organization/departments/ HTTP/1.1" 500 203787
+INFO 2025-11-16 17:32:46,596 basehttp "GET /employees/ HTTP/1.1" 200 20168
+INFO 2025-11-16 17:32:50,654 basehttp "GET /employees/add/ HTTP/1.1" 200 54242
+INFO 2025-11-16 17:33:20,048 basehttp "GET /reports/ HTTP/1.1" 200 16463
+ERROR 2025-11-16 17:33:23,312 log Internal Server Error: /leaves/policies/
+Traceback (most recent call last):
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\leaves\views.py", line 26, in leave_policy_list
+    return render(request, 'leaves/leave_policy_list.html', context)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ~~~~~~~~~~~~^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\defaulttags.py", line 860, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 481, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 479, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 597, in compile_filter
+    return FilterExpression(token, self)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 698, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: ' %' from 'empty %'
+ERROR 2025-11-16 17:33:23,317 basehttp "GET /leaves/policies/ HTTP/1.1" 500 203526
+INFO 2025-11-16 17:33:32,396 basehttp "GET /settings/ HTTP/1.1" 200 36510
+ERROR 2025-11-16 17:33:48,164 log Internal Server Error: /leaves/policies/
+Traceback (most recent call last):
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\leaves\views.py", line 26, in leave_policy_list
+    return render(request, 'leaves/leave_policy_list.html', context)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\backends\django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    return parser.parse()
+           ~~~~~~~~~~~~^^
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader_tags.py", line 295, in do_extends
+    nodelist = parser.parse()
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 508, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\defaulttags.py", line 860, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 481, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 479, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 597, in compile_filter
+    return FilterExpression(token, self)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\template\base.py", line 698, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: ' %' from 'empty %'
+ERROR 2025-11-16 17:33:48,169 basehttp "GET /leaves/policies/ HTTP/1.1" 500 203527
+INFO 2025-11-16 17:40:53,222 autoreload F:\HR_sys\HR_sys_v2\HR_sys\organization\views.py changed, reloading.
+INFO 2025-11-16 17:40:54,098 autoreload Watching for file changes with StatReloader

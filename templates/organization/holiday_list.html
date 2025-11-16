@@ -7,9 +7,9 @@
     <div class="row">
         <div class="col-12">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2><i class="fas fa-list ms-2"></i>العطلات</h2>
-                <a href="{% url 'organization:holiday_create' }}" class="btn btn-primary">
-                    <i class="fas fa-plus ms-2"></i>إضافة جديد
+                <h2><i class="fas fa-calendar-alt ms-2"></i>العطلات</h2>
+                <a href="{% url 'organization:holiday_create' %}" class="btn btn-primary">
+                    <i class="fas fa-plus ms-2"></i>إضافة عطلة جديدة
                 </a>
             </div>
         </div>
@@ -23,25 +23,37 @@
                         <table class="table table-hover">
                             <thead class="table-light">
                                 <tr>
-                                    <th>الاسم</th> <th>التاريخ</th> <th>النوع</th>
+                                    <th>اسم العطلة</th>
+                                    <th>التاريخ</th>
+                                    <th>النوع</th>
+                                    <th>متكررة سنوياً</th>
                                     <th>الإجراءات</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for item in page_obj %}}
+                                {% for holiday in holidays %}
                                     <tr>
-                                        <!-- Add table cells here -->
+                                        <td>{{ holiday.name }}</td>
+                                        <td>{{ holiday.date|date:"Y-m-d" }}</td>
+                                        <td>{{ holiday.get_holiday_type_display }}</td>
                                         <td>
-                                            <a href="{% url 'organization:holiday_detail' item.pk }}" class="btn btn-sm btn-info">
-                                                <i class="fas fa-eye"></i>
+                                            {% if holiday.is_recurring %}
+                                                <span class="badge bg-success">نعم</span>
+                                            {% else %}
+                                                <span class="badge bg-secondary">لا</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'organization:holiday_update' holiday.pk %}" class="btn btn-sm btn-warning">
+                                                <i class="fas fa-edit"></i> تعديل
                                             </a>
-                                            <a href="{% url 'organization:holiday_update' item.pk }}" class="btn btn-sm btn-warning">
-                                                <i class="fas fa-edit"></i>
+                                            <a href="{% url 'organization:holiday_delete' holiday.pk %}" class="btn btn-sm btn-danger" onclick="return confirm('هل أنت متأكد من حذف هذه العطلة؟')">
+                                                <i class="fas fa-trash"></i> حذف
                                             </a>
                                         </td>
                                     </tr>
-                                {{empty %}}
-                                    <tr><td colspan="4" class="text-center">لا توجد بيانات</td></tr>
+                                {% empty %}
+                                    <tr><td colspan="5" class="text-center">لا توجد عطلات</td></tr>
                                 {% endfor %}
                             </tbody>
                         </table>
