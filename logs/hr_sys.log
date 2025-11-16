@@ -1992,3 +1992,41 @@ django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '
 ERROR 2025-11-16 17:33:48,169 basehttp "GET /leaves/policies/ HTTP/1.1" 500 203527
 INFO 2025-11-16 17:40:53,222 autoreload F:\HR_sys\HR_sys_v2\HR_sys\organization\views.py changed, reloading.
 INFO 2025-11-16 17:40:54,098 autoreload Watching for file changes with StatReloader
+INFO 2025-11-16 17:45:18,737 basehttp "GET / HTTP/1.1" 200 21965
+INFO 2025-11-16 17:45:25,738 basehttp "GET /employees/ HTTP/1.1" 200 20168
+INFO 2025-11-16 17:45:30,354 basehttp "GET /organization/departments/ HTTP/1.1" 200 17982
+INFO 2025-11-16 17:45:31,784 basehttp "GET /organization/departments/add/ HTTP/1.1" 200 20357
+INFO 2025-11-16 17:45:48,355 basehttp "POST /organization/departments/add/ HTTP/1.1" 302 0
+INFO 2025-11-16 17:45:48,369 basehttp "GET /organization/departments/ HTTP/1.1" 200 19319
+INFO 2025-11-16 17:45:54,565 basehttp "GET /organization/departments/add/ HTTP/1.1" 200 20414
+INFO 2025-11-16 17:46:10,341 basehttp "POST /organization/departments/add/ HTTP/1.1" 302 0
+INFO 2025-11-16 17:46:10,350 basehttp "GET /organization/departments/ HTTP/1.1" 200 20410
+INFO 2025-11-16 17:46:12,003 basehttp "GET /organization/departments/2/edit/ HTTP/1.1" 200 20489
+WARNING 2025-11-16 17:46:13,620 log Not Found: /organization/departments/2/edit/{% url 'organization:department_list' }}
+WARNING 2025-11-16 17:46:13,620 basehttp "GET /organization/departments/2/edit/%7B%%20url%20'organization:department_list'%20%7D%7D HTTP/1.1" 404 8967
+INFO 2025-11-16 17:46:22,150 basehttp "GET /organization/branches/ HTTP/1.1" 200 17963
+INFO 2025-11-16 17:46:23,359 basehttp "GET /organization/branches/add/ HTTP/1.1" 200 20109
+INFO 2025-11-16 17:46:40,695 basehttp "POST /organization/branches/add/ HTTP/1.1" 302 0
+INFO 2025-11-16 17:46:40,707 basehttp "GET /organization/branches/ HTTP/1.1" 200 18931
+INFO 2025-11-16 17:46:43,008 basehttp "GET /organization/branches/add/ HTTP/1.1" 200 20109
+INFO 2025-11-16 17:46:56,893 basehttp "POST /organization/branches/add/ HTTP/1.1" 302 0
+INFO 2025-11-16 17:46:56,902 basehttp "GET /organization/branches/ HTTP/1.1" 200 19692
+INFO 2025-11-16 17:47:03,259 basehttp "GET /organization/shifts/ HTTP/1.1" 200 18013
+INFO 2025-11-16 17:47:04,574 basehttp "GET /organization/shifts/add/ HTTP/1.1" 200 19752
+ERROR 2025-11-16 17:48:02,130 log Internal Server Error: /organization/shifts/add/
+Traceback (most recent call last):
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\venv\Lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapper_view
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\HR_sys_v2\HR_sys\organization\views.py", line 246, in shift_create
+    messages.success(request, f' „ ≈÷«›… «·Ê—œÌ… {shift.name} »‰Ã«Õ.')
+                                                  ^^^^^^^^^^
+AttributeError: 'WorkShift' object has no attribute 'name'
+ERROR 2025-11-16 17:48:02,134 basehttp "POST /organization/shifts/add/ HTTP/1.1" 500 76678
+INFO 2025-11-16 17:49:44,713 autoreload F:\HR_sys\HR_sys_v2\HR_sys\organization\views.py changed, reloading.
+INFO 2025-11-16 17:49:45,333 autoreload Watching for file changes with StatReloader
+INFO 2025-11-16 17:49:54,775 autoreload F:\HR_sys\HR_sys_v2\HR_sys\organization\views.py changed, reloading.
+INFO 2025-11-16 17:49:55,313 autoreload Watching for file changes with StatReloader

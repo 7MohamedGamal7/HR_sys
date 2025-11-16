@@ -243,7 +243,7 @@ def shift_create(request):
         form = WorkShiftForm(request.POST)
         if form.is_valid():
             shift = form.save()
-            messages.success(request, f'تم إضافة الوردية {shift.name} بنجاح.')
+            messages.success(request, f'تم إضافة الوردية {shift.shift_name} بنجاح.')
             return redirect('organization:shift_list')
     else:
         form = WorkShiftForm()
@@ -263,7 +263,7 @@ def shift_update(request, pk):
         form = WorkShiftForm(request.POST, instance=shift)
         if form.is_valid():
             shift = form.save()
-            messages.success(request, f'تم تحديث الوردية {shift.name} بنجاح.')
+            messages.success(request, f'تم تحديث الوردية {shift.shift_name} بنجاح.')
             return redirect('organization:shift_list')
     else:
         form = WorkShiftForm(instance=shift)
