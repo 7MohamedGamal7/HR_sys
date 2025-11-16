@@ -88,7 +88,7 @@ def leave_balance_list(request):
     Leave balance list view
     عرض قائمة أرصدة الإجازات
     """
-    balances = LeaveBalance.objects.select_related('employee', 'leave_policy').all().order_by('employee__full_name_ar')
+    balances = LeaveBalance.objects.select_related('employee', 'leave_policy').all().order_by('employee__first_name_ar')
     
     # Filter by employee
     employee_id = request.GET.get('employee')

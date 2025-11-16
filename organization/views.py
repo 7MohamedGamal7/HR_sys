@@ -17,12 +17,12 @@ def department_list(request):
     Department list view
     عرض قائمة الأقسام
     """
-    departments = Department.objects.filter(is_active=True).order_by('name_ar')
-    
+    departments = Department.objects.filter(is_active=True).order_by('dept_name_ar')
+
     context = {
         'departments': departments,
     }
-    
+
     return render(request, 'organization/department_list.html', context)
 
 
@@ -36,9 +36,9 @@ def department_detail(request, pk):
     
     # Get employees in this department
     employees = department.employees.filter(is_active=True)
-    
+
     # Get sub-departments
-    sub_departments = Department.objects.filter(parent=department, is_active=True)
+    sub_departments = Department.objects.filter(parent_department=department, is_active=True)
     
     context = {
         'department': department,
@@ -59,7 +59,7 @@ def department_create(request):
         form = DepartmentForm(request.POST)
         if form.is_valid():
             department = form.save()
-            messages.success(request, f'تم إضافة القسم {department.name_ar} بنجاح.')
+            messages.success(request, f'تم إضافة القسم {department.dept_name_ar} بنجاح.')
             return redirect('organization:department_list')
     else:
         form = DepartmentForm()
@@ -79,7 +79,7 @@ def department_update(request, pk):
         form = DepartmentForm(request.POST, instance=department)
         if form.is_valid():
             department = form.save()
-            messages.success(request, f'تم تحديث القسم {department.name_ar} بنجاح.')
+            messages.success(request, f'تم تحديث القسم {department.dept_name_ar} بنجاح.')
             return redirect('organization:department_detail', pk=department.pk)
     else:
         form = DepartmentForm(instance=department)
@@ -98,7 +98,7 @@ def department_delete(request, pk):
     if request.method == 'POST':
         department.is_active = False
         department.save()
-        messages.success(request, f'تم حذف القسم {department.name_ar} بنجاح.')
+        messages.success(request, f'تم حذف القسم {department.dept_name_ar} بنجاح.')
         return redirect('organization:department_list')
     
     return render(request, 'organization/department_confirm_delete.html', {'department': department})
@@ -111,17 +111,17 @@ def position_list(request):
     Position list view
     عرض قائمة المناصب
     """
-    positions = Position.objects.select_related('department').filter(is_active=True).order_by('title_ar')
-    
+    positions = Position.objects.select_related('department').filter(is_active=True).order_by('position_name_ar')
+
     # Pagination
     paginator = Paginator(positions, 20)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    
+
     context = {
         'page_obj': page_obj,
     }
-    
+
     return render(request, 'organization/position_list.html', context)
 
 
@@ -135,7 +135,7 @@ def position_create(request):
         form = PositionForm(request.POST)
         if form.is_valid():
             position = form.save()
-            messages.success(request, f'تم إضافة المنصب {position.title_ar} بنجاح.')
+            messages.success(request, f'تم إضافة المنصب {position.position_name_ar} بنجاح.')
             return redirect('organization:position_list')
     else:
         form = PositionForm()
@@ -155,7 +155,7 @@ def position_update(request, pk):
         form = PositionForm(request.POST, instance=position)
         if form.is_valid():
             position = form.save()
-            messages.success(request, f'تم تحديث المنصب {position.title_ar} بنجاح.')
+            messages.success(request, f'تم تحديث المنصب {position.position_name_ar} بنجاح.')
             return redirect('organization:position_list')
     else:
         form = PositionForm(instance=position)
@@ -170,12 +170,12 @@ def branch_list(request):
     Branch list view
     عرض قائمة الفروع
     """
-    branches = Branch.objects.filter(is_active=True).order_by('name_ar')
-    
+    branches = Branch.objects.filter(is_active=True).order_by('branch_name_ar')
+
     context = {
         'branches': branches,
     }
-    
+
     return render(request, 'organization/branch_list.html', context)
 
 
@@ -189,7 +189,7 @@ def branch_create(request):
         form = BranchForm(request.POST)
         if form.is_valid():
             branch = form.save()
-            messages.success(request, f'تم إضافة الفرع {branch.name_ar} بنجاح.')
+            messages.success(request, f'تم إضافة الفرع {branch.branch_name_ar} بنجاح.')
             return redirect('organization:branch_list')
     else:
         form = BranchForm()
@@ -209,7 +209,7 @@ def branch_update(request, pk):
         form = BranchForm(request.POST, instance=branch)
         if form.is_valid():
             branch = form.save()
-            messages.success(request, f'تم تحديث الفرع {branch.name_ar} بنجاح.')
+            messages.success(request, f'تم تحديث الفرع {branch.branch_name_ar} بنجاح.')
             return redirect('organization:branch_list')
     else:
         form = BranchForm(instance=branch)

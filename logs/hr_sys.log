@@ -919,3 +919,27 @@ Traceback (most recent call last):
     )
 django.core.exceptions.FieldError: Cannot resolve keyword 'name_ar' into field. Choices are: budget, created_at, created_by, created_by_id, dept_code, dept_name_ar, dept_name_en, description, email, employees, id, is_active, jobposting, kpi, location, manager, manager_id, notes, parent_department, parent_department_id, phone, positions, sub_departments, updated_at, updated_by, updated_by_id
 ERROR 2025-11-16 14:40:37,651 basehttp "GET /organization/departments/ HTTP/1.1" 500 90885
+INFO 2025-11-16 14:44:05,636 autoreload F:\HR_sys\HR_sys_v2\HR_sys\organization\views.py changed, reloading.
+INFO 2025-11-16 14:44:06,927 autoreload Watching for file changes with StatReloader
+INFO 2025-11-16 14:44:16,443 autoreload F:\HR_sys\HR_sys_v2\HR_sys\organization\views.py changed, reloading.
+INFO 2025-11-16 14:44:16,991 autoreload Watching for file changes with StatReloader
+INFO 2025-11-16 14:44:27,521 autoreload F:\HR_sys\HR_sys_v2\HR_sys\organization\views.py changed, reloading.
+INFO 2025-11-16 14:44:28,117 autoreload Watching for file changes with StatReloader
+INFO 2025-11-16 14:44:39,723 autoreload F:\HR_sys\HR_sys_v2\HR_sys\organization\views.py changed, reloading.
+INFO 2025-11-16 14:44:40,290 autoreload Watching for file changes with StatReloader
+INFO 2025-11-16 14:44:52,976 autoreload F:\HR_sys\HR_sys_v2\HR_sys\organization\views.py changed, reloading.
+INFO 2025-11-16 14:44:53,569 autoreload Watching for file changes with StatReloader
+INFO 2025-11-16 14:45:04,156 autoreload F:\HR_sys\HR_sys_v2\HR_sys\organization\views.py changed, reloading.
+INFO 2025-11-16 14:45:04,760 autoreload Watching for file changes with StatReloader
+INFO 2025-11-16 14:45:16,422 autoreload F:\HR_sys\HR_sys_v2\HR_sys\organization\views.py changed, reloading.
+INFO 2025-11-16 14:45:17,079 autoreload Watching for file changes with StatReloader
+INFO 2025-11-16 14:45:29,626 autoreload F:\HR_sys\HR_sys_v2\HR_sys\organization\views.py changed, reloading.
+INFO 2025-11-16 14:45:30,159 autoreload Watching for file changes with StatReloader
+INFO 2025-11-16 14:45:41,709 autoreload F:\HR_sys\HR_sys_v2\HR_sys\organization\views.py changed, reloading.
+INFO 2025-11-16 14:45:42,253 autoreload Watching for file changes with StatReloader
+INFO 2025-11-16 14:45:53,811 autoreload F:\HR_sys\HR_sys_v2\HR_sys\organization\views.py changed, reloading.
+INFO 2025-11-16 14:45:54,337 autoreload Watching for file changes with StatReloader
+INFO 2025-11-16 14:46:29,568 autoreload F:\HR_sys\HR_sys_v2\HR_sys\organization\views.py changed, reloading.
+INFO 2025-11-16 14:46:30,092 autoreload Watching for file changes with StatReloader
+INFO 2025-11-16 14:47:41,049 autoreload F:\HR_sys\HR_sys_v2\HR_sys\leaves\views.py changed, reloading.
+INFO 2025-11-16 14:47:41,582 autoreload Watching for file changes with StatReloader
