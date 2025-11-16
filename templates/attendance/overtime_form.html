@@ -1,15 +1,15 @@
-{%extends 'base.html' %}
-{%load crispy_forms_tags %}
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
-{%block title %}{{if overtime %}}تعديل{{else %}}إضافة{{endif %}} سجل إضافي{%endblock %}
+{% block title %}{% if overtime %}}تعديل{% else %}إضافة{% endif %} سجل إضافي{% endblock %}
 
-{%block content %}
+{% block content %}
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2>{{if overtime %}}تعديل{{else %}}إضافة{{endif %}} سجل إضافي</h2>
-                <a href="{{url 'attendance:overtime_list' }}" class="btn btn-secondary">
+                <h2>{% if overtime %}}تعديل{% else %}إضافة{% endif %} سجل إضافي</h2>
+                <a href="{% url 'attendance:overtime_list' }}" class="btn btn-secondary">
                     <i class="fas fa-arrow-right ms-2"></i>العودة
                 </a>
             </div>
@@ -21,10 +21,10 @@
             <div class="card shadow-sm">
                 <div class="card-body">
                     <form method="post" enctype="multipart/form-data">
-                        {{csrf_token %}}
-                        {{form|crispy %}}
+                        {% csrf_token %}
+                        {{ form|crispy }}
                         <div class="text-end">
-                            <a href="{{url 'attendance:overtime_list' }}" class="btn btn-secondary">
+                            <a href="{% url 'attendance:overtime_list' }}" class="btn btn-secondary">
                                 <i class="fas fa-times ms-2"></i>إلغاء
                             </a>
                             <button type="submit" class="btn btn-primary">
@@ -37,4 +37,4 @@
         </div>
     </div>
 </div>
-{%endblock %}
+{% endblock %}

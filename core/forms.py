@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, Pass
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit, Row, Column, Div, HTML
 from crispy_forms.bootstrap import FormActions
-from .models import User, SystemSettings, Notification
+from .models import User, SystemSettings, Notification, CompanySettings
 
 
 class LoginForm(AuthenticationForm):
@@ -277,4 +277,25 @@ class DateRangeFilterForm(forms.Form):
                 ),
             )
         )
+
+
+class CompanySettingsForm(forms.ModelForm):
+    """
+    Comprehensive company settings form
+    نموذج إعدادات الشركة الشامل
+    """
+    class Meta:
+        model = CompanySettings
+        exclude = ['updated_at', 'updated_by']
+        widgets = {
+            'company_address': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
+            'theme_color': forms.TextInput(attrs={'type': 'color', 'class': 'form-control'}),
+            'smtp_password': forms.PasswordInput(attrs={'class': 'form-control'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_method = 'post'
+        self.helper.form_enctype = 'multipart/form-data'
 

@@ -188,19 +188,37 @@ def system_settings(request):
     if not request.user.is_superuser:
         messages.error(request, 'ليس لديك صلاحية للوصول إلى هذه الصفحة.')
         return redirect('core:dashboard')
-    
-    settings, created = SystemSettings.objects.get_or_create(pk=1)
-    
+
+    from .models import CompanySettings
+    from .forms import CompanySettingsForm
+    from django.db import connection
+
+    # Load singleton settings
+    settings = CompanySettings.load()
+
+    # Get database info
+    db_name = connection.settings_dict.get('NAME', 'Unknown')
+    db_engine = connection.settings_dict.get('ENGINE', 'Unknown')
+
     if request.method == 'POST':
-        form = SystemSettingsForm(request.POST, instance=settings)
+        form = CompanySettingsForm(request.POST, request.FILES, instance=settings)
         if form.is_valid():
-            form.save()
+            settings = form.save(commit=False)
+            settings.updated_by = request.user
+            settings.save()
             messages.success(request, 'تم تحديث إعدادات النظام بنجاح.')
             return redirect('core:system_settings')
     else:
-        form = SystemSettingsForm(instance=settings)
-    
-    return render(request, 'core/system_settings.html', {'form': form})
+        form = CompanySettingsForm(instance=settings)
+
+    context = {
+        'form': form,
+        'settings': settings,
+        'db_name': db_name,
+        'db_engine': 'MS SQL Server' if 'mssql' in db_engine else db_engine,
+    }
+
+    return render(request, 'core/system_settings.html', context)
 
 
 @login_required

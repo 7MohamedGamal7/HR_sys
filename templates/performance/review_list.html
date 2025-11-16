@@ -1,14 +1,14 @@
-{%extends 'base.html' %}
+{% extends 'base.html' %}
 
-{%block title %}تقييمات الأداء{%endblock %}
+{% block title %}تقييمات الأداء{% endblock %}
 
-{%block content %}
+{% block content %}
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h2><i class="fas fa-list ms-2"></i>تقييمات الأداء</h2>
-                <a href="{{url 'performance:review_create' }}" class="btn btn-primary">
+                <a href="{% url 'performance:review_create' }}" class="btn btn-primary">
                     <i class="fas fa-plus ms-2"></i>إضافة جديد
                 </a>
             </div>
@@ -28,21 +28,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{for item in page_obj %}}
+                                {% for item in page_obj %}}
                                     <tr>
                                         <!-- Add table cells here -->
                                         <td>
-                                            <a href="{{url 'performance:review_detail' item.pk }}" class="btn btn-sm btn-info">
+                                            <a href="{% url 'performance:review_detail' item.pk }}" class="btn btn-sm btn-info">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="{{url 'performance:review_update' item.pk }}" class="btn btn-sm btn-warning">
+                                            <a href="{% url 'performance:review_update' item.pk }}" class="btn btn-sm btn-warning">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                         </td>
                                     </tr>
                                 {{empty %}}
                                     <tr><td colspan="5" class="text-center">لا توجد بيانات</td></tr>
-                                {{endfor %}}
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -51,4 +51,4 @@
         </div>
     </div>
 </div>
-{%endblock %}
+{% endblock %}

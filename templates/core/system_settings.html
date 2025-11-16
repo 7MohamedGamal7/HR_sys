@@ -1,38 +1,356 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block title %}إعدادات النظام{% endblock %}
 
+{% block extra_css %}
+<style>
+    .nav-tabs .nav-link {
+        color: #495057;
+        border: none;
+        border-bottom: 3px solid transparent;
+        padding: 1rem 1.5rem;
+    }
+    .nav-tabs .nav-link:hover {
+        border-bottom-color: #dee2e6;
+    }
+    .nav-tabs .nav-link.active {
+        color: #667eea;
+        border-bottom-color: #667eea;
+        background-color: transparent;
+    }
+    .settings-section {
+        background: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+    .settings-section h5 {
+        color: #667eea;
+        margin-bottom: 1rem;
+        font-weight: 600;
+    }
+    .db-status {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #28a745;
+        margin-left: 0.5rem;
+        animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="container-fluid">
-    <div class="row">
+    <!-- Header -->
+    <div class="row mb-4">
         <div class="col-12">
-            <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="d-flex justify-content-between align-items-center">
                 <h2><i class="fas fa-cog ms-2"></i>إعدادات النظام</h2>
+                <div>
+                    <span class="badge bg-success"><i class="fas fa-check-circle ms-1"></i>متصل</span>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-12">
-            <div class="card shadow-sm">
-                <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0"><i class="fas fa-sliders-h ms-2"></i>الإعدادات العامة</h5>
-                </div>
-                <div class="card-body">
-                    <form method="post">
-                        {% csrf_token %}
-                        {{ form|crispy }}
-                        <div class="text-end">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save ms-2"></i>حفظ الإعدادات
-                            </button>
+    <!-- Tabs Navigation -->
+    <ul class="nav nav-tabs mb-4" id="settingsTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="company-tab" data-bs-toggle="tab" data-bs-target="#company" type="button">
+                <i class="fas fa-building ms-2"></i>معلومات الشركة
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="database-tab" data-bs-toggle="tab" data-bs-target="#database" type="button">
+                <i class="fas fa-database ms-2"></i>قاعدة البيانات
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="ui-tab" data-bs-toggle="tab" data-bs-target="#ui" type="button">
+                <i class="fas fa-palette ms-2"></i>الواجهة
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="system-tab" data-bs-toggle="tab" data-bs-target="#system" type="button">
+                <i class="fas fa-sliders-h ms-2"></i>النظام
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="email-tab" data-bs-toggle="tab" data-bs-target="#email" type="button">
+                <i class="fas fa-envelope ms-2"></i>البريد الإلكتروني
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="security-tab" data-bs-toggle="tab" data-bs-target="#security" type="button">
+                <i class="fas fa-shield-alt ms-2"></i>الأمان
+            </button>
+        </li>
+    </ul>
+
+    <!-- Form -->
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Tabs Content -->
+        <div class="tab-content" id="settingsTabsContent">
+            <!-- Company Information Tab -->
+            <div class="tab-pane fade show active" id="company" role="tabpanel">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="settings-section">
+                            <h5><i class="fas fa-info-circle ms-2"></i>المعلومات الأساسية</h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">اسم الشركة (عربي)</label>
+                                    {{ form.company_name_ar }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">اسم الشركة (إنجليزي)</label>
+                                    {{ form.company_name_en }}
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label class="form-label">العنوان</label>
+                                    {{ form.company_address }}
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">الهاتف</label>
+                                    {{ form.company_phone }}
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">البريد الإلكتروني</label>
+                                    {{ form.company_email }}
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">الموقع الإلكتروني</label>
+                                    {{ form.company_website }}
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <label class="form-label">شعار الشركة</label>
+                                    {{ form.company_logo }}
+                                    {% if settings.company_logo %}
+                                    <div class="mt-2">
+                                        <img src="{{ settings.company_logo.url }}" alt="Company Logo" style="max-height: 100px;">
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
                         </div>
-                    </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Database Tab -->
+            <div class="tab-pane fade" id="database" role="tabpanel">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="settings-section">
+                            <h5><i class="fas fa-server ms-2"></i>معلومات قاعدة البيانات</h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">نوع قاعدة البيانات</label>
+                                    <input type="text" class="form-control" value="{{ db_engine }}" readonly>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">اسم قاعدة البيانات</label>
+                                    <input type="text" class="form-control" value="{{ db_name }}" readonly>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">حالة الاتصال</label>
+                                    <div class="form-control">
+                                        <span class="db-status"></span>
+                                        <span class="text-success">متصل</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">آخر نسخة احتياطية</label>
+                                    <input type="text" class="form-control" value="لم يتم إنشاء نسخة احتياطية بعد" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UI/UX Tab -->
+            <div class="tab-pane fade" id="ui" role="tabpanel">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="settings-section">
+                            <h5><i class="fas fa-paint-brush ms-2"></i>إعدادات الواجهة</h5>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">نوع الخط</label>
+                                    {{ form.font_family }}
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">حجم الخط</label>
+                                    {{ form.font_size }}
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">اللون الأساسي</label>
+                                    {{ form.theme_color }}
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">تنسيق التاريخ</label>
+                                    {{ form.date_format }}
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">تنسيق الوقت</label>
+                                    {{ form.time_format }}
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-check mt-4">
+                                        {{ form.rtl_enabled }}
+                                        <label class="form-check-label">تفعيل الاتجاه من اليمين لليسار</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Tab -->
+            <div class="tab-pane fade" id="system" role="tabpanel">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="settings-section">
+                            <h5><i class="fas fa-cogs ms-2"></i>إعدادات النظام العامة</h5>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">اللغة الافتراضية</label>
+                                    {{ form.default_language }}
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">المنطقة الزمنية</label>
+                                    {{ form.timezone }}
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label">العملة</label>
+                                    {{ form.currency }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">عدد السجلات في الصفحة</label>
+                                    {{ form.pagination_size }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">مدة انتهاء الجلسة (دقيقة)</label>
+                                    {{ form.session_timeout }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email Tab -->
+            <div class="tab-pane fade" id="email" role="tabpanel">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="settings-section">
+                            <h5><i class="fas fa-mail-bulk ms-2"></i>إعدادات البريد الإلكتروني</h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">خادم SMTP</label>
+                                    {{ form.smtp_server }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">منفذ SMTP</label>
+                                    {{ form.smtp_port }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">اسم المستخدم</label>
+                                    {{ form.smtp_username }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">كلمة المرور</label>
+                                    {{ form.smtp_password }}
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <div class="form-check">
+                                        {{ form.email_notifications_enabled }}
+                                        <label class="form-check-label">تفعيل إشعارات البريد الإلكتروني</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Tab -->
+            <div class="tab-pane fade" id="security" role="tabpanel">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="settings-section">
+                            <h5><i class="fas fa-lock ms-2"></i>إعدادات كلمة المرور</h5>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">الحد الأدنى لطول كلمة المرور</label>
+                                    {{ form.password_min_length }}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">الحد الأقصى لمحاولات تسجيل الدخول</label>
+                                    {{ form.max_login_attempts }}
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <div class="form-check">
+                                        {{ form.password_require_uppercase }}
+                                        <label class="form-check-label">يتطلب أحرف كبيرة</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <div class="form-check">
+                                        {{ form.password_require_lowercase }}
+                                        <label class="form-check-label">يتطلب أحرف صغيرة</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <div class="form-check">
+                                        {{ form.password_require_numbers }}
+                                        <label class="form-check-label">يتطلب أرقام</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <div class="form-check">
+                                        {{ form.password_require_special }}
+                                        <label class="form-check-label">يتطلب رموز خاصة</label>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <div class="form-check">
+                                        {{ form.two_factor_enabled }}
+                                        <label class="form-check-label">تفعيل المصادقة الثنائية</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <!-- Save Button -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-body text-end">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-save ms-2"></i>حفظ جميع الإعدادات
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 {% endblock %}
 
