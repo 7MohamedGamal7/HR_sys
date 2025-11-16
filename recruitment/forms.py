@@ -17,19 +17,18 @@ class JobPostingForm(forms.ModelForm):
     class Meta:
         model = JobPosting
         fields = [
-            'title', 'department', 'position', 'employment_type', 'location',
+            'title', 'department', 'position', 'vacancies',
             'salary_range_min', 'salary_range_max', 'description', 'requirements',
             'responsibilities', 'posting_date', 'closing_date', 'status'
         ]
         labels = {
-            'title': 'العنوان',
+            'title': 'المسمى الوظيفي',
             'department': 'القسم',
             'position': 'المنصب',
-            'employment_type': 'نوع التوظيف',
-            'location': 'الموقع',
+            'vacancies': 'عدد الشواغر',
             'salary_range_min': 'الحد الأدنى للراتب',
             'salary_range_max': 'الحد الأقصى للراتب',
-            'description': 'الوصف',
+            'description': 'الوصف الوظيفي',
             'requirements': 'المتطلبات',
             'responsibilities': 'المسؤوليات',
             'posting_date': 'تاريخ النشر',
@@ -43,7 +42,7 @@ class JobPostingForm(forms.ModelForm):
             'requirements': forms.Textarea(attrs={'rows': 4, 'class': 'form-control'}),
             'responsibilities': forms.Textarea(attrs={'rows': 4, 'class': 'form-control'}),
         }
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -85,23 +84,21 @@ class InterviewForm(forms.ModelForm):
     class Meta:
         model = Interview
         fields = [
-            'application', 'interview_date', 'interview_time', 'location',
-            'interviewer', 'interview_type', 'notes', 'status'
+            'application', 'interview_date', 'location',
+            'interviewer', 'status', 'result', 'feedback'
         ]
         labels = {
-            'application': 'الطلب',
-            'interview_date': 'تاريخ المقابلة',
-            'interview_time': 'وقت المقابلة',
+            'application': 'طلب التوظيف',
+            'interview_date': 'تاريخ ووقت المقابلة',
             'location': 'المكان',
             'interviewer': 'المقابل',
-            'interview_type': 'نوع المقابلة',
-            'notes': 'ملاحظات',
             'status': 'الحالة',
+            'result': 'النتيجة',
+            'feedback': 'التغذية الراجعة',
         }
         widgets = {
-            'interview_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'interview_time': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}),
-            'notes': forms.Textarea(attrs={'rows': 4, 'class': 'form-control'}),
+            'interview_date': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'form-control'}),
+            'feedback': forms.Textarea(attrs={'rows': 4, 'class': 'form-control'}),
         }
 
 

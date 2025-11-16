@@ -74,7 +74,7 @@ class GoalForm(forms.ModelForm):
         model = Goal
         fields = [
             'employee', 'title', 'description', 'start_date', 'due_date',
-            'priority', 'status', 'progress'
+            'status', 'progress'
         ]
         labels = {
             'employee': 'الموظف',
@@ -82,7 +82,6 @@ class GoalForm(forms.ModelForm):
             'description': 'الوصف',
             'start_date': 'تاريخ البداية',
             'due_date': 'تاريخ الاستحقاق',
-            'priority': 'الأولوية',
             'status': 'الحالة',
             'progress': 'التقدم (%)',
         }
@@ -91,15 +90,15 @@ class GoalForm(forms.ModelForm):
             'due_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'description': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
         }
-    
+
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
-        
+
         if user and hasattr(user, 'employee_profile'):
             self.fields['employee'].initial = user.employee_profile
             self.fields['employee'].widget = forms.HiddenInput()
-        
+
         self.helper = FormHelper()
         self.helper.form_method = 'post'
 
