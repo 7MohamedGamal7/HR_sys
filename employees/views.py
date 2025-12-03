@@ -30,7 +30,7 @@ def employee_list(request):
     search_query = request.GET.get('search', '')
     if search_query:
         employees = employees.filter(
-            Q(employee_code__icontains=search_query) |
+            Q(emp_code__icontains=search_query) |
             Q(full_name_ar__icontains=search_query) |
             Q(full_name_en__icontains=search_query) |
             Q(email__icontains=search_query) |
@@ -98,7 +98,7 @@ def employee_create(request):
             return redirect('employees:employee_detail', pk=employee.pk)
     else:
         form = EmployeeForm()
-
+    
     return render(request, 'employees/employee_form_comprehensive.html', {'form': form, 'action': 'إضافة'})
 
 

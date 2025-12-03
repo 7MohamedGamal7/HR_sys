@@ -1,7 +1,7 @@
 # Core Django
-Django==5.0.0
+Django==5.2.8
 pyodbc==5.3.0
-mssql-django==1.5
+mssql-django==1.6
 
 # ZK Fingerprint Device Integration
 pyzk==0.9

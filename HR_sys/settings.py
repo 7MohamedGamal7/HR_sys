@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config, Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#p0uegzim5ji@&72gv&)+=!ip7t#&-o^3q#$bu9#!bvyi@k)*d'
+SECRET_KEY = config('SECRET_KEY', default='dev-secret-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost', cast=Csv())
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', default='http://127.0.0.1,http://localhost', cast=Csv())
 
 
 # Application definition
@@ -105,14 +107,15 @@ WSGI_APPLICATION = 'HR_sys.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': 'HR_System_New',
-        'USER': 'admin',
-        'PASSWORD': 'hgslduhgfwdv',
-        'HOST': '192.168.1.48',
-        'PORT': '1433',
+        'NAME': config('DB_NAME', default='HR_System'),
+        'USER': config('DB_USER', default=''),
+        'PASSWORD': config('DB_PASSWORD', default=''),
+        'HOST': config('DB_HOST', default='127.0.0.1'),
+        'PORT': config('DB_PORT', default='1433'),
         'OPTIONS': {
             'driver': 'ODBC Driver 17 for SQL Server',
         },
+        'CONN_MAX_AGE': 60,
     }
 }
 
@@ -140,13 +143,11 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'ar'  # Arabic language
+LANGUAGE_CODE = 'ar'
 
-TIME_ZONE = 'Africa/Cairo'  # Egypt timezone (adjust as needed)
+TIME_ZONE = 'Africa/Cairo'
 
 USE_I18N = True
-
-USE_L10N = True
 
 USE_TZ = True
 
@@ -198,13 +199,14 @@ THOUSAND_SEPARATOR = ','
 DECIMAL_SEPARATOR = '.'
 
 # Celery Configuration
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='redis://localhost:6379/0')
+CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default='redis://localhost:6379/1')
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
 CELERY_ENABLE_UTC = True
+CELERY_TASK_ALWAYS_EAGER = config('CELERY_TASK_ALWAYS_EAGER', default=True, cast=bool)
 
 # Email Configuration (for notifications)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -232,8 +234,10 @@ LOGGING = {
     'handlers': {
         'file': {
             'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'logs' / 'hr_sys.log',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': str(BASE_DIR / 'logs' / 'hr_sys.log'),
+            'maxBytes': 5242880,
+            'backupCount': 5,
             'formatter': 'verbose',
         },
         'console': {

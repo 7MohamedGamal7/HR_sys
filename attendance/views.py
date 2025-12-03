@@ -147,12 +147,12 @@ def my_leave_requests(request):
     My leave requests view
     عرض إجازاتي
     """
-    if not hasattr(request.user, 'employee_profile'):
+    if not hasattr(request.user, 'employee') or request.user.employee is None:
         messages.error(request, 'لا يوجد ملف موظف مرتبط بحسابك.')
         return redirect('core:dashboard')
     
     leave_requests = LeaveRequest.objects.filter(
-        employee=request.user.employee_profile
+        employee=request.user.employee
     ).order_by('-created_at')
     
     context = {
