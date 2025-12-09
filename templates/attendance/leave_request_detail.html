@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}تفاصيل طلب الإجازة{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">تفاصيل طلب الإجازة</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">الموظف</dt>
+                        <dd class="col-sm-9">{{ leave_request.employee }}</dd>
+                        <dt class="col-sm-3">النوع</dt>
+                        <dd class="col-sm-9">{{ leave_request.leave_type }}</dd>
+                        <dt class="col-sm-3">من</dt>
+                        <dd class="col-sm-9">{{ leave_request.start_date }}</dd>
+                        <dt class="col-sm-3">إلى</dt>
+                        <dd class="col-sm-9">{{ leave_request.end_date }}</dd>
+                        <dt class="col-sm-3">الحالة</dt>
+                        <dd class="col-sm-9">{{ leave_request.status }}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

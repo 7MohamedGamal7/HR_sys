@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}رفض طلب الإجازة{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="mb-0">رفض طلب الإجازة</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="rejection_reason" class="form-label">سبب الرفض</label>
+                            <textarea class="form-control" id="rejection_reason" name="rejection_reason" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-danger">رفض</button>
+                        <a href="{% url 'attendance:leave_request_list' %}" class="btn btn-secondary">إلغاء</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -2181,3 +2181,1210 @@ Traceback (most recent call last):
 django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: ' %' from 'empty %'
 ERROR 2025-11-16 18:34:42,099 basehttp "GET /recruitment/applications/ HTTP/1.1" 500 204500
 INFO 2025-12-03 11:23:42,939 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 11:49:55,647 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 11:52:11,121 basehttp "GET /?ide_webview_request_time=1764755531043 HTTP/1.1" 302 0
+INFO 2025-12-03 11:52:11,132 basehttp "GET /login/?next=/%3Fide_webview_request_time%3D1764755531043 HTTP/1.1" 200 7575
+WARNING 2025-12-03 11:52:11,800 log Not Found: /@vite/client
+WARNING 2025-12-03 11:52:11,801 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-03 11:52:25,526 basehttp "POST /login/ HTTP/1.1" 200 8196
+WARNING 2025-12-03 11:52:25,551 log Not Found: /@vite/client
+WARNING 2025-12-03 11:52:25,552 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-03 11:52:33,254 basehttp "POST /login/ HTTP/1.1" 200 8196
+WARNING 2025-12-03 11:52:33,270 log Not Found: /@vite/client
+WARNING 2025-12-03 11:52:33,270 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-03 11:52:45,219 basehttp "GET /login/?ide_webview_request_time=1764755565217 HTTP/1.1" 200 7575
+WARNING 2025-12-03 11:52:45,233 log Not Found: /@vite/client
+WARNING 2025-12-03 11:52:45,233 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-03 12:14:44,941 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 12:14:51,829 basehttp "GET /login/?ide_webview_request_time=1764756891678 HTTP/1.1" 200 7575
+WARNING 2025-12-03 12:14:52,049 log Not Found: /@vite/client
+WARNING 2025-12-03 12:14:52,050 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+ERROR 2025-12-03 12:15:28,841 log Invalid HTTP_HOST header: '192.168.1.48:8000'. You may need to add '192.168.1.48' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.48:8000'. You may need to add '192.168.1.48' to ALLOWED_HOSTS.
+WARNING 2025-12-03 12:15:28,843 basehttp "GET / HTTP/1.1" 400 76261
+ERROR 2025-12-03 12:15:29,130 log Invalid HTTP_HOST header: '192.168.1.48:8000'. You may need to add '192.168.1.48' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.48:8000'. You may need to add '192.168.1.48' to ALLOWED_HOSTS.
+WARNING 2025-12-03 12:15:29,132 basehttp "GET /favicon.ico HTTP/1.1" 400 76219
+INFO 2025-12-03 12:16:26,263 autoreload F:\HR_sys\v3\HR_sys\HR_sys\settings.py changed, reloading.
+INFO 2025-12-03 12:19:23,637 autoreload Watching for file changes with StatReloader
+ERROR 2025-12-03 12:19:32,572 log Invalid HTTP_HOST header: '192.168.1.48:8000'. You may need to add '192.168.1.48' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.48:8000'. You may need to add '192.168.1.48' to ALLOWED_HOSTS.
+WARNING 2025-12-03 12:19:32,574 basehttp "GET / HTTP/1.1" 400 76398
+ERROR 2025-12-03 12:19:32,914 log Invalid HTTP_HOST header: '192.168.1.48:8000'. You may need to add '192.168.1.48' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.48:8000'. You may need to add '192.168.1.48' to ALLOWED_HOSTS.
+WARNING 2025-12-03 12:19:32,915 basehttp "GET /favicon.ico HTTP/1.1" 400 76219
+ERROR 2025-12-03 12:19:36,879 log Invalid HTTP_HOST header: '192.168.1.48:8000'. You may need to add '192.168.1.48' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.48:8000'. You may need to add '192.168.1.48' to ALLOWED_HOSTS.
+WARNING 2025-12-03 12:19:36,881 basehttp "GET / HTTP/1.1" 400 76398
+ERROR 2025-12-03 12:19:36,964 log Invalid HTTP_HOST header: '192.168.1.48:8000'. You may need to add '192.168.1.48' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '192.168.1.48:8000'. You may need to add '192.168.1.48' to ALLOWED_HOSTS.
+WARNING 2025-12-03 12:19:36,966 basehttp "GET /favicon.ico HTTP/1.1" 400 76219
+INFO 2025-12-03 12:20:59,256 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 12:21:54,850 autoreload Watching for file changes with StatReloader
+ERROR 2025-12-03 12:21:57,795 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:21:57,799 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-03 12:22:01,086 basehttp code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x06')
+ERROR 2025-12-03 12:22:01,086 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-03 12:22:01,087 basehttp code 400, message Bad request version ('\x02h2\x08http/1.1\x00')
+ERROR 2025-12-03 12:22:01,089 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:22:01,089 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:22:01,092 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-03 12:22:01,897 basehttp code 400, message Bad request version ('\x00\x02\x01\x00\x00\x1b\x00\x03\x02\x00\x02\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+ERROR 2025-12-03 12:22:01,900 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:22:01,900 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-03 12:22:01,901 basehttp code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00')
+ERROR 2025-12-03 12:22:01,903 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:22:01,903 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:22:02,849 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:22:02,851 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-03 12:22:02,852 basehttp code 400, message Bad request version ('\x02h2\x08http/1.1\x00')
+ERROR 2025-12-03 12:22:02,855 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:22:02,856 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-03 12:24:07,784 basehttp "HEAD /login/ HTTP/1.1" 200 0
+INFO 2025-12-03 12:27:39,303 autoreload Watching for file changes with StatReloader
+ERROR 2025-12-03 12:27:46,052 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:27:46,056 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-03 12:29:15,950 autoreload Watching for file changes with StatReloader
+ERROR 2025-12-03 12:29:22,909 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-03 12:29:22,909 basehttp code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x06')
+ERROR 2025-12-03 12:29:22,909 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-03 12:29:22,923 basehttp code 400, message Bad request version ('\x00\x02\x01\x00\x00\x1b\x00\x03\x02\x00\x02\x00')
+ERROR 2025-12-03 12:29:22,925 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:29:22,925 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-03 12:29:22,925 basehttp code 400, message Bad request version ('\x02h2\x08http/1.1\x00')
+INFO 2025-12-03 12:29:22,926 basehttp code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00\x1b\x00\x03\x02\x00\x02\x00')
+ERROR 2025-12-03 12:29:22,926 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:29:22,926 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:29:22,943 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:29:22,946 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:29:22,959 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:29:22,961 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:29:22,964 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:29:22,967 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-03 12:29:30,889 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-12-03 12:29:30,903 basehttp "GET /login/?next=/ HTTP/1.1" 200 7575
+WARNING 2025-12-03 12:29:31,525 log Not Found: /favicon.ico
+WARNING 2025-12-03 12:29:31,525 basehttp "GET /favicon.ico HTTP/1.1" 404 6641
+INFO 2025-12-03 12:29:39,677 basehttp "POST /login/ HTTP/1.1" 302 0
+INFO 2025-12-03 12:29:39,745 basehttp "GET / HTTP/1.1" 200 22276
+INFO 2025-12-03 12:29:55,477 basehttp "GET /employees/ HTTP/1.1" 200 21451
+ERROR 2025-12-03 12:30:01,651 log Internal Server Error: /leaves/policies/
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\v3\HR_sys\leaves\views.py", line 26, in leave_policy_list
+    return render(request, 'leaves/leave_policy_list.html', context)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 489, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 487, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 609, in compile_filter
+    return FilterExpression(token, self)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 710, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: ' %' from 'empty %'
+ERROR 2025-12-03 12:30:01,659 basehttp "GET /leaves/policies/ HTTP/1.1" 500 207021
+INFO 2025-12-03 12:30:04,878 basehttp "GET /attendance/ HTTP/1.1" 200 17827
+INFO 2025-12-03 12:30:06,266 basehttp "GET /attendance/add/ HTTP/1.1" 200 20718
+INFO 2025-12-03 12:30:30,374 basehttp "POST /attendance/add/ HTTP/1.1" 200 20929
+INFO 2025-12-03 12:30:40,902 basehttp "POST /attendance/add/ HTTP/1.1" 200 20927
+INFO 2025-12-03 12:30:48,260 basehttp "GET /organization/departments/ HTTP/1.1" 200 20065
+INFO 2025-12-03 12:30:50,839 basehttp "GET / HTTP/1.1" 200 21965
+INFO 2025-12-03 12:30:53,286 basehttp "GET /employees/ HTTP/1.1" 200 21451
+INFO 2025-12-03 12:30:56,348 basehttp "GET /employees/1/ HTTP/1.1" 200 32464
+INFO 2025-12-03 12:31:05,078 basehttp "GET /settings/ HTTP/1.1" 200 36510
+INFO 2025-12-03 12:31:55,771 basehttp "POST /settings/ HTTP/1.1" 302 0
+INFO 2025-12-03 12:31:55,784 basehttp "GET /settings/ HTTP/1.1" 200 37528
+INFO 2025-12-03 12:31:55,858 basehttp "GET /media/company/%D9%84%D9%88%D8%AC%D9%88_%D8%A3%D9%88%D8%B1%D9%8A%D9%86%D8%AA_%D8%B9%D8%B1%D8%A8%D9%8A.jpg HTTP/1.1" 200 11712
+INFO 2025-12-03 12:31:59,657 basehttp "GET /settings/ HTTP/1.1" 200 37181
+INFO 2025-12-03 12:31:59,693 basehttp "GET /media/company/%D9%84%D9%88%D8%AC%D9%88_%D8%A3%D9%88%D8%B1%D9%8A%D9%86%D8%AA_%D8%B9%D8%B1%D8%A8%D9%8A.jpg HTTP/1.1" 304 0
+INFO 2025-12-03 12:32:02,529 basehttp "GET / HTTP/1.1" 200 21965
+INFO 2025-12-03 12:32:05,741 basehttp "GET /organization/departments/ HTTP/1.1" 200 20065
+INFO 2025-12-03 12:32:07,923 basehttp "GET /attendance/ HTTP/1.1" 200 17827
+INFO 2025-12-03 12:32:10,896 basehttp "GET /settings/ HTTP/1.1" 200 37181
+INFO 2025-12-03 12:32:10,936 basehttp "GET /media/company/%D9%84%D9%88%D8%AC%D9%88_%D8%A3%D9%88%D8%B1%D9%8A%D9%86%D8%AA_%D8%B9%D8%B1%D8%A8%D9%8A.jpg HTTP/1.1" 304 0
+ERROR 2025-12-03 12:32:15,003 log Internal Server Error: /leaves/balances/
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\v3\HR_sys\leaves\views.py", line 112, in leave_balance_list
+    return render(request, 'leaves/leave_balance_list.html', context)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\defaulttags.py", line 862, in do_for
+    nodelist_loop = parser.parse(
+        (
+    ...<2 lines>...
+        )
+    )
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 489, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 487, in parse
+    filter_expression = self.compile_filter(token.contents)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 609, in compile_filter
+    return FilterExpression(token, self)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 710, in __init__
+    raise TemplateSyntaxError(
+    ...<2 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: ' %' from 'empty %'
+ERROR 2025-12-03 12:32:15,006 basehttp "GET /leaves/balances/ HTTP/1.1" 500 208019
+INFO 2025-12-03 12:32:29,693 basehttp "GET /leaves/balances/ HTTP/1.1" 302 0
+INFO 2025-12-03 12:32:29,696 basehttp "GET /login/?next=/leaves/balances/ HTTP/1.1" 200 7575
+INFO 2025-12-03 12:54:38,083 autoreload Watching for file changes with StatReloader
+ERROR 2025-12-03 12:54:41,890 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:54:41,894 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-03 12:55:22,996 autoreload Watching for file changes with StatReloader
+ERROR 2025-12-03 12:55:33,626 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:55:33,629 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:55:33,632 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:55:33,634 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-03 12:55:33,644 basehttp code 400, message Bad request version ('\x02h2\x08http/1.1\x00')
+ERROR 2025-12-03 12:55:33,646 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:55:33,646 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:55:33,650 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 12:55:33,653 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-03 12:57:13,621 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 12:57:41,154 autoreload F:\HR_sys\v3\HR_sys\HR_sys\settings.py changed, reloading.
+INFO 2025-12-03 12:57:41,544 autoreload F:\HR_sys\v3\HR_sys\HR_sys\settings.py changed, reloading.
+INFO 2025-12-03 12:57:41,714 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 12:57:42,072 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 12:58:42,358 basehttp "GET / HTTP/1.1" 200 21965
+WARNING 2025-12-03 12:58:42,675 log Not Found: /favicon.ico
+WARNING 2025-12-03 12:58:42,675 basehttp "GET /favicon.ico HTTP/1.1" 404 6641
+INFO 2025-12-03 12:58:47,869 basehttp "GET /leaves/policies/ HTTP/1.1" 200 17825
+ERROR 2025-12-03 12:58:50,015 log Internal Server Error: /leaves/balances/
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\v3\HR_sys\leaves\views.py", line 112, in leave_balance_list
+    return render(request, 'leaves/leave_balance_list.html', context)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\defaulttags.py", line 199, in render
+    len_values = len(values)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\paginator.py", line 191, in __len__
+    return len(self.object_list)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\db\models\query.py", line 368, in __len__
+    self._fetch_all()
+    ~~~~~~~~~~~~~~~^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\db\models\query.py", line 1954, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\db\models\query.py", line 93, in __iter__
+    results = compiler.execute_sql(
+        chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size
+    )
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1610, in execute_sql
+    sql, params = self.as_sql()
+                  ~~~~~~~~~~~^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\mssql\compiler.py", line 226, in as_sql
+    extra_select, order_by, group_by = self.pre_sql_setup()
+                                       ~~~~~~~~~~~~~~~~~~^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\db\models\sql\compiler.py", line 85, in pre_sql_setup
+    self.setup_query(with_col_aliases=with_col_aliases)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\db\models\sql\compiler.py", line 74, in setup_query
+    self.select, self.klass_info, self.annotation_col_map = self.get_select(
+                                                            ~~~~~~~~~~~~~~~^
+        with_col_aliases=with_col_aliases,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\db\models\sql\compiler.py", line 299, in get_select
+    related_klass_infos = self.get_related_selections(select, select_mask)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1396, in get_related_selections
+    raise FieldError(
+    ...<6 lines>...
+    )
+django.core.exceptions.FieldError: Invalid field name(s) given in select_related: 'leave_policy'. Choices are: created_by, updated_by, employee
+ERROR 2025-12-03 12:58:50,024 basehttp "GET /leaves/balances/ HTTP/1.1" 500 227009
+INFO 2025-12-03 12:58:58,114 basehttp "GET /leaves/balances/ HTTP/1.1" 302 0
+INFO 2025-12-03 12:58:58,120 basehttp "GET /login/?next=/leaves/balances/ HTTP/1.1" 200 7575
+INFO 2025-12-03 13:00:25,191 autoreload F:\HR_sys\v3\HR_sys\leaves\views.py changed, reloading.
+INFO 2025-12-03 13:00:25,439 autoreload F:\HR_sys\v3\HR_sys\leaves\views.py changed, reloading.
+INFO 2025-12-03 13:00:26,275 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 13:00:26,276 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 13:00:43,941 autoreload F:\HR_sys\v3\HR_sys\leaves\views.py changed, reloading.
+INFO 2025-12-03 13:00:43,959 autoreload F:\HR_sys\v3\HR_sys\leaves\views.py changed, reloading.
+INFO 2025-12-03 13:00:44,593 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 13:01:22,558 autoreload F:\HR_sys\v3\HR_sys\leaves\views.py changed, reloading.
+INFO 2025-12-03 13:01:22,572 autoreload F:\HR_sys\v3\HR_sys\leaves\views.py changed, reloading.
+INFO 2025-12-03 13:01:23,196 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 13:01:23,197 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 13:01:40,044 autoreload F:\HR_sys\v3\HR_sys\leaves\views.py changed, reloading.
+INFO 2025-12-03 13:01:40,053 autoreload F:\HR_sys\v3\HR_sys\leaves\views.py changed, reloading.
+INFO 2025-12-03 13:01:40,674 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 13:01:40,695 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 13:21:21,661 basehttp "GET /leaves/balances/ HTTP/1.1" 200 17813
+WARNING 2025-12-03 13:21:26,413 log Not Found: /leaves/balances/{% url 'leaves:leave_balance_create' }}
+WARNING 2025-12-03 13:21:26,413 basehttp "GET /leaves/balances/%7B%%20url%20'leaves:leave_balance_create'%20%7D%7D HTTP/1.1" 404 9255
+WARNING 2025-12-03 13:21:35,575 log Not Found: /leaves/balances/{% url 
+WARNING 2025-12-03 13:21:35,575 basehttp "GET /leaves/balances/%7B%25%20url%20 HTTP/1.1" 404 9123
+INFO 2025-12-03 13:50:05,034 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 13:50:19,184 basehttp "GET /login/?ide_webview_request_time=1764756891678 HTTP/1.1" 200 7575
+WARNING 2025-12-03 13:50:19,375 log Not Found: /@vite/client
+WARNING 2025-12-03 13:50:19,375 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-03 13:51:38,773 basehttp "POST /login/ HTTP/1.1" 302 0
+INFO 2025-12-03 13:51:38,835 basehttp "GET / HTTP/1.1" 200 22276
+WARNING 2025-12-03 13:51:38,876 log Not Found: /@vite/client
+WARNING 2025-12-03 13:51:38,876 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-03 13:51:47,685 basehttp "GET /employees/ HTTP/1.1" 200 21451
+WARNING 2025-12-03 13:51:47,718 log Not Found: /@vite/client
+WARNING 2025-12-03 13:51:47,718 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-03 13:51:55,289 basehttp "GET /leaves/balances/ HTTP/1.1" 200 17797
+WARNING 2025-12-03 13:51:55,312 log Not Found: /@vite/client
+WARNING 2025-12-03 13:51:55,312 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-03 13:51:57,782 basehttp "GET /leaves/balance/create/ HTTP/1.1" 200 19359
+WARNING 2025-12-03 13:51:57,809 log Not Found: /@vite/client
+WARNING 2025-12-03 13:51:57,809 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-03 13:52:23,579 basehttp "POST /leaves/balance/create/ HTTP/1.1" 302 0
+ERROR 2025-12-03 13:52:23,682 log Internal Server Error: /leaves/balances/
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\v3\HR_sys\leaves\views.py", line 112, in leave_balance_list
+    return render(request, 'leaves/leave_balance_list.html', context)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\defaulttags.py", line 243, in render
+    nodelist.append(node.render_annotated(context))
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'leave_balance_detail' not found. 'leave_balance_detail' is not a valid view function or pattern name.
+ERROR 2025-12-03 13:52:23,691 basehttp "GET /leaves/balances/ HTTP/1.1" 500 181381
+WARNING 2025-12-03 13:52:23,743 log Not Found: /@vite/client
+WARNING 2025-12-03 13:52:23,743 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-03 13:55:02,425 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 13:55:19,156 basehttp "GET /leaves/balances/ HTTP/1.1" 200 18165
+WARNING 2025-12-03 13:55:20,122 log Not Found: /@vite/client
+WARNING 2025-12-03 13:55:20,122 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-03 13:55:45,773 basehttp "GET /leaves/balance/1/update/ HTTP/1.1" 200 19407
+WARNING 2025-12-03 13:55:45,796 log Not Found: /@vite/client
+WARNING 2025-12-03 13:55:45,796 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-03 13:55:47,453 basehttp "GET /leaves/balances/ HTTP/1.1" 200 18165
+ERROR 2025-12-03 13:55:48,001 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 13:55:48,003 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 13:55:48,009 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 13:55:48,010 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-03 13:55:49,386 basehttp code 400, message Bad request version ('\x02h2\x08http/1.1\x00+\x00\x07\x06')
+ERROR 2025-12-03 13:55:49,386 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 13:55:49,389 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 13:55:49,391 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-03 13:55:49,392 basehttp code 400, message Bad request version ('\x02h2\x08http/1.1\x00')
+ERROR 2025-12-03 13:55:49,392 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 13:55:49,396 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 13:55:49,400 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+WARNING 2025-12-03 13:55:52,449 log Not Found: /leaves/balances/{% url 'leaves:leave_balance_create' }}
+WARNING 2025-12-03 13:55:52,450 basehttp "GET /leaves/balances/%7B%%20url%20'leaves:leave_balance_create'%20%7D%7D HTTP/1.1" 404 9255
+INFO 2025-12-03 13:56:30,344 basehttp "GET /attendance/ HTTP/1.1" 200 17827
+INFO 2025-12-03 13:56:30,394 basehttp "POST /leaves/balance/1/update/ HTTP/1.1" 302 0
+INFO 2025-12-03 13:56:30,412 basehttp "GET /leaves/balances/ HTTP/1.1" 200 18508
+WARNING 2025-12-03 13:56:30,437 log Not Found: /@vite/client
+WARNING 2025-12-03 13:56:30,437 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-03 14:01:25,109 basehttp "GET /training/ HTTP/1.1" 200 17790
+INFO 2025-12-03 14:01:27,336 basehttp "GET /employees/ HTTP/1.1" 200 21451
+INFO 2025-12-03 14:22:07,195 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-03 14:22:07,194 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-03 14:22:07,203 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-03 14:22:08,967 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 14:22:09,159 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 14:22:09,244 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 14:22:16,435 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-03 14:22:16,555 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-03 14:22:16,622 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-03 14:22:17,041 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 14:22:17,165 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 14:22:17,216 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 18:13:04,267 basehttp "GET /employees/ HTTP/1.1" 200 21903
+INFO 2025-12-03 18:13:08,965 basehttp "GET /employees/1/ HTTP/1.1" 200 32464
+INFO 2025-12-03 18:16:42,082 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-03 18:16:42,112 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-03 18:16:42,116 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-03 18:16:43,894 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 18:16:43,937 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 18:16:44,085 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 18:16:58,855 autoreload F:\HR_sys\v3\HR_sys\employees\urls.py changed, reloading.
+INFO 2025-12-03 18:16:59,451 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 18:16:59,794 autoreload F:\HR_sys\v3\HR_sys\employees\urls.py changed, reloading.
+INFO 2025-12-03 18:16:59,796 autoreload F:\HR_sys\v3\HR_sys\employees\urls.py changed, reloading.
+INFO 2025-12-03 18:17:00,430 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 18:17:00,430 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 18:20:49,275 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 18:21:24,565 basehttp code 400, message Bad request version ('\x04\x8eµ°.&´$`\x00')
+ERROR 2025-12-03 18:21:24,566 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-03 18:21:24,572 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-03 18:22:12,185 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 18:22:42,424 basehttp "GET /leaves/balances/ HTTP/1.1" 200 18165
+WARNING 2025-12-03 18:22:42,526 log Not Found: /@vite/client
+WARNING 2025-12-03 18:22:42,527 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-03 18:22:46,613 basehttp "GET /employees/ HTTP/1.1" 200 21903
+WARNING 2025-12-03 18:22:46,658 log Not Found: /@vite/client
+WARNING 2025-12-03 18:22:46,658 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-03 18:22:50,218 basehttp "GET /employees/1/ HTTP/1.1" 200 34918
+WARNING 2025-12-03 18:22:50,248 log Not Found: /@vite/client
+WARNING 2025-12-03 18:22:50,248 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-03 18:22:55,151 basehttp "POST /employees/1/photo/upload/ HTTP/1.1" 302 0
+INFO 2025-12-03 18:22:55,163 basehttp "GET /employees/1/ HTTP/1.1" 200 35406
+INFO 2025-12-03 18:22:55,176 basehttp "GET /media/employees/photos/%D9%84%D9%88%D8%AC%D9%88_%D8%A3%D9%88%D8%B1%D9%8A%D9%86%D8%AA_%D8%A7%D9%86%D8%AC%D9%84%D8%B4.jpg HTTP/1.1" 200 11765
+WARNING 2025-12-03 18:22:55,213 log Not Found: /@vite/client
+WARNING 2025-12-03 18:22:55,214 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-03 18:22:55,246 basehttp "GET /employees/?ide_webview_request_time=1764778975236 HTTP/1.1" 200 21903
+WARNING 2025-12-03 18:22:55,267 log Not Found: /@vite/client
+WARNING 2025-12-03 18:22:55,268 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-03 18:23:00,353 basehttp "GET /employees/1/ HTTP/1.1" 200 35065
+INFO 2025-12-03 18:23:00,363 basehttp "GET /media/employees/photos/%D9%84%D9%88%D8%AC%D9%88_%D8%A3%D9%88%D8%B1%D9%8A%D9%86%D8%AA_%D8%A7%D9%86%D8%AC%D9%84%D8%B4.jpg HTTP/1.1" 304 0
+WARNING 2025-12-03 18:23:00,376 log Not Found: /@vite/client
+WARNING 2025-12-03 18:23:00,376 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-03 18:24:14,035 basehttp "GET /employees/1/ HTTP/1.1" 302 0
+INFO 2025-12-03 18:24:14,044 basehttp "GET /login/?next=/employees/1/ HTTP/1.1" 200 7575
+WARNING 2025-12-03 18:24:14,468 log Not Found: /favicon.ico
+WARNING 2025-12-03 18:24:14,468 basehttp "GET /favicon.ico HTTP/1.1" 404 6638
+INFO 2025-12-03 18:24:23,514 basehttp "POST /login/ HTTP/1.1" 302 0
+INFO 2025-12-03 18:24:23,526 basehttp "GET / HTTP/1.1" 200 22276
+INFO 2025-12-03 18:24:29,148 basehttp "GET /employees/ HTTP/1.1" 200 21903
+INFO 2025-12-03 18:24:30,293 basehttp "GET /employees/1/ HTTP/1.1" 200 34989
+INFO 2025-12-03 18:24:30,331 basehttp "GET /media/employees/photos/employee_1_photo.jpg HTTP/1.1" 200 384
+INFO 2025-12-03 18:24:34,482 basehttp "POST /employees/1/photo/upload/ HTTP/1.1" 302 0
+INFO 2025-12-03 18:24:34,500 basehttp "GET /employees/1/ HTTP/1.1" 200 35400
+INFO 2025-12-03 18:24:34,542 basehttp "GET /media/employees/photos/%D9%84%D9%88%D8%AC%D9%88_%D8%A3%D9%88%D8%B1%D9%8A%D9%86%D8%AA_%D8%B9%D8%B1%D8%A8%D9%8A.jpg HTTP/1.1" 200 11712
+INFO 2025-12-03 18:24:40,371 basehttp "POST /employees/1/photo/upload/ HTTP/1.1" 302 0
+INFO 2025-12-03 18:24:40,390 basehttp "GET /employees/1/ HTTP/1.1" 200 35414
+INFO 2025-12-03 18:24:40,441 basehttp "GET /media/employees/photos/%D9%84%D9%88%D8%AC%D9%88_%D8%A3%D9%88%D8%B1%D9%8A%D9%86%D8%AA_%D8%A7%D9%86%D8%AC%D9%84%D8%B4_jjdfKBg.jpg HTTP/1.1" 200 11765
+INFO 2025-12-03 18:25:04,361 basehttp "GET /employees/1/edit/ HTTP/1.1" 200 54607
+INFO 2025-12-03 18:25:33,857 basehttp "POST /employees/1/edit/ HTTP/1.1" 302 0
+INFO 2025-12-03 18:25:33,873 basehttp "GET /employees/1/ HTTP/1.1" 200 35450
+INFO 2025-12-03 18:25:33,914 basehttp "GET /media/employees/photos/%D9%84%D9%88%D8%AC%D9%88_%D8%A3%D9%88%D8%B1%D9%8A%D9%86%D8%AA_%D8%A7%D9%86%D8%AC%D9%84%D8%B4_jjdfKBg.jpg HTTP/1.1" 304 0
+INFO 2025-12-03 18:25:53,943 basehttp "GET /employees/1/edit/ HTTP/1.1" 200 54626
+INFO 2025-12-03 18:26:17,534 basehttp "GET /employees/ HTTP/1.1" 200 21903
+INFO 2025-12-03 18:26:19,718 basehttp "GET /employees/1/ HTTP/1.1" 200 35068
+INFO 2025-12-03 18:26:19,760 basehttp "GET /media/employees/photos/%D9%84%D9%88%D8%AC%D9%88_%D8%A3%D9%88%D8%B1%D9%8A%D9%86%D8%AA_%D8%A7%D9%86%D8%AC%D9%84%D8%B4_jjdfKBg.jpg HTTP/1.1" 304 0
+INFO 2025-12-03 18:51:29,550 basehttp "GET /reports/ HTTP/1.1" 200 16463
+INFO 2025-12-03 18:51:34,626 basehttp "GET /training/ HTTP/1.1" 200 17790
+INFO 2025-12-03 18:51:36,698 basehttp "GET /training/program/create/ HTTP/1.1" 200 21302
+INFO 2025-12-03 18:52:21,378 basehttp "POST /training/program/create/ HTTP/1.1" 302 0
+ERROR 2025-12-03 18:52:21,539 log Internal Server Error: /training/program/1/
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\v3\HR_sys\training\views.py", line 41, in program_detail
+    sessions = TrainingSession.objects.filter(program=program).order_by('-start_date')
+               ^^^^^^^^^^^^^^^
+NameError: name 'TrainingSession' is not defined
+ERROR 2025-12-03 18:52:21,554 basehttp "GET /training/program/1/ HTTP/1.1" 500 82328
+INFO 2025-12-03 18:54:37,757 basehttp "GET /training/program/create/ HTTP/1.1" 200 21655
+INFO 2025-12-03 18:54:40,091 basehttp "GET /employees/ HTTP/1.1" 200 21903
+ERROR 2025-12-03 18:54:41,308 log Internal Server Error: /employees/1/
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\v3\HR_sys\employees\views.py", line 86, in employee_detail
+    return render(request, 'employees/employee_detail_comprehensive.html', context)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'employee_inline_update' not found. 'employee_inline_update' is not a valid view function or pattern name.
+ERROR 2025-12-03 18:54:41,316 basehttp "GET /employees/1/ HTTP/1.1" 500 182748
+INFO 2025-12-03 18:56:16,900 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-03 18:56:18,691 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 18:56:30,262 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-03 18:56:30,813 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 18:56:48,538 autoreload F:\HR_sys\v3\HR_sys\employees\urls.py changed, reloading.
+INFO 2025-12-03 18:56:49,092 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 18:57:36,746 autoreload F:\HR_sys\v3\HR_sys\employees\urls.py changed, reloading.
+INFO 2025-12-03 18:57:37,277 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 18:58:26,668 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-03 18:58:27,197 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 18:58:34,639 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-03 18:58:35,155 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 19:00:36,591 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 19:00:55,479 basehttp "GET /employees/1/ HTTP/1.1" 200 80108
+INFO 2025-12-03 19:00:55,518 basehttp "GET /media/employees/photos/%D9%84%D9%88%D8%AC%D9%88_%D8%A3%D9%88%D8%B1%D9%8A%D9%86%D8%AA_%D8%A7%D9%86%D8%AC%D9%84%D8%B4_jjdfKBg.jpg HTTP/1.1" 304 0
+INFO 2025-12-03 19:01:39,346 basehttp "POST /employees/1/ HTTP/1.1" 200 80108
+INFO 2025-12-03 19:02:16,710 basehttp "POST /employees/1/ HTTP/1.1" 200 80108
+INFO 2025-12-03 19:02:50,313 basehttp "POST /employees/1/ HTTP/1.1" 200 80108
+INFO 2025-12-03 19:06:59,325 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-03 19:07:00,244 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 19:07:30,203 autoreload F:\HR_sys\v3\HR_sys\employees\models.py changed, reloading.
+INFO 2025-12-03 19:07:30,745 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 19:07:42,204 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-03 19:07:42,744 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 19:07:51,139 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-03 19:07:51,688 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 19:11:28,423 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-03 19:11:28,990 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 19:11:50,824 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-03 19:11:51,343 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 19:14:41,146 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-03 19:14:41,680 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 19:14:52,179 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-03 19:14:52,703 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 19:19:13,888 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-03 19:19:14,422 autoreload Watching for file changes with StatReloader
+INFO 2025-12-03 19:21:46,869 basehttp "POST /employees/1/ HTTP/1.1" 200 80121
+INFO 2025-12-03 19:21:46,988 basehttp "GET /media/employees/photos/%D9%84%D9%88%D8%AC%D9%88_%D8%A3%D9%88%D8%B1%D9%8A%D9%86%D8%AA_%D8%A7%D9%86%D8%AC%D9%84%D8%B4_jjdfKBg.jpg HTTP/1.1" 304 0
+INFO 2025-12-03 19:22:16,645 basehttp "POST /employees/1/ HTTP/1.1" 200 80121
+INFO 2025-12-03 19:35:04,941 basehttp "POST /employees/1/ HTTP/1.1" 200 84775
+INFO 2025-12-03 19:35:04,996 basehttp "GET /media/employees/photos/%D9%84%D9%88%D8%AC%D9%88_%D8%A3%D9%88%D8%B1%D9%8A%D9%86%D8%AA_%D8%A7%D9%86%D8%AC%D9%84%D8%B4_jjdfKBg.jpg HTTP/1.1" 304 0
+ERROR 2025-12-03 19:44:51,610 log Internal Server Error: /employees/1/
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'else'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\v3\HR_sys\employees\views.py", line 105, in employee_detail
+    return render(request, 'employees/employee_detail_comprehensive.html', context)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 567, in invalid_block_tag
+    raise self.error(
+    ...<8 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 718: 'else', expected 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-12-03 19:44:51,614 basehttp "POST /employees/1/ HTTP/1.1" 500 270113
+INFO 2025-12-04 13:15:00,583 autoreload Watching for file changes with StatReloader
+ERROR 2025-12-04 13:15:07,653 log Internal Server Error: /employees/1/
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'else'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\v3\HR_sys\employees\views.py", line 105, in employee_detail
+    return render(request, 'employees/employee_detail_comprehensive.html', context)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 567, in invalid_block_tag
+    raise self.error(
+    ...<8 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 1080: 'else', expected 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-12-04 13:15:07,676 basehttp "GET /employees/1/ HTTP/1.1" 500 273158
+WARNING 2025-12-04 13:15:07,860 log Not Found: /@vite/client
+WARNING 2025-12-04 13:15:07,862 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-04 13:54:49,266 autoreload Watching for file changes with StatReloader
+ERROR 2025-12-04 13:57:15,705 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-04 13:57:15,708 basehttp code 400, message Bad request version ('·\x9b\x8fsj±³F\x0eC\\\x13')
+ERROR 2025-12-04 13:57:15,708 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-04 13:59:05,795 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-04 13:59:05,800 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-04 14:07:53,993 autoreload Watching for file changes with StatReloader
+WARNING 2025-12-04 14:08:04,257 log Not Found: /favicon.ico
+INFO 2025-12-04 14:08:04,261 basehttp - Broken pipe from ('127.0.0.1', 62087)
+INFO 2025-12-04 14:12:14,031 basehttp "GET / HTTP/1.1" 200 21965
+WARNING 2025-12-04 14:12:14,285 log Not Found: /favicon.ico
+WARNING 2025-12-04 14:12:14,286 basehttp "GET /favicon.ico HTTP/1.1" 404 6641
+INFO 2025-12-04 14:12:18,939 basehttp "GET /employees/ HTTP/1.1" 200 21903
+ERROR 2025-12-04 14:12:21,808 log Internal Server Error: /employees/1/
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'else'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\v3\HR_sys\employees\views.py", line 105, in employee_detail
+    return render(request, 'employees/employee_detail_comprehensive.html', context)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 567, in invalid_block_tag
+    raise self.error(
+    ...<8 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 1080: 'else', expected 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-12-04 14:12:21,816 basehttp "GET /employees/1/ HTTP/1.1" 500 272773
+INFO 2025-12-04 14:12:29,600 basehttp "GET /employees/1/ HTTP/1.1" 302 0
+INFO 2025-12-04 14:12:29,607 basehttp "GET /login/?next=/employees/1/ HTTP/1.1" 200 7575
+ERROR 2025-12-04 14:17:07,324 log Internal Server Error: /employees/1/
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'else'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\v3\HR_sys\employees\views.py", line 105, in employee_detail
+    return render(request, 'employees/employee_detail_comprehensive.html', context)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 567, in invalid_block_tag
+    raise self.error(
+    ...<8 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 1080: 'else', expected 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-12-04 14:17:07,327 basehttp "GET /employees/1/ HTTP/1.1" 500 272910
+ERROR 2025-12-04 14:18:47,023 log Internal Server Error: /employees/1/
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'else'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\v3\HR_sys\employees\views.py", line 105, in employee_detail
+    return render(request, 'employees/employee_detail_comprehensive.html', context)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader_tags.py", line 234, in do_block
+    nodelist = parser.parse(("endblock",))
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\base.py", line 567, in invalid_block_tag
+    raise self.error(
+    ...<8 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 1080: 'else', expected 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-12-04 14:18:47,026 basehttp "GET /employees/1/ HTTP/1.1" 500 272910
+INFO 2025-12-04 14:40:54,588 autoreload Watching for file changes with StatReloader
+INFO 2025-12-04 14:40:59,077 basehttp "GET /?ide_webview_request_time=1764852058645 HTTP/1.1" 302 0
+INFO 2025-12-04 14:40:59,087 basehttp "GET /login/?next=/%3Fide_webview_request_time%3D1764852058645 HTTP/1.1" 200 7575
+WARNING 2025-12-04 14:40:59,229 log Not Found: /@vite/client
+WARNING 2025-12-04 14:40:59,229 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-04 14:41:05,973 basehttp "POST /login/ HTTP/1.1" 302 0
+INFO 2025-12-04 14:41:06,007 basehttp "GET / HTTP/1.1" 200 22276
+WARNING 2025-12-04 14:41:06,049 log Not Found: /@vite/client
+WARNING 2025-12-04 14:41:06,050 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+ERROR 2025-12-04 14:41:11,698 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-04 14:41:11,703 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-04 14:41:35,679 basehttp "GET / HTTP/1.1" 200 21965
+WARNING 2025-12-04 14:41:36,013 log Not Found: /favicon.ico
+WARNING 2025-12-04 14:41:36,013 basehttp "GET /favicon.ico HTTP/1.1" 404 6638
+INFO 2025-12-04 14:41:55,634 basehttp "GET /employees/ HTTP/1.1" 200 21903
+INFO 2025-12-04 14:43:15,024 basehttp "GET /employees/1/ HTTP/1.1" 200 87001
+INFO 2025-12-04 14:43:15,074 basehttp "GET /media/employees/photos/%D9%84%D9%88%D8%AC%D9%88_%D8%A3%D9%88%D8%B1%D9%8A%D9%86%D8%AA_%D8%A7%D9%86%D8%AC%D9%84%D8%B4_jjdfKBg.jpg HTTP/1.1" 304 0
+INFO 2025-12-04 14:57:22,603 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-04 14:57:23,375 autoreload Watching for file changes with StatReloader
+INFO 2025-12-04 14:58:44,200 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-04 14:58:44,871 autoreload Watching for file changes with StatReloader
+INFO 2025-12-04 14:59:09,622 autoreload F:\HR_sys\v3\HR_sys\employees\urls.py changed, reloading.
+INFO 2025-12-04 14:59:10,319 autoreload Watching for file changes with StatReloader
+ERROR 2025-12-04 15:15:49,638 log Invalid HTTP_HOST header: 'testserver'. You may need to add 'testserver' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'testserver'. You may need to add 'testserver' to ALLOWED_HOSTS.
+INFO 2025-12-04 15:15:55,976 basehttp "GET / HTTP/1.1" 200 21965
+WARNING 2025-12-04 15:15:56,106 log Not Found: /@vite/client
+WARNING 2025-12-04 15:15:56,106 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+ERROR 2025-12-04 15:16:13,042 log Internal Server Error: /employees/1/edit/
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\v3\HR_sys\employees\views.py", line 160, in employee_update
+    insurance_form.helper.form_action = reverse('employees:insurance_create', args=[employee.pk])
+    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EmployeeInsuranceForm' object has no attribute 'helper'
+INFO 2025-12-04 15:16:29,658 basehttp "GET / HTTP/1.1" 200 21965
+INFO 2025-12-04 15:16:29,680 basehttp "GET / HTTP/1.1" 200 21965
+WARNING 2025-12-04 15:16:29,804 log Not Found: /@vite/client
+WARNING 2025-12-04 15:16:29,805 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-04 15:16:30,944 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-04 15:16:32,354 autoreload Watching for file changes with StatReloader
+ERROR 2025-12-04 15:17:52,708 log Internal Server Error: /employees/1/edit/
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\v3\HR_sys\employees\views.py", line 171, in employee_update
+    experience_form.helper.form_action = reverse('employees:experience_create', args=[employee.pk])
+    ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'EmployeeExperienceForm' object has no attribute 'helper'
+INFO 2025-12-04 15:18:43,924 autoreload F:\HR_sys\v3\HR_sys\employees\views.py changed, reloading.
+INFO 2025-12-04 15:18:44,550 autoreload Watching for file changes with StatReloader
+INFO 2025-12-04 15:20:04,347 basehttp "GET /employees/1/ HTTP/1.1" 200 87001
+INFO 2025-12-04 15:21:55,953 autoreload Watching for file changes with StatReloader
+INFO 2025-12-04 15:21:59,992 basehttp "GET /employees/ HTTP/1.1" 200 21903
+WARNING 2025-12-04 15:22:00,028 log Not Found: /@vite/client
+WARNING 2025-12-04 15:22:00,028 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-04 15:22:02,570 basehttp "GET /employees/1/ HTTP/1.1" 200 87001
+INFO 2025-12-04 15:22:02,580 basehttp "GET /media/employees/photos/%D9%84%D9%88%D8%AC%D9%88_%D8%A3%D9%88%D8%B1%D9%8A%D9%86%D8%AA_%D8%A7%D9%86%D8%AC%D9%84%D8%B4_jjdfKBg.jpg HTTP/1.1" 200 11765
+WARNING 2025-12-04 15:22:02,671 log Not Found: /@vite/client
+WARNING 2025-12-04 15:22:02,671 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-08 13:39:02,385 autoreload Watching for file changes with StatReloader
+INFO 2025-12-08 13:39:04,227 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-12-08 13:39:04,243 basehttp "GET /login/?next=/ HTTP/1.1" 200 7575
+WARNING 2025-12-08 13:39:08,918 log Not Found: /favicon.ico
+WARNING 2025-12-08 13:39:08,918 basehttp "GET /favicon.ico HTTP/1.1" 404 6641
+INFO 2025-12-08 13:39:10,609 basehttp "POST /login/ HTTP/1.1" 302 0
+INFO 2025-12-08 13:39:10,651 basehttp "GET / HTTP/1.1" 200 22276
+INFO 2025-12-08 13:39:18,578 basehttp "GET /employees/ HTTP/1.1" 200 21903
+INFO 2025-12-08 13:39:20,231 basehttp "GET /employees/1/ HTTP/1.1" 200 86848
+INFO 2025-12-08 13:39:20,246 basehttp "GET /media/employees/photos/%D9%84%D9%88%D8%AC%D9%88_%D8%A3%D9%88%D8%B1%D9%8A%D9%86%D8%AA_%D8%A7%D9%86%D8%AC%D9%84%D8%B4_jjdfKBg.jpg HTTP/1.1" 200 11765
+INFO 2025-12-08 15:09:17,389 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-12-08 15:09:17,445 basehttp "GET /login/?next=/ HTTP/1.1" 200 7575
+WARNING 2025-12-08 15:09:18,143 log Not Found: /favicon.ico
+WARNING 2025-12-08 15:09:18,143 basehttp "GET /favicon.ico HTTP/1.1" 404 6641
+INFO 2025-12-08 15:09:22,517 basehttp "POST /login/ HTTP/1.1" 302 0
+INFO 2025-12-08 15:09:22,542 basehttp "GET / HTTP/1.1" 200 22276
+INFO 2025-12-08 15:09:27,229 basehttp "GET /employees/ HTTP/1.1" 200 21903
+INFO 2025-12-08 15:09:28,641 basehttp "GET /employees/1/ HTTP/1.1" 200 86848
+INFO 2025-12-08 15:09:28,663 basehttp "GET /media/employees/photos/%D9%84%D9%88%D8%AC%D9%88_%D8%A3%D9%88%D8%B1%D9%8A%D9%86%D8%AA_%D8%A7%D9%86%D8%AC%D9%84%D8%B4_jjdfKBg.jpg HTTP/1.1" 200 11765
+INFO 2025-12-08 17:41:26,189 basehttp "GET /?ide_webview_request_time=1765208486017 HTTP/1.1" 302 0
+INFO 2025-12-08 17:41:26,238 basehttp "GET /login/?next=/%3Fide_webview_request_time%3D1765208486017 HTTP/1.1" 200 7575
+WARNING 2025-12-08 17:41:30,534 log Not Found: /@vite/client
+WARNING 2025-12-08 17:41:30,534 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-09 14:28:17,264 basehttp "GET / HTTP/1.1" 200 22009
+INFO 2025-12-09 14:28:22,476 basehttp "GET /training/ HTTP/1.1" 200 17834
+INFO 2025-12-09 14:28:24,655 basehttp "GET /leaves/balances/ HTTP/1.1" 200 18209
+INFO 2025-12-09 14:28:25,760 basehttp "GET /leaves/balance/1/update/ HTTP/1.1" 200 19451
+INFO 2025-12-09 14:28:39,787 basehttp "POST /leaves/balance/1/update/ HTTP/1.1" 302 0
+INFO 2025-12-09 14:28:39,805 basehttp "GET /leaves/balances/ HTTP/1.1" 200 18552
+INFO 2025-12-09 14:28:45,516 basehttp "GET /leaves/balance/create/ HTTP/1.1" 200 19403
+INFO 2025-12-09 14:29:03,613 basehttp "POST /leaves/balance/create/ HTTP/1.1" 302 0
+INFO 2025-12-09 14:29:03,638 basehttp "GET /leaves/balances/ HTTP/1.1" 200 19066

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}مزامنة أجهزة البصمة{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">إعدادات المزامنة</div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary">بدء المزامنة</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-secondary text-white">حالة المزامنة</div>
+                <div class="card-body">
+                    <pre class="mb-0">{{ sync_status|default:"لا توجد عمليات مزامنة" }}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

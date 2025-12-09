@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}تفاصيل الحضور{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">تفاصيل الحضور</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">الموظف</dt>
+                        <dd class="col-sm-9">{{ attendance.employee }}</dd>
+
+                        <dt class="col-sm-3">التاريخ</dt>
+                        <dd class="col-sm-9">{{ attendance.date }}</dd>
+
+                        <dt class="col-sm-3">وقت الدخول</dt>
+                        <dd class="col-sm-9">{{ attendance.check_in|time:"H:i" }}</dd>
+
+                        <dt class="col-sm-3">وقت الخروج</dt>
+                        <dd class="col-sm-9">{{ attendance.check_out|time:"H:i"|default:"--" }}</dd>
+
+                        <dt class="col-sm-3">الحالة</dt>
+                        <dd class="col-sm-9">{{ attendance.status }}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

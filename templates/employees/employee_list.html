@@ -80,14 +80,14 @@
                             <tbody>
                                 {% for employee in page_obj %}
                                     <tr>
-                                        <td>{{ employee.employee_code }}</td>
+                                        <td>{{ employee.emp_code }}</td>
                                         <td>
                                             <a href="{% url 'employees:employee_detail' employee.pk %}">
-                                                {{ employee.full_name_ar }}
+                                                {{ employee.get_full_name_ar }}
                                             </a>
                                         </td>
-                                        <td>{{ employee.department.name_ar|default:"-" }}</td>
-                                        <td>{{ employee.position.title_ar|default:"-" }}</td>
+                                        <td>{{ employee.department.dept_name_ar|default:"-" }}</td>
+                                        <td>{{ employee.position.position_name_ar|default:"-" }}</td>
                                         <td>{{ employee.email }}</td>
                                         <td>{{ employee.phone }}</td>
                                         <td>

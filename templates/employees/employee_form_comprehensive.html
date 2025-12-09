@@ -82,6 +82,36 @@
                     <i class="fas fa-file-alt"></i> المستندات
                 </button>
             </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="contracts-tab" data-bs-toggle="tab" data-bs-target="#contracts" type="button" role="tab">
+                    <i class="fas fa-file-contract"></i> العقود
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="insurances-tab" data-bs-toggle="tab" data-bs-target="#insurances" type="button" role="tab">
+                    <i class="fas fa-shield-alt"></i> التأمينات
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="custody-tab" data-bs-toggle="tab" data-bs-target="#custody" type="button" role="tab">
+                    <i class="fas fa-box"></i> العهد
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="education-tab" data-bs-toggle="tab" data-bs-target="#education" type="button" role="tab">
+                    <i class="fas fa-graduation-cap"></i> المؤهلات
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="experience-tab" data-bs-toggle="tab" data-bs-target="#experience" type="button" role="tab">
+                    <i class="fas fa-briefcase"></i> الخبرات
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="health-tab" data-bs-toggle="tab" data-bs-target="#health" type="button" role="tab">
+                    <i class="fas fa-notes-medical"></i> التأمين الصحي
+                </button>
+            </li>
         </ul>
 
         <!-- Tab Content -->
@@ -271,14 +301,297 @@
                 </div>
             </div>
 
-            <!-- Documents Tab -->
-            <div class="tab-pane fade" id="documents" role="tabpanel">
-                <div class="form-section-title">المستندات والملاحظات</div>
-                <div class="alert alert-info">
-                    <i class="fas fa-info-circle"></i>
-                    يمكنك إضافة المستندات والعقود والتأمينات والعهد بعد حفظ بيانات الموظف الأساسية
+        <!-- Documents Tab -->
+        <div class="tab-pane fade" id="documents" role="tabpanel">
+                <div class="form-section-title">المستندات</div>
+                {% if employee %}
+                <div class="card mb-3">
+                    <div class="card-header">إضافة مستند</div>
+                    <div class="card-body">
+                        {{ document_form|crispy }}
+                    </div>
+                </div>
+                {% if documents %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>الاسم</th>
+                                <th>النوع</th>
+                                <th>تاريخ الإصدار</th>
+                                <th>تاريخ الانتهاء</th>
+                                <th>ملف</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in documents %}
+                            <tr>
+                                <td>{{ d.document_name }}</td>
+                                <td>{{ d.get_document_type_display }}</td>
+                                <td>{{ d.issue_date|date:'Y-m-d' }}</td>
+                                <td>{{ d.expiry_date|date:'Y-m-d' }}</td>
+                                <td>
+                                    {% if d.document_file %}
+                                    <a href="{{ d.document_file.url }}" target="_blank" class="btn btn-sm btn-primary"><i class="fas fa-download"></i></a>
+                                    {% else %}
+                                    <span class="text-muted">لا يوجد</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="alert alert-info"><i class="fas fa-info-circle"></i> لا توجد مستندات مسجلة</div>
+                {% endif %}
+                {% else %}
+                <div class="alert alert-info"><i class="fas fa-info-circle"></i> قم بحفظ بيانات الموظف أولاً لإضافة المستندات</div>
+                {% endif %}
+        </div>
+
+        <!-- Contracts Tab -->
+        <div class="tab-pane fade" id="contracts" role="tabpanel">
+            <div class="form-section-title">العقود</div>
+            {% if employee %}
+            <div class="card mb-3">
+                <div class="card-header">إضافة عقد</div>
+                <div class="card-body">
+                    {{ contract_form|crispy }}
                 </div>
             </div>
+            {% if contracts %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>رقم العقد</th>
+                            <th>النوع</th>
+                            <th>البداية</th>
+                            <th>النهاية</th>
+                            <th>الراتب</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for c in contracts %}
+                        <tr>
+                            <td>{{ c.contract_number }}</td>
+                            <td>{{ c.get_contract_type_display }}</td>
+                            <td>{{ c.start_date|date:'Y-m-d' }}</td>
+                            <td>{{ c.end_date|date:'Y-m-d' }}</td>
+                            <td>{{ c.salary|floatformat:2 }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="alert alert-info"><i class="fas fa-info-circle"></i> لا توجد عقود مسجلة</div>
+            {% endif %}
+            {% else %}
+            <div class="alert alert-info"><i class="fas fa-info-circle"></i> قم بحفظ بيانات الموظف أولاً لإضافة العقود</div>
+            {% endif %}
+        </div>
+
+        <!-- Insurances Tab -->
+        <div class="tab-pane fade" id="insurances" role="tabpanel">
+            <div class="form-section-title">التأمينات</div>
+            {% if employee %}
+            <div class="card mb-3">
+                <div class="card-header">إضافة تأمين</div>
+                <div class="card-body">
+                    {{ insurance_form|crispy }}
+                </div>
+            </div>
+            {% if insurances %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>النوع</th>
+                            <th>الرقم</th>
+                            <th>الشركة</th>
+                            <th>البداية</th>
+                            <th>النهاية</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in insurances %}
+                        <tr>
+                            <td>{{ i.get_insurance_type_display }}</td>
+                            <td>{{ i.insurance_number }}</td>
+                            <td>{{ i.insurance_company }}</td>
+                            <td>{{ i.start_date|date:'Y-m-d' }}</td>
+                            <td>{{ i.end_date|date:'Y-m-d' }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="alert alert-info"><i class="fas fa-info-circle"></i> لا توجد تأمينات مسجلة</div>
+            {% endif %}
+            {% else %}
+            <div class="alert alert-info"><i class="fas fa-info-circle"></i> قم بحفظ بيانات الموظف أولاً لإضافة التأمينات</div>
+            {% endif %}
+        </div>
+
+        <!-- Custody Tab -->
+        <div class="tab-pane fade" id="custody" role="tabpanel">
+            <div class="form-section-title">العهد</div>
+            {% if employee %}
+            <div class="card mb-3">
+                <div class="card-header">إضافة عهدة</div>
+                <div class="card-body">
+                    {{ custody_form|crispy }}
+                </div>
+            </div>
+            {% if custodies %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>النوع</th>
+                            <th>الاسم</th>
+                            <th>الرقم التسلسلي</th>
+                            <th>القيمة</th>
+                            <th>تاريخ الاستلام</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cu in custodies %}
+                        <tr>
+                            <td>{{ cu.get_custody_type_display }}</td>
+                            <td>{{ cu.item_name }}</td>
+                            <td>{{ cu.serial_number }}</td>
+                            <td>{{ cu.item_value }}</td>
+                            <td>{{ cu.issue_date|date:'Y-m-d' }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="alert alert-info"><i class="fas fa-info-circle"></i> لا توجد عهد مسجلة</div>
+            {% endif %}
+            {% else %}
+            <div class="alert alert-info"><i class="fas fa-info-circle"></i> قم بحفظ بيانات الموظف أولاً لإضافة العهد</div>
+            {% endif %}
+        </div>
+
+        <!-- Education Tab -->
+        <div class="tab-pane fade" id="education" role="tabpanel">
+            <div class="form-section-title">المؤهلات</div>
+            {% if employee %}
+            <div class="card mb-3">
+                <div class="card-header">إضافة مؤهل</div>
+                <div class="card-body">
+                    {{ education_form|crispy }}
+                </div>
+            </div>
+            {% if education %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>الدرجة</th>
+                            <th>المجال</th>
+                            <th>المؤسسة</th>
+                            <th>سنة التخرج</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for e in education %}
+                        <tr>
+                            <td>{{ e.degree }}</td>
+                            <td>{{ e.field_of_study }}</td>
+                            <td>{{ e.institution }}</td>
+                            <td>{{ e.graduation_year }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="alert alert-info"><i class="fas fa-info-circle"></i> لا توجد مؤهلات مسجلة</div>
+            {% endif %}
+            {% else %}
+            <div class="alert alert-info"><i class="fas fa-info-circle"></i> قم بحفظ بيانات الموظف أولاً لإضافة المؤهلات</div>
+            {% endif %}
+        </div>
+
+        <!-- Experience Tab -->
+        <div class="tab-pane fade" id="experience" role="tabpanel">
+            <div class="form-section-title">الخبرات</div>
+            {% if employee %}
+            <div class="card mb-3">
+                <div class="card-header">إضافة خبرة</div>
+                <div class="card-body">
+                    {{ experience_form|crispy }}
+                </div>
+            </div>
+            {% if experience %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>الشركة</th>
+                            <th>المنصب</th>
+                            <th>البداية</th>
+                            <th>النهاية</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ex in experience %}
+                        <tr>
+                            <td>{{ ex.company_name }}</td>
+                            <td>{{ ex.position }}</td>
+                            <td>{{ ex.start_date|date:'Y-m-d' }}</td>
+                            <td>{{ ex.end_date|date:'Y-m-d' }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="alert alert-info"><i class="fas fa-info-circle"></i> لا توجد خبرات مسجلة</div>
+            {% endif %}
+            {% else %}
+            <div class="alert alert-info"><i class="fas fa-info-circle"></i> قم بحفظ بيانات الموظف أولاً لإضافة الخبرات</div>
+            {% endif %}
+        </div>
+
+        <!-- Health Insurance Tab -->
+        <div class="tab-pane fade" id="health" role="tabpanel">
+            <div class="form-section-title">التأمين الصحي</div>
+            <div class="row">
+                <div class="col-md-6">{{ form.health_card|as_crispy_field }}</div>
+                <div class="col-md-6">{{ form.health_card_number|as_crispy_field }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">{{ form.health_card_start_date|as_crispy_field }}</div>
+                <div class="col-md-4">{{ form.health_card_renewal_date|as_crispy_field }}</div>
+                <div class="col-md-4">{{ form.health_card_remaining_days|as_crispy_field }}</div>
+            </div>
+            <div class="form-section-title">تأمين الدولية</div>
+            <div class="row">
+                <div class="col-md-6">{{ form.orient_subscription_start_date|as_crispy_field }}</div>
+                <div class="col-md-6">{{ form.orient_subscription_expiry_date|as_crispy_field }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">{{ form.orient_incoming_number|as_crispy_field }}</div>
+                <div class="col-md-6">{{ form.orient_incoming_date|as_crispy_field }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">{{ form.orient_s1|as_crispy_field }}</div>
+                <div class="col-md-4">{{ form.orient_s1_delivery_date|as_crispy_field }}</div>
+                <div class="col-md-4">{{ form.orient_s1_receipt_date|as_crispy_field }}</div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">{{ form.orient_insurance_entry_confirmation|as_crispy_field }}</div>
+                <div class="col-md-6">{{ form.orient_s6|as_crispy_field }}</div>
+            </div>
+        </div>
         </div>
 
         <!-- Form Actions -->

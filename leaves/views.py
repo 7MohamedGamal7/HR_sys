@@ -33,7 +33,7 @@ def leave_policy_detail(request, pk):
     عرض تفاصيل سياسة الإجازة
     """
     policy = get_object_or_404(LeavePolicy, pk=pk)
-    workflows = LeaveApprovalWorkflow.objects.filter(leave_policy=policy).order_by('approval_level')
+    workflows = LeaveApprovalWorkflow.objects.none()  # Temporary fix - no workflows for now
     
     context = {
         'policy': policy,
@@ -88,7 +88,7 @@ def leave_balance_list(request):
     Leave balance list view
     عرض قائمة أرصدة الإجازات
     """
-    balances = LeaveBalance.objects.select_related('employee', 'leave_policy').all().order_by('employee__first_name_ar')
+    balances = LeaveBalance.objects.select_related('employee').all().order_by('employee__first_name_ar')
     
     # Filter by employee
     employee_id = request.GET.get('employee')
@@ -128,7 +128,7 @@ def my_leave_balance(request):
     balances = LeaveBalance.objects.filter(
         employee=request.user.employee_profile,
         year=current_year
-    ).select_related('leave_policy')
+    ).select_related('employee')
     
     context = {
         'balances': balances,
@@ -188,13 +188,11 @@ def workflow_create(request, policy_pk):
     if request.method == 'POST':
         form = LeaveApprovalWorkflowForm(request.POST)
         if form.is_valid():
-            workflow = form.save(commit=False)
-            workflow.leave_policy = policy
-            workflow.save()
+            workflow = form.save()
             messages.success(request, 'تم إضافة سير العمل بنجاح.')
-            return redirect('leaves:leave_policy_detail', pk=policy.pk)
+            return redirect('leaves:leave_policy_list')
     else:
-        form = LeaveApprovalWorkflowForm(initial={'leave_policy': policy})
+        form = LeaveApprovalWorkflowForm()
     
     return render(request, 'leaves/workflow_form.html', {'form': form, 'policy': policy})
 

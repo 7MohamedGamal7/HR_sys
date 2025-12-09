@@ -3,11 +3,468 @@
 
 {% block title %}تفاصيل الموظف - {{ employee.get_full_name_ar }}{% endblock %}
 
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM Content Loaded - Starting debugging');
+    
+    // Check if Bootstrap is loaded
+    console.log('Bootstrap loaded:', typeof bootstrap !== 'undefined');
+    console.log('jQuery loaded:', typeof $ !== 'undefined');
+    
+    // Check all edit-related elements
+    console.log('Edit button element:', document.getElementById('editBtn'));
+    console.log('Save button element:', document.getElementById('saveBtn'));
+    console.log('Cancel button element:', document.getElementById('cancelBtn'));
+    
+    // Check button visibility on load
+    const editBtn = document.getElementById('editBtn');
+    const saveBtn = document.getElementById('saveBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    
+    if (editBtn) {
+        console.log('Edit button computed style:', window.getComputedStyle(editBtn).display);
+        console.log('Edit button inline style:', editBtn.style.display);
+    }
+    
+    // Check for any hidden parent containers
+    console.log('Checking for hidden parent containers...');
+    let parent = editBtn ? editBtn.parentElement : null;
+    while (parent) {
+        const style = window.getComputedStyle(parent);
+        console.log('Parent element:', parent.tagName, 'display:', style.display, 'visibility:', style.visibility);
+        if (style.display === 'none' || style.visibility === 'hidden') {
+            console.log('FOUND HIDDEN PARENT!', parent);
+        }
+        parent = parent.parentElement;
+    }
+    
+    // Check for Bootstrap d-none classes or other hiding classes
+    console.log('Checking for Bootstrap hiding classes...');
+    const allElements = document.querySelectorAll('*');
+    let hiddenElements = [];
+    allElements.forEach(el => {
+        if (el.classList.contains('d-none') || 
+            el.classList.contains('d-sm-none') || 
+            el.classList.contains('d-md-none') || 
+            el.classList.contains('d-lg-none') || 
+            el.classList.contains('d-xl-none') ||
+            el.classList.contains('invisible') ||
+            el.classList.contains('hidden')) {
+            hiddenElements.push({
+                element: el.tagName,
+                classes: el.className,
+                id: el.id
+            });
+        }
+    });
+    console.log('Elements with hiding classes:', hiddenElements);
+    
+    // Force show all edit controls for debugging
+    console.log('Forcing all edit controls to be visible for debugging...');
+    setTimeout(function() {
+        console.log('Running force show function...');
+        
+        // Force show main edit buttons
+        const editBtn = document.getElementById('editBtn');
+        const saveBtn = document.getElementById('saveBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        
+        if (editBtn) {
+            editBtn.style.display = 'inline-block';
+            editBtn.style.visibility = 'visible';
+            console.log('Forced edit button visible');
+        }
+        if (saveBtn) {
+            saveBtn.style.display = 'none'; // Keep hidden initially
+            saveBtn.style.visibility = 'visible';
+        }
+        if (cancelBtn) {
+            cancelBtn.style.display = 'none'; // Keep hidden initially
+            cancelBtn.style.visibility = 'visible';
+        }
+        
+        // Force show all tab controls
+        document.querySelectorAll('.add-form-btn, .edit-item-btn, .delete-item-btn').forEach(btn => {
+            btn.style.display = 'inline-block';
+            btn.style.visibility = 'visible';
+            console.log('Forced button visible:', btn.textContent.trim() || btn.className);
+        });
+        
+        // Force show edit actions columns
+        document.querySelectorAll('.edit-actions').forEach(action => {
+            action.style.display = 'table-cell';
+            action.style.visibility = 'visible';
+        });
+        
+        console.log('Force show completed');
+    }, 2000); // Wait 2 seconds to ensure everything is loaded
+    
+    // Monitor tab visibility and ensure they remain visible
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && 
+                (mutation.attributeName === 'style' || mutation.attributeName === 'class')) {
+                
+                // Check if any tabs are being hidden
+                document.querySelectorAll('.nav-tabs .nav-item').forEach(tab => {
+                    if (tab.style.display === 'none' || tab.style.visibility === 'hidden') {
+                        tab.style.display = 'list-item';
+                        tab.style.visibility = 'visible';
+                        tab.style.opacity = '1';
+                    }
+                });
+                
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    if (link.style.pointerEvents === 'none') {
+                        link.style.pointerEvents = 'auto';
+                    }
+                });
+            }
+        });
+    });
+    
+    // Start observing
+    observer.observe(document.body, {
+        attributes: true,
+        subtree: true,
+        attributeFilter: ['style', 'class']
+    });
+    
+    // Protect tab functionality - ensure tabs remain clickable
+    document.querySelectorAll('[data-bs-toggle="tab"]').forEach(tab => {
+        tab.addEventListener('click', function(e) {
+            // Allow normal tab functionality to continue
+            console.log('Tab clicked:', this.id);
+        });
+    });
+    
+    // Photo upload functionality
+    const photoInput = document.getElementById('photoInput');
+    const photoUploadForm = document.getElementById('photoUploadForm');
+    
+    // Show loading indicator when file is selected
+    photoInput.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            // Create loading overlay
+            const loadingDiv = document.createElement('div');
+            loadingDiv.innerHTML = `
+                <div class="position-fixed top-50 start-50 translate-middle bg-white p-4 rounded shadow text-center" style="z-index: 9999;">
+                    <div class="spinner-border text-primary mb-3" role="status">
+                        <span class="visually-hidden">جاري الرفع...</span>
+                    </div>
+                    <p class="mb-0">جاري رفع الصورة...</p>
+                </div>
+            `;
+            loadingDiv.style.position = 'fixed';
+            loadingDiv.style.top = '0';
+            loadingDiv.style.left = '0';
+            loadingDiv.style.width = '100%';
+            loadingDiv.style.height = '100%';
+            loadingDiv.style.backgroundColor = 'rgba(0,0,0,0.5)';
+            loadingDiv.style.zIndex = '9998';
+            loadingDiv.id = 'loadingOverlay';
+            
+            document.body.appendChild(loadingDiv);
+            
+            // Submit the form
+            photoUploadForm.submit();
+        }
+    });
+    
+    // Inline edit functionality
+    let editMode = false;
+    
+    console.log('Edit button found:', editBtn);
+    console.log('Save button found:', saveBtn);
+    console.log('Cancel button found:', cancelBtn);
+    
+    if (editBtn) {
+        editBtn.addEventListener('click', function() {
+            console.log('Edit button clicked');
+            editMode = true;
+            toggleEditMode();
+            ensureTabsVisible();
+        });
+    }
+    
+    if (saveBtn) {
+        saveBtn.addEventListener('click', function() {
+            saveChanges();
+        });
+    }
+    
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', function() {
+            editMode = false;
+            toggleEditMode();
+            resetForms();
+            ensureTabsVisible();
+        });
+    }
+    
+    function ensureTabsVisible() {
+        console.log('Ensuring all tabs are visible');
+        
+        // Force all tab navigation items to be visible
+        document.querySelectorAll('.nav-tabs .nav-item').forEach(tab => {
+            tab.style.display = 'list-item';
+            tab.style.visibility = 'visible';
+            tab.style.opacity = '1';
+            tab.style.pointerEvents = 'auto';
+        });
+        
+        // Force all nav-links to be clickable
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.style.pointerEvents = 'auto';
+            link.style.opacity = '1';
+            link.style.display = 'block';
+        });
+        
+        // Ensure no tab-pane is hidden
+        document.querySelectorAll('.tab-pane').forEach(pane => {
+            if (pane.classList.contains('active')) {
+                pane.style.display = 'block';
+            } else {
+                pane.style.display = ''; // Let Bootstrap handle non-active tabs
+            }
+            pane.style.visibility = 'visible';
+        });
+        
+        // Force Bootstrap tab functionality to work
+        const tabTrigger = new bootstrap.Tab(document.querySelector('#employeeDetailTabs .nav-link.active'));
+    }
+    
+    // Function to force show all elements for debugging
+    window.forceShowAllElements = function() {
+        console.log('Force showing ALL elements for debugging...');
+        
+        // Show all forms
+        document.querySelectorAll('.add-form').forEach(form => {
+            form.style.display = 'block';
+            console.log('Showed form:', form.id);
+        });
+        
+        // Show all add buttons
+        document.querySelectorAll('.add-form-btn').forEach(btn => {
+            btn.style.display = 'inline-block';
+            console.log('Showed add button for:', btn.getAttribute('data-target'));
+        });
+        
+        // Show all edit buttons
+        document.querySelectorAll('.edit-item-btn').forEach(btn => {
+            btn.style.display = 'inline-block';
+            console.log('Showed edit button');
+        });
+        
+        // Show all delete buttons
+        document.querySelectorAll('.delete-item-btn').forEach(btn => {
+            btn.style.display = 'inline-block';
+            console.log('Showed delete button');
+        });
+        
+        // Show all edit actions columns
+        document.querySelectorAll('.edit-actions').forEach(action => {
+            action.style.display = 'table-cell';
+            console.log('Showed edit actions column');
+        });
+        
+        // Show main edit buttons
+        const editBtn = document.getElementById('editBtn');
+        const saveBtn = document.getElementById('saveBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        
+        if (editBtn) editBtn.style.display = 'none'; // Hide edit button in force show mode
+        if (saveBtn) saveBtn.style.display = 'inline-block';
+        if (cancelBtn) cancelBtn.style.display = 'inline-block';
+        
+        console.log('Force show completed - all elements should be visible now');
+        alert('جميع العناصر أصبحت مرئية الآن - تحقق من التابات');
+    }
+    
+    function toggleEditMode() {
+        console.log('Toggling edit mode:', editMode);
+        
+        // Toggle edit buttons visibility
+        if (editBtn) editBtn.style.display = editMode ? 'none' : 'inline-block';
+        if (saveBtn) saveBtn.style.display = editMode ? 'inline-block' : 'none';
+        if (cancelBtn) cancelBtn.style.display = editMode ? 'inline-block' : 'none';
+        
+        console.log('Add buttons found:', document.querySelectorAll('.add-form-btn').length);
+        console.log('Edit buttons found:', document.querySelectorAll('.edit-item-btn').length);
+        console.log('Delete buttons found:', document.querySelectorAll('.delete-item-btn').length);
+        console.log('Edit actions found:', document.querySelectorAll('.edit-actions').length);
+        
+        // Show/hide add buttons in all tabs
+        document.querySelectorAll('.add-form-btn').forEach(btn => {
+            btn.style.display = editMode ? 'inline-block' : 'none';
+            console.log('Add button visibility set to:', editMode ? 'inline-block' : 'none');
+        });
+        
+        // Show/hide edit buttons in all tabs
+        document.querySelectorAll('.edit-item-btn').forEach(btn => {
+            btn.style.display = editMode ? 'inline-block' : 'none';
+            console.log('Edit button visibility set to:', editMode ? 'inline-block' : 'none');
+        });
+        
+        // Show/hide delete buttons in all tabs
+        document.querySelectorAll('.delete-item-btn').forEach(btn => {
+            btn.style.display = editMode ? 'inline-block' : 'none';
+            console.log('Delete button visibility set to:', editMode ? 'inline-block' : 'none');
+        });
+        
+        // Show/hide edit actions columns in tables
+        document.querySelectorAll('.edit-actions').forEach(action => {
+            action.style.display = editMode ? 'table-cell' : 'none';
+            console.log('Edit actions visibility set to:', editMode ? 'table-cell' : 'none');
+        });
+    }
+    
+    function resetForms() {
+        // Reset all forms to their original state
+        document.querySelectorAll('.add-form').forEach(form => {
+            form.style.display = 'none';
+            form.reset();
+        });
+    }
+    
+    function saveChanges() {
+        // Collect all form data from all tabs
+        const formsData = {};
+        
+        // Collect data from visible forms
+        Array.from(document.querySelectorAll('.add-form'))
+            .filter(form => form.style.display !== 'none')
+            .forEach(form => {
+                const formData = new FormData(form);
+                const tabId = form.closest('.tab-pane').id;
+                if (!formsData[tabId]) formsData[tabId] = [];
+                formsData[tabId].push(Object.fromEntries(formData));
+            });
+        
+        // Send AJAX request to save all changes
+        fetch("{% url 'employees:employee_inline_update' employee.pk %}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            },
+            body: JSON.stringify(formsData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('تم حفظ التغييرات بنجاح!');
+                location.reload();
+            } else {
+                alert('حدث خطأ أثناء الحفظ: ' + data.error);
+            }
+        })
+        .catch(error => {
+            alert('حدث خطأ أثناء الحفظ');
+            console.error('Error:', error);
+        });
+    }
+    
+    // Add event listeners for add buttons
+    document.querySelectorAll('.add-form-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const targetForm = document.querySelector(this.dataset.target);
+            if (targetForm) {
+                targetForm.style.display = targetForm.style.display === 'none' ? 'block' : 'none';
+            }
+        });
+    });
+    
+    // Add event listeners for edit item buttons
+    document.querySelectorAll('.edit-item-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const itemId = this.dataset.itemId;
+            const itemType = this.dataset.itemType;
+            // Implement edit functionality for existing items
+            editExistingItem(itemType, itemId);
+        });
+    });
+    
+    // Add event listeners for delete item buttons
+    document.querySelectorAll('.delete-item-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            if (confirm('هل أنت متأكد من حذف هذا العنصر؟')) {
+                const itemId = this.dataset.itemId;
+                const itemType = this.dataset.itemType;
+                deleteItem(itemType, itemId);
+            }
+        });
+    });
+    
+    function editExistingItem(itemType, itemId) {
+        // Fetch item data and populate form
+        fetch(`/employees/${itemType}/${itemId}/get/`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Populate form with data
+                    const form = document.querySelector(`#${itemType}-form`);
+                    if (form) {
+                        Object.keys(data.item).forEach(key => {
+                            const field = form.querySelector(`[name=${key}]`);
+                            if (field) field.value = data.item[key];
+                        });
+                        form.style.display = 'block';
+                    }
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+    
+    function deleteItem(itemType, itemId) {
+        fetch(`/employees/${itemType}/${itemId}/delete/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Remove item from DOM
+                const itemElement = document.querySelector(`#${itemType}-${itemId}`);
+                if (itemElement) {
+                    itemElement.remove();
+                }
+            } else {
+                alert('حدث خطأ أثناء الحذف');
+            }
+        })
+        .catch(error => {
+            alert('حدث خطأ أثناء الحذف');
+            console.error('Error:', error);
+        });
+    }
+});
+</script>
+{% endblock %}
+
 {% block extra_css %}
 <style>
+    /* Ensure tabs remain visible during edit mode */
+    .nav-tabs {
+        display: flex !important;
+        visibility: visible !important;
+    }
+    
+    .nav-tabs .nav-item {
+        display: list-item !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
     .nav-tabs .nav-link {
         color: #495057;
         font-weight: 500;
+        pointer-events: auto !important;
+        opacity: 1 !important;
+        display: block !important;
     }
     .nav-tabs .nav-link.active {
         color: #0d6efd;
@@ -41,6 +498,19 @@
         max-width: 200px;
         border-radius: 10px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .employee-photo:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .fa-user-circle {
+        cursor: pointer;
+        transition: color 0.2s ease;
+    }
+    .fa-user-circle:hover {
+        color: #0d6efd !important;
     }
     .badge-status {
         font-size: 0.9rem;
@@ -58,10 +528,14 @@
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-md-2 text-center">
+                            <form id="photoUploadForm" method="post" enctype="multipart/form-data" action="{% url 'employees:photo_upload' employee.pk %}">
+                                {% csrf_token %}
+                                <input type="file" id="photoInput" name="photo" accept="image/*" style="display: none;" onchange="this.form.submit();">
+                            </form>
                             {% if employee.photo %}
-                                <img src="{{ employee.photo.url }}" alt="{{ employee.get_full_name_ar }}" class="employee-photo">
+                                <img src="{{ employee.photo.url }}" alt="{{ employee.get_full_name_ar }}" class="employee-photo" style="cursor: pointer;" onclick="document.getElementById('photoInput').click();" title="انقر لتغيير الصورة">
                             {% else %}
-                                <i class="fas fa-user-circle fa-8x text-secondary"></i>
+                                <i class="fas fa-user-circle fa-8x text-secondary" style="cursor: pointer;" onclick="document.getElementById('photoInput').click();" title="انقر لإضافة صورة"></i>
                             {% endif %}
                         </div>
                         <div class="col-md-7">
@@ -78,16 +552,165 @@
                             </p>
                         </div>
                         <div class="col-md-3 text-end">
-                            <a href="{% url 'employees:employee_update' employee.pk %}" class="btn btn-warning mb-2">
-                                <i class="fas fa-edit"></i> تعديل
-                            </a>
-                            <a href="{% url 'employees:employee_list' %}" class="btn btn-secondary mb-2">
+                            <div class="mb-2">
+                                <button type="button" id="editBtn" class="btn btn-warning">
+                                    <i class="fas fa-edit"></i> تعديل
+                                </button>
+                                <button type="button" id="saveBtn" class="btn btn-success" style="display: none;">
+                                    <i class="fas fa-save"></i> حفظ
+                                </button>
+                                <button type="button" id="cancelBtn" class="btn btn-secondary" style="display: none;">
+                                    <i class="fas fa-times"></i> إلغاء
+                                </button>
+                            </div>
+                            <small class="text-muted d-block mb-2" id="editHelpText">
+                                <i class="fas fa-info-circle"></i> اضغط على "تعديل" لإضافة أو تعديل البيانات
+                            </small>
+                            <button type="button" class="btn btn-info btn-sm" onclick="forceShowAllElements()">
+                                <i class="fas fa-eye"></i> إظهار جميع العناصر (للتصحيح)
+                            </button>
+                            <a href="{% url 'employees:employee_list' %}" class="btn btn-secondary">
                                 <i class="fas fa-arrow-right"></i> العودة
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Health Insurance Tab -->
+        <div class="tab-pane fade" id="health-insurance" role="tabpanel">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="section-title">التأمين الصحي</div>
+                <button type="button" class="btn btn-primary btn-sm add-form-btn" data-target="#health-insurance-form" style="display: none;">
+                    <i class="fas fa-plus"></i> إضافة تأمين صحي
+                </button>
+            </div>
+            
+            <!-- Add Health Insurance Form -->
+            <div class="card mb-3 add-form" id="health-insurance-form" style="display: none;">
+                <div class="card-header">
+                    <h6 class="mb-0">إضافة/تعديل التأمين الصحي</h6>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="form-label">شركة التأمين</label>
+                                <input type="text" name="insurance_company" class="form-control" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">رقم الوثيقة</label>
+                                <input type="text" name="policy_number" class="form-control" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">نوع التأمين</label>
+                                <select name="insurance_type" class="form-select" required>
+                                    <option value="">اختر النوع</option>
+                                    <option value="basic">تأمين أساسي</option>
+                                    <option value="comprehensive">تأمين شامل</option>
+                                    <option value="family">تأمين عائلي</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <label class="form-label">تاريخ البداية</label>
+                                <input type="date" name="start_date" class="form-control" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">تاريخ النهاية</label>
+                                <input type="date" name="end_date" class="form-control">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">قسط التأمين</label>
+                                <input type="number" name="premium" class="form-control" step="0.01">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <label class="form-label">تغطية التأمين</label>
+                                <textarea name="coverage_details" class="form-control" rows="2"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">ملاحظات</label>
+                                <textarea name="notes" class="form-control" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-success btn-sm">
+                                    <i class="fas fa-save"></i> حفظ
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="this.closest('.add-form').style.display='none'">
+                                    <i class="fas fa-times"></i> إلغاء
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Health Insurance List -->
+            {% if health_insurances %}
+                <div class="table-responsive">
+                    <h6 class="text-primary mb-3">التأمينات الصحية</h6>
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>شركة التأمين</th>
+                                <th>رقم التأمين</th>
+                                <th>نوع التأمين</th>
+                                <th>تاريخ البداية</th>
+                                <th>تاريخ النهاية</th>
+                                <th>قسط التأمين</th>
+                                <th>الحالة</th>
+                                <th class="edit-actions" style="display: none;">إجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for insurance in health_insurances %}
+                            <tr id="health-insurance-{{ insurance.id }}">
+                                <td>{{ insurance.insurance_company|default:"غير محدد" }}</td>
+                                <td>{{ insurance.insurance_number }}</td>
+                                <td>{{ insurance.get_insurance_type_display }}</td>
+                                <td>{{ insurance.start_date|date:"Y-m-d" }}</td>
+                                <td>{{ insurance.end_date|date:"Y-m-d"|default:"غير محدد" }}</td>
+                                <td>{{ insurance.monthly_premium|floatformat:2|default:"غير محدد" }}</td>
+                                <td>
+                                    {% if insurance.end_date %}
+                                        {% if insurance.end_date > today %}
+                                            <span class="badge bg-success">نشط</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">منتهي</span>
+                                        {% endif %}
+                                    {% else %}
+                                        <span class="badge bg-success">نشط</span>
+                                    {% endif %}
+                                </td>
+                                <td class="edit-actions" style="display: none;">
+                                    <button type="button" class="btn btn-sm btn-warning edit-item-btn" 
+                                            data-item-id="{{ insurance.id }}" 
+                                            data-item-type="insurance">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-danger delete-item-btn" 
+                                            data-item-id="{{ insurance.id }}" 
+                                            data-item-type="insurance">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> لا توجد بيانات تأمين صحي مسجل لهذا الموظف
+                </div>
+            {% endif %}
         </div>
     </div>
 
@@ -141,6 +764,11 @@
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="experience-tab" data-bs-toggle="tab" data-bs-target="#experience" type="button" role="tab">
                 <i class="fas fa-briefcase"></i> الخبرات
+            </button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="health-insurance-tab" data-bs-toggle="tab" data-bs-target="#health-insurance" type="button" role="tab">
+                <i class="fas fa-heartbeat"></i> التأمين الصحي
             </button>
         </li>
     </ul>
@@ -325,9 +953,83 @@
 
         <!-- Insurance Tab -->
         <div class="tab-pane fade" id="insurance" role="tabpanel">
-            <div class="section-title">التأمينات الاجتماعية والصحية</div>
-            {% if employee.insurances.all %}
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="section-title">التأمينات الاجتماعية والصحية</div>
+                <button type="button" class="btn btn-primary btn-sm add-form-btn" data-target="#insurance-form" style="display: none;">
+                    <i class="fas fa-plus"></i> إضافة تأمين
+                </button>
+            </div>
+
+            <!-- Add Insurance Form -->
+            <div class="card mb-3 add-form" id="insurance-form" style="display: none;">
+                <div class="card-header">
+                    <h6 class="mb-0">إضافة/تعديل التأمين</h6>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="form-label">نوع التأمين</label>
+                                <select name="insurance_type" class="form-select" required>
+                                    <option value="">اختر النوع</option>
+                                    <option value="social">تأمين اجتماعي</option>
+                                    <option value="health">تأمين صحي</option>
+                                    <option value="life">تأمين على الحياة</option>
+                                    <option value="work">تأمين ضد الحوادث</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">رقم التأمين</label>
+                                <input type="text" name="insurance_number" class="form-control" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">شركة التأمين</label>
+                                <input type="text" name="insurance_company" class="form-control" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">قيمة التغطية</label>
+                                <input type="number" name="coverage_amount" class="form-control" step="0.01">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <label class="form-label">القسط الشهري</label>
+                                <input type="number" name="monthly_premium" class="form-control" step="0.01">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">تاريخ البداية</label>
+                                <input type="date" name="start_date" class="form-control" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">تاريخ النهاية</label>
+                                <input type="date" name="end_date" class="form-control">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">الحالة</label>
+                                <select name="status" class="form-select">
+                                    <option value="active">نشط</option>
+                                    <option value="inactive">غير نشط</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-success btn-sm">
+                                    <i class="fas fa-save"></i> حفظ
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="this.closest('.add-form').style.display='none'">
+                                    <i class="fas fa-times"></i> إلغاء
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            {% if social_insurances %}
                 <div class="table-responsive">
+                    <h6 class="text-primary mb-3 mt-4">التأمينات الاجتماعية</h6>
                     <table class="table table-hover">
                         <thead class="table-light">
                             <tr>
@@ -338,11 +1040,12 @@
                                 <th>تاريخ النهاية</th>
                                 <th>قيمة التغطية</th>
                                 <th>القسط الشهري</th>
+                                <th class="edit-actions" style="display: none;">إجراءات</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for insurance in employee.insurances.all %}
-                            <tr>
+                            {% for insurance in social_insurances %}
+                            <tr id="social-insurance-{{ insurance.id }}">
                                 <td>{{ insurance.get_insurance_type_display }}</td>
                                 <td>{{ insurance.insurance_number }}</td>
                                 <td>{{ insurance.insurance_company|default:"غير محدد" }}</td>
@@ -350,6 +1053,18 @@
                                 <td>{{ insurance.end_date|date:"Y-m-d"|default:"مستمر" }}</td>
                                 <td>{{ insurance.coverage_amount|floatformat:2|default:"غير محدد" }}</td>
                                 <td>{{ insurance.monthly_premium|floatformat:2|default:"غير محدد" }}</td>
+                                <td class="edit-actions" style="display: none;">
+                                    <button type="button" class="btn btn-sm btn-warning edit-item-btn" 
+                                            data-item-id="{{ insurance.id }}" 
+                                            data-item-type="insurance">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-danger delete-item-btn" 
+                                            data-item-id="{{ insurance.id }}" 
+                                            data-item-type="insurance">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -364,9 +1079,93 @@
 
         <!-- Contracts Tab -->
         <div class="tab-pane fade" id="contracts" role="tabpanel">
-            <div class="section-title">عقود العمل</div>
-            {% if employee.contracts.all %}
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="section-title">عقود العمل</div>
+                <button type="button" class="btn btn-primary btn-sm add-form-btn" data-target="#contract-form" style="display: none;">
+                    <i class="fas fa-plus"></i> إضافة عقد
+                </button>
+            </div>
+
+            <!-- Add Contract Form -->
+            <div class="card mb-3 add-form" id="contract-form" style="display: none;">
+                <div class="card-header">
+                    <h6 class="mb-0">إضافة/تعديل العقد</h6>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="form-label">رقم العقد</label>
+                                <input type="text" name="contract_number" class="form-control" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">نوع العقد</label>
+                                <select name="contract_type" class="form-select" required>
+                                    <option value="">اختر النوع</option>
+                                    <option value="permanent">دائم</option>
+                                    <option value="temporary">مؤقت</option>
+                                    <option value="contract">عقد عمل</option>
+                                    <option value="part_time">دوام جزئي</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">تاريخ البداية</label>
+                                <input type="date" name="start_date" class="form-control" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">تاريخ النهاية</label>
+                                <input type="date" name="end_date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <label class="form-label">الراتب الأساسي</label>
+                                <input type="number" name="salary" class="form-control" step="0.01" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">بدل السكن</label>
+                                <input type="number" name="housing_allowance" class="form-control" step="0.01">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">بدل المواصلات</label>
+                                <input type="number" name="transportation_allowance" class="form-control" step="0.01">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">بدل طعام</label>
+                                <input type="number" name="food_allowance" class="form-control" step="0.01">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <label class="form-label">ملاحظات</label>
+                                <textarea name="notes" class="form-control" rows="2"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">الحالة</label>
+                                <select name="status" class="form-select">
+                                    <option value="active">نشط</option>
+                                    <option value="inactive">غير نشط</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-success btn-sm">
+                                    <i class="fas fa-save"></i> حفظ
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="this.closest('.add-form').style.display='none'">
+                                    <i class="fas fa-times"></i> إلغاء
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            {% if contracts %}
                 <div class="table-responsive">
+                    <h6 class="text-primary mb-3">عقود العمل</h6>
                     <table class="table table-hover">
                         <thead class="table-light">
                             <tr>
@@ -376,22 +1175,35 @@
                                 <th>تاريخ النهاية</th>
                                 <th>الراتب</th>
                                 <th>الحالة</th>
+                                <th class="edit-actions" style="display: none;">إجراءات</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for contract in employee.contracts.all %}
-                            <tr>
+                            {% for contract in contracts %}
+                            <tr id="contract-{{ contract.id }}">
                                 <td>{{ contract.contract_number }}</td>
                                 <td>{{ contract.get_contract_type_display }}</td>
                                 <td>{{ contract.start_date|date:"Y-m-d" }}</td>
                                 <td>{{ contract.end_date|date:"Y-m-d"|default:"غير محدد" }}</td>
                                 <td>{{ contract.salary|floatformat:2 }} ريال</td>
                                 <td>
-                                    {% if contract.is_active %}
+                                    {% if contract.is_current %}
                                         <span class="badge bg-success">نشط</span>
                                     {% else %}
                                         <span class="badge bg-secondary">منتهي</span>
                                     {% endif %}
+                                </td>
+                                <td class="edit-actions" style="display: none;">
+                                    <button type="button" class="btn btn-sm btn-warning edit-item-btn" 
+                                            data-item-id="{{ contract.id }}" 
+                                            data-item-type="contract">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-danger delete-item-btn" 
+                                            data-item-id="{{ contract.id }}" 
+                                            data-item-type="contract">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -407,8 +1219,83 @@
 
         <!-- Custody Tab -->
         <div class="tab-pane fade" id="custody" role="tabpanel">
-            <div class="section-title">عهد الموظف</div>
-            {% if employee.custodies.all %}
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="section-title">عهد الموظف</div>
+                <button type="button" class="btn btn-primary btn-sm add-form-btn" data-target="#custody-form" style="display: none;">
+                    <i class="fas fa-plus"></i> إضافة عهدة
+                </button>
+            </div>
+
+            <!-- Add Custody Form -->
+            <div class="card mb-3 add-form" id="custody-form" style="display: none;">
+                <div class="card-header">
+                    <h6 class="mb-0">إضافة/تعديل العهدة</h6>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="form-label">نوع العهدة</label>
+                                <select name="custody_type" class="form-select" required>
+                                    <option value="">اختر النوع</option>
+                                    <option value="device">جهاز</option>
+                                    <option value="tool">أداة</option>
+                                    <option value="accessory">ملحق</option>
+                                    <option value="other">أخرى</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">اسم الصنف</label>
+                                <input type="text" name="item_name" class="form-control" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">الرقم التسلسلي</label>
+                                <input type="text" name="serial_number" class="form-control">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">قيمة الصنف</label>
+                                <input type="number" name="item_value" class="form-control" step="0.01" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <label class="form-label">تاريخ الاستلام</label>
+                                <input type="date" name="issue_date" class="form-control" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">تاريخ الإرجاع</label>
+                                <input type="date" name="return_date" class="form-control">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">الحالة</label>
+                                <select name="status" class="form-select" required>
+                                    <option value="active">نشطة</option>
+                                    <option value="returned">مُرتجعة</option>
+                                    <option value="lost">مفقودة</option>
+                                    <option value="damaged">تالفة</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">ملاحظات</label>
+                                <textarea name="notes" class="form-control" rows="1"></textarea>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-success btn-sm">
+                                    <i class="fas fa-save"></i> حفظ
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="this.closest('.add-form').style.display='none'">
+                                    <i class="fas fa-times"></i> إلغاء
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            {% if custodies %}
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead class="table-light">
@@ -420,10 +1307,11 @@
                                 <th>تاريخ الاستلام</th>
                                 <th>تاريخ الإرجاع</th>
                                 <th>الحالة</th>
+                                <th class="edit-actions" style="display: none;">إجراءات</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for custody in employee.custodies.all %}
+                            {% for custody in custodies %}
                             <tr>
                                 <td>{{ custody.get_custody_type_display }}</td>
                                 <td>{{ custody.item_name }}</td>
@@ -442,6 +1330,14 @@
                                         <span class="badge bg-warning">تالفة</span>
                                     {% endif %}
                                 </td>
+                                <td class="edit-actions" style="display: none;">
+                                    <button type="button" class="btn btn-sm btn-warning edit-item-btn" data-id="{{ custody.id }}" data-type="custody">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-danger delete-item-btn" data-id="{{ custody.id }}" data-type="custody">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -457,8 +1353,82 @@
 
         <!-- Documents Tab -->
         <div class="tab-pane fade" id="documents" role="tabpanel">
-            <div class="section-title">المستندات</div>
-            {% if employee.documents.all %}
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="section-title">المستندات</div>
+                <button type="button" class="btn btn-primary btn-sm add-form-btn" data-target="#document-form" style="display: none;">
+                    <i class="fas fa-plus"></i> إضافة مستند
+                </button>
+            </div>
+
+            <!-- Add Document Form -->
+            <div class="card mb-3 add-form" id="document-form" style="display: none;">
+                <div class="card-header">
+                    <h6 class="mb-0">إضافة/تعديل المستند</h6>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="form-label">نوع المستند</label>
+                                <select name="document_type" class="form-select" required>
+                                    <option value="">اختر النوع</option>
+                                    <option value="id">بطاقة هوية</option>
+                                    <option value="passport">جواز سفر</option>
+                                    <option value="license">رخصة</option>
+                                    <option value="certificate">شهادة</option>
+                                    <option value="contract">عقد</option>
+                                    <option value="other">أخرى</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">اسم المستند</label>
+                                <input type="text" name="document_name" class="form-control" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">رقم المستند</label>
+                                <input type="text" name="document_number" class="form-control">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">جهة الإصدار</label>
+                                <input type="text" name="issuing_authority" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <label class="form-label">تاريخ الإصدار</label>
+                                <input type="date" name="issue_date" class="form-control">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">تاريخ الانتهاء</label>
+                                <input type="date" name="expiry_date" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">ملف المستند</label>
+                                <input type="file" name="document_file" class="form-control" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <label class="form-label">ملاحظات</label>
+                                <textarea name="notes" class="form-control" rows="2"></textarea>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-success btn-sm">
+                                    <i class="fas fa-save"></i> حفظ
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="this.closest('.add-form').style.display='none'">
+                                    <i class="fas fa-times"></i> إلغاء
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            {% if documents %}
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead class="table-light">
@@ -469,10 +1439,11 @@
                                 <th>تاريخ الإصدار</th>
                                 <th>تاريخ الانتهاء</th>
                                 <th>الملف</th>
+                                <th class="edit-actions" style="display: none;">إجراءات</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for document in employee.documents.all %}
+                            {% for document in documents %}
                             <tr>
                                 <td>{{ document.get_document_type_display }}</td>
                                 <td>{{ document.document_name }}</td>
@@ -488,6 +1459,14 @@
                                         <span class="text-muted">لا يوجد ملف</span>
                                     {% endif %}
                                 </td>
+                                <td class="edit-actions" style="display: none;">
+                                    <button type="button" class="btn btn-sm btn-warning edit-item-btn" data-id="{{ document.id }}" data-type="document">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-danger delete-item-btn" data-id="{{ document.id }}" data-type="document">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -502,8 +1481,81 @@
 
         <!-- Education Tab -->
         <div class="tab-pane fade" id="education" role="tabpanel">
-            <div class="section-title">المؤهلات العلمية</div>
-            {% if employee.education.all %}
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="section-title">المؤهلات العلمية</div>
+                <button type="button" class="btn btn-primary btn-sm add-form-btn" data-target="#education-form" style="display: none;">
+                    <i class="fas fa-plus"></i> إضافة مؤهل
+                </button>
+            </div>
+
+            <!-- Add Education Form -->
+            <div class="card mb-3 add-form" id="education-form" style="display: none;">
+                <div class="card-header">
+                    <h6 class="mb-0">إضافة/تعديل المؤهل العلمي</h6>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="form-label">الدرجة العلمية</label>
+                                <select name="degree" class="form-select" required>
+                                    <option value="">اختر الدرجة</option>
+                                    <option value="high_school">الثانوية العامة</option>
+                                    <option value="diploma">دبلوم</option>
+                                    <option value="bachelor">بكالوريوس</option>
+                                    <option value="master">ماجستير</option>
+                                    <option value="phd">دكتوراه</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">مجال الدراسة</label>
+                                <input type="text" name="field_of_study" class="form-control" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">المؤسسة التعليمية</label>
+                                <input type="text" name="institution" class="form-control" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">سنة التخرج</label>
+                                <input type="number" name="graduation_year" class="form-control" min="1900" max="2099">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <label class="form-label">التقدير</label>
+                                <select name="grade" class="form-select">
+                                    <option value="">اختر التقدير</option>
+                                    <option value="excellent">ممتاز</option>
+                                    <option value="very_good">جيد جداً</option>
+                                    <option value="good">جيد</option>
+                                    <option value="acceptable">مقبول</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">المعدل التراكمي</label>
+                                <input type="number" name="gpa" class="form-control" step="0.01" min="0" max="4">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">ملاحظات</label>
+                                <textarea name="notes" class="form-control" rows="1"></textarea>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-success btn-sm">
+                                    <i class="fas fa-save"></i> حفظ
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="this.closest('.add-form').style.display='none'">
+                                    <i class="fas fa-times"></i> إلغاء
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            {% if education %}
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead class="table-light">
@@ -513,16 +1565,25 @@
                                 <th>المؤسسة التعليمية</th>
                                 <th>سنة التخرج</th>
                                 <th>التقدير</th>
+                                <th class="edit-actions" style="display: none;">إجراءات</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for edu in employee.education.all %}
+                            {% for edu in education %}
                             <tr>
                                 <td>{{ edu.get_degree_display }}</td>
                                 <td>{{ edu.field_of_study }}</td>
                                 <td>{{ edu.institution }}</td>
                                 <td>{{ edu.graduation_year|default:"غير محدد" }}</td>
                                 <td>{{ edu.grade|default:"غير محدد" }}</td>
+                                <td class="edit-actions" style="display: none;">
+                                    <button type="button" class="btn btn-sm btn-warning edit-item-btn" data-id="{{ edu.id }}" data-type="education">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-danger delete-item-btn" data-id="{{ edu.id }}" data-type="education">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -537,8 +1598,91 @@
 
         <!-- Experience Tab -->
         <div class="tab-pane fade" id="experience" role="tabpanel">
-            <div class="section-title">الخبرات العملية</div>
-            {% if employee.experience.all %}
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="section-title">الخبرات العملية</div>
+                <button type="button" class="btn btn-primary btn-sm add-form-btn" data-target="#experience-form" style="display: none;">
+                    <i class="fas fa-plus"></i> إضافة خبرة
+                </button>
+            </div>
+
+            <!-- Add Experience Form -->
+            <div class="card mb-3 add-form" id="experience-form" style="display: none;">
+                <div class="card-header">
+                    <h6 class="mb-0">إضافة/تعديل الخبرة العملية</h6>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="form-label">اسم الشركة</label>
+                                <input type="text" name="company_name" class="form-control" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">المنصب</label>
+                                <input type="text" name="position" class="form-control" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">القطاع</label>
+                                <select name="industry" class="form-select">
+                                    <option value="">اختر القطاع</option>
+                                    <option value="technology">تكنولوجيا</option>
+                                    <option value="healthcare">رعاية صحية</option>
+                                    <option value="finance">مالية</option>
+                                    <option value="education">تعليم</option>
+                                    <option value="government">حكومي</option>
+                                    <option value="other">أخرى</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <label class="form-label">تاريخ البداية</label>
+                                <input type="date" name="start_date" class="form-control" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">تاريخ النهاية</label>
+                                <input type="date" name="end_date" class="form-control">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">الوضع الحالي</label>
+                                <select name="is_current" class="form-select">
+                                    <option value="false">منتهية</option>
+                                    <option value="true">حالية</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">الراتب الأخير</label>
+                                <input type="number" name="salary" class="form-control" step="0.01">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <label class="form-label">المسؤوليات والواجبات</label>
+                                <textarea name="responsibilities" class="form-control" rows="3" placeholder="صف المسؤوليات الرئيسية..."></textarea>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <label class="form-label">الإنجازات</label>
+                                <textarea name="achievements" class="form-control" rows="2" placeholder="أهم الإنجازات..."></textarea>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-success btn-sm">
+                                    <i class="fas fa-save"></i> حفظ
+                                </button>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="this.closest('.add-form').style.display='none'">
+                                    <i class="fas fa-times"></i> إلغاء
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            {% if experience %}
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead class="table-light">
@@ -549,10 +1693,11 @@
                                 <th>تاريخ النهاية</th>
                                 <th>المدة</th>
                                 <th>المسؤوليات</th>
+                                <th class="edit-actions" style="display: none;">إجراءات</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% for exp in employee.experience.all %}
+                            {% for exp in experience %}
                             <tr>
                                 <td>{{ exp.company_name }}</td>
                                 <td>{{ exp.position }}</td>
@@ -572,6 +1717,14 @@
                                     {% endif %}
                                 </td>
                                 <td>{{ exp.responsibilities|truncatewords:10|default:"غير محدد" }}</td>
+                                <td class="edit-actions" style="display: none;">
+                                    <button type="button" class="btn btn-sm btn-warning edit-item-btn" data-id="{{ exp.id }}" data-type="experience">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-danger delete-item-btn" data-id="{{ exp.id }}" data-type="experience">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>

@@ -1284,3 +1284,70 @@ class EmployeeCustody(BaseModel):
 
     def __str__(self):
         return f"{self.employee.emp_code} - {self.item_name}"
+
+
+class EmployeeQualification(BaseModel):
+    """
+    Employee educational qualifications
+    المؤهلات الدراسية للموظف
+    """
+    EDUCATION_LEVEL_CHOICES = [
+        ('primary', 'ابتدائي'),
+        ('intermediate', 'متوسط'),
+        ('secondary', 'ثانوي'),
+        ('diploma', 'دبلوم'),
+        ('bachelor', 'بكالوريوس'),
+        ('master', 'ماجستير'),
+        ('doctorate', 'دكتوراه'),
+        ('other', 'أخرى'),
+    ]
+
+    employee = models.ForeignKey(
+        Employee,
+        on_delete=models.CASCADE,
+        related_name='qualifications',
+        verbose_name='الموظف'
+    )
+    education_level = models.CharField(
+        max_length=20,
+        choices=EDUCATION_LEVEL_CHOICES,
+        verbose_name='المستوى التعليمي'
+    )
+    major = models.CharField(
+        max_length=200,
+        verbose_name='التخصص'
+    )
+    institution_name = models.CharField(
+        max_length=200,
+        verbose_name='اسم المؤسسة التعليمية'
+    )
+    graduation_year = models.IntegerField(
+        verbose_name='سنة التخرج'
+    )
+    grade = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        verbose_name='الدرجة/التقدير'
+    )
+    certificate_file = models.FileField(
+        upload_to='employees/certificates/',
+        blank=True,
+        null=True,
+        validators=[FileExtensionValidator(['pdf', 'jpg', 'jpeg', 'png'])],
+        verbose_name='ملف الشهادة'
+    )
+    notes = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name='ملاحظات'
+    )
+
+    class Meta:
+        db_table = 'Tbl_Employee_Qualifications'
+        verbose_name = 'مؤهل موظف'
+        verbose_name_plural = 'مؤهلات الموظفين'
+        ordering = ['-graduation_year']
+
+    def __str__(self):
+        return f"{self.employee.emp_code} - {self.get_education_level_display()}"

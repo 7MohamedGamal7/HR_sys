@@ -27,8 +27,12 @@ SECRET_KEY = config('SECRET_KEY', default='dev-secret-key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost', cast=Csv())
-CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', default='http://127.0.0.1,http://localhost', cast=Csv())
+# Disable SSL redirect for development
+SECURE_SSL_REDIRECT = False
+SECURE_PROXY_SSL_HEADER = None
+
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost,192.168.1.48', cast=Csv())
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', default='http://127.0.0.1,http://192.168.1.48,http://localhost', cast=Csv())
 
 
 # Application definition
@@ -104,20 +108,31 @@ WSGI_APPLICATION = 'HR_sys.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'mssql',
-        'NAME': config('DB_NAME', default='HR_System'),
-        'USER': config('DB_USER', default=''),
-        'PASSWORD': config('DB_PASSWORD', default=''),
-        'HOST': config('DB_HOST', default='127.0.0.1'),
-        'PORT': config('DB_PORT', default='1433'),
-        'OPTIONS': {
-            'driver': 'ODBC Driver 17 for SQL Server',
-        },
-        'CONN_MAX_AGE': 60,
+DB_ENGINE = config('DB_ENGINE', default='sqlite')
+
+if DB_ENGINE == 'mssql':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'mssql',
+            'NAME': config('DB_NAME', default='HR_System_New'),
+            'USER': config('DB_USER', default='admin'),
+            'PASSWORD': config('DB_PASSWORD', default='hgslduhgfwdv'),
+            'HOST': config('DB_HOST', default='192.168.1.48'),
+            'PORT': config('DB_PORT', default='1433'),
+            'OPTIONS': {
+                'driver': 'ODBC Driver 17 for SQL Server',
+                'extra_params': 'TrustServerCertificate=yes;MARS_Connection=yes;'
+            },
+            'CONN_MAX_AGE': 60,
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': str(BASE_DIR / 'db.sqlite3'),
+        }
+    }
 
 
 
