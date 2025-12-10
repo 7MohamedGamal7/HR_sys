@@ -3388,3 +3388,123 @@ INFO 2025-12-09 14:28:39,805 basehttp "GET /leaves/balances/ HTTP/1.1" 200 18552
 INFO 2025-12-09 14:28:45,516 basehttp "GET /leaves/balance/create/ HTTP/1.1" 200 19403
 INFO 2025-12-09 14:29:03,613 basehttp "POST /leaves/balance/create/ HTTP/1.1" 302 0
 INFO 2025-12-09 14:29:03,638 basehttp "GET /leaves/balances/ HTTP/1.1" 200 19066
+INFO 2025-12-09 14:30:54,548 basehttp "GET /leaves/balance/2/update/ HTTP/1.1" 200 19445
+INFO 2025-12-09 14:39:59,138 autoreload F:\HR_sys\v3\HR_sys\leaves\forms.py changed, reloading.
+INFO 2025-12-09 14:40:01,680 autoreload Watching for file changes with StatReloader
+INFO 2025-12-09 14:42:07,038 autoreload F:\HR_sys\v3\HR_sys\leaves\views.py changed, reloading.
+INFO 2025-12-09 14:42:07,664 autoreload Watching for file changes with StatReloader
+INFO 2025-12-09 14:45:55,189 basehttp "GET /login/?next=/%3Fide_webview_request_time%3D1765208486017 HTTP/1.1" 200 7575
+WARNING 2025-12-09 14:45:55,447 log Not Found: /@vite/client
+WARNING 2025-12-09 14:45:55,447 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-09 14:45:58,660 basehttp "GET /login/?next=/%3Fide_webview_request_time%3D1765208486017 HTTP/1.1" 200 7575
+INFO 2025-12-09 14:45:58,680 basehttp "GET /login/?next=/%3Fide_webview_request_time%3D1765208486017 HTTP/1.1" 200 7575
+WARNING 2025-12-09 14:45:58,763 log Not Found: /@vite/client
+WARNING 2025-12-09 14:45:58,764 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-09 14:46:12,155 basehttp "GET /login/?next=/%3Fide_webview_request_time%3D1765208486017 HTTP/1.1" 200 7575
+INFO 2025-12-09 14:46:12,175 basehttp "GET /login/?next=/%3Fide_webview_request_time%3D1765208486017 HTTP/1.1" 200 7575
+WARNING 2025-12-09 14:46:12,263 log Not Found: /@vite/client
+WARNING 2025-12-09 14:46:12,263 basehttp "GET /@vite/client HTTP/1.1" 404 6641
+INFO 2025-12-09 14:46:23,962 basehttp "GET /leaves/balance/2/update/ HTTP/1.1" 200 19464
+INFO 2025-12-09 14:46:31,776 basehttp "GET /leaves/policies/ HTTP/1.1" 200 17853
+INFO 2025-12-09 14:46:33,335 basehttp "GET /leaves/policy/create/ HTTP/1.1" 200 20258
+INFO 2025-12-09 14:46:37,324 basehttp "GET /leaves/my-balance/ HTTP/1.1" 302 0
+INFO 2025-12-09 14:46:37,339 basehttp "GET / HTTP/1.1" 200 22353
+INFO 2025-12-09 14:46:40,451 basehttp "GET /leaves/balances/ HTTP/1.1" 200 20167
+INFO 2025-12-09 14:46:44,052 basehttp "GET /leaves/balance/create/ HTTP/1.1" 200 19450
+INFO 2025-12-09 14:46:48,779 basehttp "GET /settings/ HTTP/1.1" 200 37225
+INFO 2025-12-09 14:46:48,814 basehttp "GET /media/company/%D9%84%D9%88%D8%AC%D9%88_%D8%A3%D9%88%D8%B1%D9%8A%D9%86%D8%AA_%D8%B9%D8%B1%D8%A8%D9%8A.jpg HTTP/1.1" 200 11712
+INFO 2025-12-09 14:46:57,546 basehttp "GET /attendance/ HTTP/1.1" 200 17871
+INFO 2025-12-09 14:46:59,394 basehttp "GET /attendance/add/ HTTP/1.1" 200 20762
+INFO 2025-12-09 14:47:04,660 basehttp "GET / HTTP/1.1" 200 22009
+INFO 2025-12-09 15:00:13,279 basehttp "GET / HTTP/1.1" 200 22009
+INFO 2025-12-09 15:00:21,209 basehttp "GET /payroll/ HTTP/1.1" 200 17815
+INFO 2025-12-09 15:00:24,487 basehttp "GET /recruitment/ HTTP/1.1" 200 17860
+INFO 2025-12-09 15:00:26,761 basehttp "GET /recruitment/job/create/ HTTP/1.1" 200 21875
+INFO 2025-12-09 15:01:34,317 basehttp "POST /recruitment/job/create/ HTTP/1.1" 302 0
+ERROR 2025-12-09 15:01:34,473 log Internal Server Error: /recruitment/job/1/
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\v3\HR_sys\recruitment\views.py", line 53, in job_detail
+    return render(request, 'recruitment/job_detail.html', context)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: recruitment/job_detail.html
+ERROR 2025-12-09 15:01:34,483 basehttp "GET /recruitment/job/1/ HTTP/1.1" 500 99906
+INFO 2025-12-09 15:01:42,335 basehttp "GET /recruitment/job/1/ HTTP/1.1" 302 0
+INFO 2025-12-09 15:01:42,339 basehttp "GET /login/?next=/recruitment/job/1/ HTTP/1.1" 200 7575
+INFO 2025-12-09 15:16:23,915 basehttp "GET /recruitment/job/1/ HTTP/1.1" 200 20793
+INFO 2025-12-09 15:16:32,744 basehttp "GET /recruitment/job/1/apply/ HTTP/1.1" 200 20290
+INFO 2025-12-09 15:16:55,005 basehttp "POST /recruitment/job/1/apply/ HTTP/1.1" 302 0
+ERROR 2025-12-09 15:16:55,043 log Internal Server Error: /recruitment/application/1/
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\v3\HR_sys\recruitment\views.py", line 134, in application_detail
+    return render(request, 'recruitment/application_detail.html', context)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: recruitment/application_detail.html
+ERROR 2025-12-09 15:16:55,045 basehttp "GET /recruitment/application/1/ HTTP/1.1" 500 100399
+INFO 2025-12-09 15:17:01,077 basehttp "GET /recruitment/application/1/ HTTP/1.1" 302 0
+INFO 2025-12-09 15:17:01,080 basehttp "GET /login/?next=/recruitment/application/1/ HTTP/1.1" 200 7575
+INFO 2025-12-09 15:23:58,735 basehttp "GET /recruitment/application/1/ HTTP/1.1" 200 20448
+INFO 2025-12-09 15:24:02,657 basehttp "GET /media/recruitment/resumes/ckeditor4-export-pdf.pdf HTTP/1.1" 200 21986
+INFO 2025-12-09 15:24:10,745 basehttp "GET /recruitment/application/1/interview/create/ HTTP/1.1" 200 20443
+INFO 2025-12-09 15:24:30,054 basehttp "POST /recruitment/application/1/interview/create/ HTTP/1.1" 302 0
+ERROR 2025-12-09 15:24:30,092 log Internal Server Error: /recruitment/interview/1/
+Traceback (most recent call last):
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "F:\HR_sys\v3\HR_sys\recruitment\views.py", line 192, in interview_detail
+    return render(request, 'recruitment/interview_detail.html', {'interview': interview})
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "F:\HR_sys\v3\HR_sys\.venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: recruitment/interview_detail.html
+ERROR 2025-12-09 15:24:30,096 basehttp "GET /recruitment/interview/1/ HTTP/1.1" 500 99791
+INFO 2025-12-09 15:24:36,274 basehttp "GET /recruitment/interview/1/ HTTP/1.1" 302 0
+INFO 2025-12-09 15:24:36,276 basehttp "GET /login/?next=/recruitment/interview/1/ HTTP/1.1" 200 7575
+INFO 2025-12-09 15:36:49,247 basehttp "GET /recruitment/interview/1/ HTTP/1.1" 200 18604
+INFO 2025-12-09 15:36:55,142 basehttp "GET /recruitment/application/1/ HTTP/1.1" 200 20740
+INFO 2025-12-09 15:37:01,424 basehttp "GET / HTTP/1.1" 200 22009
+INFO 2025-12-09 15:37:03,654 basehttp "GET /employees/ HTTP/1.1" 200 21947
+INFO 2025-12-09 15:53:11,249 autoreload F:\HR_sys\v3\HR_sys\recruitment\models.py changed, reloading.
+INFO 2025-12-09 15:53:13,375 autoreload Watching for file changes with StatReloader
+INFO 2025-12-09 15:56:05,422 autoreload F:\HR_sys\v3\HR_sys\core\forms.py changed, reloading.
+INFO 2025-12-09 15:56:06,076 autoreload Watching for file changes with StatReloader
+INFO 2025-12-09 18:23:09,460 autoreload Watching for file changes with StatReloader
+INFO 2025-12-09 18:23:11,780 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-12-09 18:23:11,804 basehttp "GET /login/?next=/ HTTP/1.1" 200 7575
+INFO 2025-12-09 18:23:16,471 basehttp "POST /login/ HTTP/1.1" 302 0
+INFO 2025-12-09 18:23:16,486 basehttp "GET / HTTP/1.1" 200 22320
+INFO 2025-12-09 18:23:27,301 basehttp "GET /organization/departments/ HTTP/1.1" 200 20109
+INFO 2025-12-09 18:23:35,714 basehttp "GET /recruitment/ HTTP/1.1" 200 18456
+INFO 2025-12-09 18:23:37,429 basehttp "GET /recruitment/job/1/ HTTP/1.1" 200 21062
+INFO 2025-12-09 18:23:42,226 basehttp "GET /training/ HTTP/1.1" 200 17834
+INFO 2025-12-09 18:23:44,108 basehttp "GET /reports/ HTTP/1.1" 200 16507
+INFO 2025-12-09 18:23:48,757 basehttp "GET /settings/ HTTP/1.1" 200 37225
+INFO 2025-12-09 18:23:48,781 basehttp "GET /media/company/%D9%84%D9%88%D8%AC%D9%88_%D8%A3%D9%88%D8%B1%D9%8A%D9%86%D8%AA_%D8%B9%D8%B1%D8%A8%D9%8A.jpg HTTP/1.1" 200 11712

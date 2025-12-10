@@ -110,6 +110,7 @@ class EmployeeForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['email'].required = False
 
         # Filter querysets to show only active records
         from organization.models import Department, Position, Branch, WorkShift
@@ -382,9 +383,13 @@ class EmployeeForm(forms.ModelForm):
             ),
             FormActions(
                 Submit('submit', 'حفظ', css_class='btn btn-primary'),
-                HTML('<a href="{% url \'employees:employee_list\' %}" class="btn btn-secondary">إلغاء</a>')
+                HTML("<a href=\"{% url 'employees:employee_list' %}\" class=\"btn btn-secondary\">إلغاء</a>")
             )
         )
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        return email or None
 
 
 class EmployeeDocumentForm(forms.ModelForm):

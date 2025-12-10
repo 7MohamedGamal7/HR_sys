@@ -245,6 +245,40 @@
             padding: 8px 20px;
             font-weight: 500;
         }
+
+        /* Unified Forms */
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+        .form-control {
+            border-radius: 8px;
+            min-height: 42px;
+        }
+        .form-control:focus {
+            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+            border-color: var(--secondary-color);
+        }
+        .form-group, .mb-3 {
+            margin-bottom: 1rem !important;
+        }
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-start;
+            margin-top: 10px;
+        }
+        .card .form-actions {
+            border-top: 1px solid var(--light-bg);
+            padding-top: 15px;
+        }
+        .invalid-feedback {
+            display: block;
+        }
+        .btn:focus-visible, .form-control:focus-visible, .btn-close:focus-visible {
+            outline: 3px solid rgba(52, 152, 219, 0.35);
+            outline-offset: 2px;
+        }
         
         /* Tables */
         .table {

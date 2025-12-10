@@ -74,6 +74,9 @@ def send_email_notification(subject, message, recipient_list, from_email=None):
     try:
         if from_email is None:
             from_email = settings.DEFAULT_FROM_EMAIL
+        recipient_list = [e for e in (recipient_list or []) if e]
+        if not recipient_list:
+            return False
         
         send_mail(
             subject=subject,

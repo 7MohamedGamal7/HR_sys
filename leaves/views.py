@@ -89,6 +89,7 @@ def leave_balance_list(request):
     عرض قائمة أرصدة الإجازات
     """
     balances = LeaveBalance.objects.select_related('employee').all().order_by('employee__first_name_ar')
+    leave_types = list(LeavePolicy.objects.filter(is_active=True).values_list('leave_type', flat=True).distinct())
     
     # Filter by employee
     employee_id = request.GET.get('employee')
@@ -98,7 +99,18 @@ def leave_balance_list(request):
     # Filter by year
     year = request.GET.get('year')
     if year:
-        balances = balances.filter(year=year)
+        if not year.isdigit():
+            messages.error(request, 'قيمة السنة غير صحيحة.')
+        else:
+            balances = balances.filter(year=year)
+
+    # Filter by leave type
+    selected_leave_type = request.GET.get('leave_type')
+    if selected_leave_type:
+        if selected_leave_type not in leave_types:
+            messages.error(request, 'نوع الإجازة المحدد غير صالح.')
+        else:
+            balances = balances.filter(leave_type=selected_leave_type)
     
     # Pagination
     paginator = Paginator(balances, 20)
@@ -107,6 +119,9 @@ def leave_balance_list(request):
     
     context = {
         'page_obj': page_obj,
+        'leave_types': leave_types,
+        'selected_leave_type': selected_leave_type,
+        'selected_year': year,
     }
     
     return render(request, 'leaves/leave_balance_list.html', context)

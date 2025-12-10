@@ -107,6 +107,8 @@ class JobApplication(BaseModel):
         verbose_name='اسم المتقدم'
     )
     email = models.EmailField(
+        blank=True,
+        null=True,
         verbose_name='البريد الإلكتروني'
     )
     phone = models.CharField(

@@ -52,7 +52,7 @@ class UserRegistrationForm(UserCreationForm):
     """
     email = forms.EmailField(
         label='البريد الإلكتروني',
-        required=True,
+        required=False,
         widget=forms.EmailInput(attrs={'class': 'form-control'})
     )
     
@@ -117,6 +117,7 @@ class UserProfileForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['email'].required = False
         self.helper = FormHelper()
         self.helper.form_method = 'post'
         self.helper.form_enctype = 'multipart/form-data'

@@ -80,6 +80,28 @@ class LeaveBalanceForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_method = 'post'
+        types = list(LeavePolicy.objects.filter(is_active=True).values_list('leave_type', flat=True).distinct())
+        self.fields['leave_type'].widget = forms.Select(choices=[('', 'اختر نوع الإجازة')] + [(t, t) for t in types])
+        self.fields['leave_type'].required = True
+
+    def clean(self):
+        cleaned = super().clean()
+        total_days = cleaned.get('total_days') or 0
+        used_days = cleaned.get('used_days') or 0
+        if used_days < 0:
+            self.add_error('used_days', 'يجب ألا تكون الأيام المستخدمة سالبة')
+        if total_days < used_days:
+            self.add_error('used_days', 'الأيام المستخدمة لا يجب أن تتجاوز إجمالي الأيام')
+        employee = cleaned.get('employee')
+        leave_type = cleaned.get('leave_type')
+        year = cleaned.get('year')
+        if employee and leave_type and year is not None:
+            qs = LeaveBalance.objects.filter(employee=employee, leave_type=leave_type, year=year)
+            if self.instance and self.instance.pk:
+                qs = qs.exclude(pk=self.instance.pk)
+            if qs.exists():
+                raise forms.ValidationError('يوجد رصيد لنفس الموظف ونوع الإجازة والسنة')
+        return cleaned
 
 
 class LeaveApprovalWorkflowForm(forms.ModelForm):

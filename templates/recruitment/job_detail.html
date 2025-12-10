@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %}تفاصيل الوظيفة{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-briefcase ms-2"></i>تفاصيل الوظيفة</h2>
+                <div>
+                    <a href="{% url 'recruitment:job_update' job.pk %}" class="btn btn-warning me-2">
+                        <i class="fas fa-edit ms-2"></i>تعديل
+                    </a>
+                    <a href="{% url 'recruitment:application_create' job.pk %}" class="btn btn-primary">
+                        <i class="fas fa-paper-plane ms-2"></i>تقديم طلب
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header">
+                    <strong>بيانات الوظيفة</strong>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3"><strong>المسمى:</strong> {{ job.title }}</div>
+                    <div class="mb-3"><strong>القسم:</strong> {{ job.department }}</div>
+                    <div class="mb-3"><strong>المنصب:</strong> {{ job.position }}</div>
+                    <div class="mb-3"><strong>الحالة:</strong> {{ job.get_status_display }}</div>
+                    <div class="mb-3"><strong>تاريخ النشر:</strong> {{ job.posting_date|date:"Y/m/d" }}</div>
+                    <div class="mb-3"><strong>تاريخ الإغلاق:</strong> {{ job.closing_date|date:"Y/m/d" }}</div>
+                    <div class="mb-3"><strong>عدد الشواغر:</strong> {{ job.vacancies }}</div>
+                    <div class="mb-3"><strong>الراتب:</strong>
+                        {% if job.salary_range_min and job.salary_range_max %}
+                            {{ job.salary_range_min }} - {{ job.salary_range_max }}
+                        {% elif job.salary_range_min %}
+                            من {{ job.salary_range_min }}
+                        {% elif job.salary_range_max %}
+                            حتى {{ job.salary_range_max }}
+                        {% else %}
+                            غير محدد
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header">
+                    <strong>الوصف والمتطلبات</strong>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3"><strong>الوصف:</strong></div>
+                    <div class="mb-3">{{ job.description }}</div>
+                    <div class="mb-3"><strong>المتطلبات:</strong></div>
+                    <div class="mb-3">{{ job.requirements }}</div>
+                    <div class="mb-3"><strong>المسؤوليات:</strong></div>
+                    <div class="mb-3">{{ job.responsibilities }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <strong>طلبات التوظيف</strong>
+                    <a href="{% url 'recruitment:application_create' job.pk %}" class="btn btn-primary btn-sm">
+                        <i class="fas fa-plus ms-2"></i>إضافة طلب
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>المتقدم</th> <th>البريد</th> <th>الهاتف</th> <th>الحالة</th> <th>تاريخ التقديم</th>
+                                    <th>الإجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for application in applications %}
+                                    <tr>
+                                        <td>{{ application.applicant_name }}</td>
+                                        <td>{{ application.email }}</td>
+                                        <td>{{ application.phone }}</td>
+                                        <td>{{ application.get_status_display }}</td>
+                                        <td>{{ application.application_date|date:"Y/m/d" }}</td>
+                                        <td>
+                                            <a href="{% url 'recruitment:application_detail' application.pk %}" class="btn btn-sm btn-info">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% empty %}
+                                    <tr><td colspan="6" class="text-center">لا توجد طلبات</td></tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

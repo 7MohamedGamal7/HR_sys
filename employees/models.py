@@ -149,7 +149,6 @@ class Employee(BaseModel):
 
     # Contact Information
     email = models.EmailField(
-        unique=True,
         blank=True,
         null=True,
         verbose_name='البريد الإلكتروني'
