@@ -3661,3 +3661,8 @@ INFO 2025-11-17 13:25:44,603 basehttp "GET / HTTP/1.1" 200 21965
 WARNING 2025-11-17 13:25:44,950 log Not Found: /favicon.ico
 WARNING 2025-11-17 13:25:44,951 basehttp "GET /favicon.ico HTTP/1.1" 404 5207
 >>>>>>> 13b167c0061c07d603f53fb0196ea51975fe5311
+INFO 2025-12-10 13:25:15,809 autoreload Watching for file changes with StatReloader
+INFO 2025-12-10 13:25:19,068 basehttp "GET / HTTP/1.1" 200 22997
+INFO 2025-12-10 13:25:22,407 basehttp "GET /employees/ HTTP/1.1" 200 22935
+INFO 2025-12-10 13:25:26,907 basehttp "GET /employees/add/ HTTP/1.1" 200 69083
+INFO 2025-12-10 13:26:21,821 basehttp "GET / HTTP/1.1" 200 22997
