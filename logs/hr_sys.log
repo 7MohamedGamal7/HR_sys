@@ -3666,3 +3666,40 @@ INFO 2025-12-10 13:25:19,068 basehttp "GET / HTTP/1.1" 200 22997
 INFO 2025-12-10 13:25:22,407 basehttp "GET /employees/ HTTP/1.1" 200 22935
 INFO 2025-12-10 13:25:26,907 basehttp "GET /employees/add/ HTTP/1.1" 200 69083
 INFO 2025-12-10 13:26:21,821 basehttp "GET / HTTP/1.1" 200 22997
+INFO 2025-12-30 15:29:38,429 autoreload Watching for file changes with StatReloader
+INFO 2025-12-30 15:29:41,616 basehttp "GET / HTTP/1.1" 302 0
+INFO 2025-12-30 15:29:41,637 basehttp "GET /login/?next=/ HTTP/1.1" 200 7575
+WARNING 2025-12-30 15:29:42,479 log Not Found: /favicon.ico
+WARNING 2025-12-30 15:29:42,479 basehttp "GET /favicon.ico HTTP/1.1" 404 6638
+INFO 2025-12-30 15:29:46,480 basehttp "POST /login/ HTTP/1.1" 302 0
+INFO 2025-12-30 15:29:46,525 basehttp "GET / HTTP/1.1" 200 23308
+INFO 2025-12-30 15:29:57,235 basehttp "GET /employees/ HTTP/1.1" 200 22935
+INFO 2025-12-30 15:30:19,043 basehttp "GET /organization/departments/ HTTP/1.1" 200 21097
+INFO 2025-12-30 15:30:29,907 basehttp "GET /training/ HTTP/1.1" 200 18822
+INFO 2025-12-30 15:30:31,250 basehttp "GET /settings/ HTTP/1.1" 200 38213
+INFO 2025-12-30 15:30:31,269 basehttp "GET /media/company/%D9%84%D9%88%D8%AC%D9%88_%D8%A3%D9%88%D8%B1%D9%8A%D9%86%D8%AA_%D8%B9%D8%B1%D8%A8%D9%8A.jpg HTTP/1.1" 200 11712
+INFO 2025-12-30 15:30:42,188 basehttp "GET /attendance/add/ HTTP/1.1" 200 21750
+INFO 2025-12-30 15:30:44,758 basehttp "GET /leaves/policies/ HTTP/1.1" 200 18841
+INFO 2025-12-30 15:30:48,360 basehttp "GET /leaves/balances/ HTTP/1.1" 200 21155
+INFO 2025-12-30 15:30:55,278 basehttp "GET /leaves/balance/create/ HTTP/1.1" 200 20438
+INFO 2025-12-30 15:31:03,569 basehttp "GET /leaves/policies/ HTTP/1.1" 200 18841
+INFO 2025-12-30 15:31:05,138 basehttp "GET /leaves/policy/create/ HTTP/1.1" 200 21246
+INFO 2025-12-30 15:31:42,905 basehttp "POST /leaves/policy/create/ HTTP/1.1" 302 0
+ERROR 2025-12-30 15:31:43,004 log Internal Server Error: /leaves/policy/1/
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "F:\»—„Ã… »‘ﬂ· ÃœÌœ\HR_sys\HR_sys\leaves\views.py", line 43, in leave_policy_detail
+    return render(request, 'leaves/leave_policy_detail.html', context)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: leaves/leave_policy_detail.html
+ERROR 2025-12-30 15:31:43,007 basehttp "GET /leaves/policy/1/ HTTP/1.1" 500 93778
